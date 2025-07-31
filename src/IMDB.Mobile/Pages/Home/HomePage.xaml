@@ -2,9 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
-             x:Class="IMDB.Mobile.Pages.Home.HomePage"
-             Title="HomePage">
+             x:Class="IMDB.Mobile.Pages.Home.HomePage">
+
     <VerticalStackLayout>
-        <component:CardComponent Title="Hitman’s Wife’s Bodyguard" />
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Top Five</Span>
+                    <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <ScrollView Orientation="Horizontal">
+            <HorizontalStackLayout Spacing="10">
+                <component:CardComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="2" />
+                <component:CardComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="5"/>
+                <component:CardComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="1,5"/>
+            </HorizontalStackLayout>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

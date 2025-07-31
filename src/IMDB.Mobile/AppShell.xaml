@@ -5,8 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:IMDB.Mobile"
     xmlns:home="clr-namespace:IMDB.Mobile.Pages.Home"
+    Shell.BackgroundColor="{ StaticResource ColorPrimary }"
     Title="IMDB.Mobile">
 
+    
     <TabBar>
         <Tab Icon="home_icon.png">
             <ShellContent ContentTemplate="{ DataTemplate home:HomePage }" />

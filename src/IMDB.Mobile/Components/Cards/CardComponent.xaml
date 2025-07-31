@@ -6,7 +6,7 @@
 
     <VerticalStackLayout
         BindingContext="{ x:Reference this }"
-        Spacing="10"
+        Spacing="5"
         WidthRequest="180" >
         <Border 
             Padding="10" 
@@ -24,9 +24,7 @@
                        AbsoluteLayout.LayoutFlags="PositionProportional" 
                        AbsoluteLayout.LayoutBounds="1,0" />
 
-                    <Image AbsoluteLayout.LayoutBounds="1,0" 
-                       AbsoluteLayout.LayoutFlags="All" 
-                       Aspect="AspectFill" 
+                    <Image 
                        Source="{ Binding Image }" />
 
                 </AbsoluteLayout>
@@ -36,5 +34,13 @@
         <Label 
             Style="{ StaticResource CardTitle }"
             Text="{ Binding Title }"/>
+        <HorizontalStackLayout Spacing="10">
+            <Label
+                Style="{ StaticResource RatingNote }"
+                Text="{ Binding Rating }"/>
+            <Image 
+                VerticalOptions="Center"
+                Source="rating_star_full.png"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentView>
