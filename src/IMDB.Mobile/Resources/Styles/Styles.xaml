@@ -4,6 +4,14 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- TabBar Style -->
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{ StaticResource ColorPrimary }" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{ StaticResource ColorSecondary }" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{ StaticResource ColorSecondary }" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="White" />
+    </Style>
+    
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
