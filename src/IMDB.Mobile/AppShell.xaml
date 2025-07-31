@@ -4,11 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:IMDB.Mobile"
+    xmlns:home="clr-namespace:IMDB.Mobile.Pages.Home"
     Title="IMDB.Mobile">
 
     <TabBar>
         <Tab Icon="home_icon.png">
-            <ShellContent ContentTemplate="{ DataTemplate local:MainPage }" />
+            <ShellContent ContentTemplate="{ DataTemplate home:HomePage }" />
         </Tab>
         <Tab Icon="search_icon.png">
             <ShellContent ContentTemplate="{ DataTemplate local:MainPage }" />

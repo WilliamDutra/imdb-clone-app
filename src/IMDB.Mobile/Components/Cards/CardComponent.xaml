@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IMDB.Mobile.Components.Cards.CardComponent"
+             x:Name="this">
+
+    <VerticalStackLayout
+        BindingContext="{ x:Reference this }"
+        Spacing="10"
+        WidthRequest="180" >
+        <Border 
+            Padding="10" 
+            Stroke="{ StaticResource ColorTertiary }" 
+            StrokeThickness="4" 
+            Background="{ StaticResource ColorTertiary }">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20" />
+            </Border.StrokeShape>
+            <VerticalStackLayout>
+
+                <AbsoluteLayout>
+                    <Image Source="bookmark_icon.png" 
+                       AbsoluteLayout.LayoutFlags="PositionProportional" 
+                       AbsoluteLayout.LayoutBounds="1,0" />
+
+                    <Image AbsoluteLayout.LayoutBounds="1,0" 
+                       AbsoluteLayout.LayoutFlags="All" 
+                       Aspect="AspectFill" 
+                       Source="{ Binding Image }" />
+
+                </AbsoluteLayout>
+
+            </VerticalStackLayout>
+        </Border>
+        <Label 
+            Style="{ StaticResource CardTitle }"
+            Text="{ Binding Title }"/>
+    </VerticalStackLayout>
+</ContentView>
