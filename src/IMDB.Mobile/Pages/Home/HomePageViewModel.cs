@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using IMDB.ApiClient;
 using IMDB.ApiClient.GetMoviesLatest;
 using IMDB.ApiClient.GetMoviesTopFiveDay;
@@ -14,18 +15,33 @@ namespace IMDB.Mobile.Pages.Home
 
         private IGetMoviesLatest _getMoviesLatest;
 
+        private INavigationManager _navigationManager;
+
         [ObservableProperty]
         private ObservableCollection<Movie> moviesTopFive;
 
         [ObservableProperty]
         private ObservableCollection<Movie> moviesLatest;
 
-        public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest)
+        [ObservableProperty]
+        private Movie movieSelected;
+
+        public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, INavigationManager navigationManager)
         {
             _getMoviesTopFiveDay = getMoviesTopFiveDay;
             _getMoviesLatest = getMoviesLatest;
+            _navigationManager = navigationManager;
             EachMoviesTopFive();
             EachMoviesLatest();
+        }
+
+        [RelayCommand]
+        public void Detail()
+        {
+            var id = MovieSelected.Id;
+            var paramsNavigation = new Dictionary<string, object>();
+            paramsNavigation["Id"] = id;
+            _navigationManager.GoToPage("details", paramsNavigation);
         }
 
         private void EachMoviesTopFive()

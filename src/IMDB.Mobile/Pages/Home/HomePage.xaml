@@ -15,7 +15,11 @@
                 </Label.FormattedText>
             </Label>
             <ScrollView Orientation="Horizontal">
-                <CollectionView ItemsSource="{Binding MoviesTopFive}">
+                <CollectionView 
+                    ItemsSource="{Binding MoviesTopFive}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding MovieSelected, Mode=TwoWay}"
+                    SelectionChangedCommand="{ Binding DetailCommand }">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
@@ -27,7 +31,6 @@
                 </CollectionView>
             </ScrollView>
 
-           
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
