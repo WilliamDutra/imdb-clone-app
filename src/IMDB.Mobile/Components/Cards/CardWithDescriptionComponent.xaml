@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IMDB.Mobile.Components.Cards.CardWithDescriptionComponent"
+             x:Name="this">
+    
+    <Grid
+        BindingContext="{ x:Reference this }">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Border 
+            Grid.Column="0"
+            Stroke="{ StaticResource ColorTertiary }" 
+            StrokeThickness="4" 
+            Background="{ StaticResource ColorTertiary }">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20" />
+            </Border.StrokeShape>
+                        
+        </Border>
+
+        <Grid 
+            Padding="5"
+            Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Style="{ StaticResource CardTitle }"
+                Text="{Binding Title}" />
+
+            <HorizontalStackLayout 
+                Spacing="10"
+                Grid.Row="1">
+
+                <Label
+                    Style="{ StaticResource RatingNote }"
+                    VerticalOptions="Center"
+                    Text="{ Binding Rating }" />
+
+                <Image Source="rating_star_full.png"/>
+                <Image Source="rating_star_full.png"/>
+                <Image Source="rating_star_full.png"/>
+                <Image Source="rating_star_full.png"/>
+
+            </HorizontalStackLayout>
+            
+            <Label
+                Grid.Row="2"
+                Style="{ StaticResource CardDescription }"
+                LineBreakMode="WordWrap"
+                Text="{Binding Description }" />
+
+        </Grid>
+
+        
+        
+    </Grid>
+</ContentView>

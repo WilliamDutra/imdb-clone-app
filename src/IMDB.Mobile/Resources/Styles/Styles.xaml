@@ -35,6 +35,11 @@
         <Setter Property="FontFamily" Value="PoppinsBold" />
     </Style>
 
+    <Style x:Key="CardDescription" TargetType="Label">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="PoppinsRegular" />
+    </Style>
+
     <Style TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
