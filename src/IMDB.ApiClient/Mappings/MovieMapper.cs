@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IMDB.ApiClient.GetMovieById;
+using System;
 using System.Collections.ObjectModel;
 
 namespace IMDB.ApiClient.Mappings
@@ -17,5 +18,12 @@ namespace IMDB.ApiClient.Mappings
 
             return movies;
         }
+
+        public static Movie ToMap(MovieById response)
+        {
+            var movie = Movie.Restore(response.Id, response.Title, response.Overview, $"https://image.tmdb.org/t/p/original{response.Poster}");
+            return movie;
+        }
+
     }
 }
