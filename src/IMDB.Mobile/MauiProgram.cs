@@ -1,5 +1,13 @@
 ﻿using CommunityToolkit.Maui;
+using IMDB.ApiClient.GetMovieById;
+using IMDB.ApiClient.GetMoviesLatest;
+using IMDB.ApiClient.GetMoviesTopFiveDay;
+using IMDB.Mobile.Networks;
+using IMDB.Mobile.Pages.Details;
+using IMDB.Mobile.Pages.Home;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Refit;
 
 namespace IMDB.Mobile
 {
@@ -11,6 +19,8 @@ namespace IMDB.Mobile
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .AddPages()
+                .AddApiClient()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -25,6 +35,39 @@ namespace IMDB.Mobile
 #endif
 
             return builder.Build();
+        }
+
+        public static MauiAppBuilder AddPages(this MauiAppBuilder appBuilder)
+        {
+            appBuilder.Services.AddSingleton<INavigationManager, NavigationManager>();
+            appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
+            appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
+            return appBuilder;
+        }
+
+        public static MauiAppBuilder AddApiClient(this MauiAppBuilder appBuilder)
+        {
+            
+            appBuilder.Services.AddScoped<BearerTokenHandler>();
+            
+            appBuilder.Services.AddRefitClient<IGetMoviesTopFiveDay>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetMoviesLatest>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetMovieById>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            return appBuilder;
+        }
+
+        private static void httpClientSettings(HttpClient client)
+        {
+            client.BaseAddress = new Uri("https://api.themoviedb.org/3");
         }
     }
 }
