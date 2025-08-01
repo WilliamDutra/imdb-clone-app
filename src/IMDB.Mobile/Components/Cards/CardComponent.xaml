@@ -19,15 +19,17 @@
             </Border.StrokeShape>
             <VerticalStackLayout>
 
-                <AbsoluteLayout>
-                    <Image Source="bookmark_icon.png" 
-                       AbsoluteLayout.LayoutFlags="PositionProportional" 
-                       AbsoluteLayout.LayoutBounds="1,0" />
+                <Grid>
+                    <Image 
+                        Source="bookmark_icon.png" 
+                        VerticalOptions="Start"
+                        HorizontalOptions="End"/>
 
                     <Image 
+                       Aspect="AspectFill"
                        Source="{ Binding Image }" />
 
-                </AbsoluteLayout>
+                </Grid>
 
             </VerticalStackLayout>
         </Border>
