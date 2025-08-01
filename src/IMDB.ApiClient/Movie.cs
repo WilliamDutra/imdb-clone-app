@@ -14,16 +14,19 @@ namespace IMDB.ApiClient
 
         public int Id { get; private set; }
 
-        private Movie(int id, string title, string overview)
+        public string Poster { get; private set; }
+
+        private Movie(int id, string title, string overview, string poster)
         {
             Title = title;
             Id = id;
             Overview = overview;
+            Poster = poster;
         }
 
-        public static Movie Restore(int id, string title, string overview)
+        public static Movie Restore(int id, string title, string overview, string poster)
         {
-            return new Movie(id, title, overview);
+            return new Movie(id, title, overview, poster);
         }
     }
 }

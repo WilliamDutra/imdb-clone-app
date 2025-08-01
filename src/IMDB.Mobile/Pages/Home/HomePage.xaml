@@ -15,13 +15,19 @@
                 </Label.FormattedText>
             </Label>
             <ScrollView Orientation="Horizontal">
-                <HorizontalStackLayout Spacing="10">
-                    <component:CardComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="2" />
-                    <component:CardComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="5"/>
-                    <component:CardComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="1,5"/>
-                </HorizontalStackLayout>
+                <CollectionView ItemsSource="{Binding MoviesTopFive}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <component:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="2" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </ScrollView>
 
+           
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
@@ -31,7 +37,17 @@
                 </Label.FormattedText>
             </Label>
 
-            <component:CardWithDescriptionComponent Title="Hitman’s Wife’s Bodyguard" Image="dotnet_bot.png" Rating="5" Description="The world's most lethal odd couple - bodyguard Michael Bryce and hitman Darius Kincaid - are back on anoth......" />
+            <CollectionView ItemsSource="{ Binding MoviesLatest }">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout  ItemSpacing="10" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <component:CardWithDescriptionComponent Title="{ Binding Title }" Image="dotnet_bot.png" Rating="5" Description="{ Binding Overview }" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
 
         </VerticalStackLayout>
     </ScrollView>

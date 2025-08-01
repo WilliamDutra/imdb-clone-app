@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace IMDB.ApiClient.GetMoviesTopFiveDay
+namespace IMDB.ApiClient
 {
     public class Movies
     {

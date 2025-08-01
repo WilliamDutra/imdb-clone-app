@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using IMDB.ApiClient.GetMoviesTopFiveDay;
 
 namespace IMDB.ApiClient.Mappings
 {
@@ -13,7 +12,7 @@ namespace IMDB.ApiClient.Mappings
             foreach (var item in response)
             {
 
-                movies.Add(Movie.Restore(item.Id, item.Title, item.Overview));
+                movies.Add(Movie.Restore(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/original{item.PosterPath}"));
             }
 
             return movies;

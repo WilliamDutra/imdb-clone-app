@@ -2,8 +2,9 @@ namespace IMDB.Mobile.Pages.Home;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+	public HomePage(HomePageViewModel homePageViewModel)
 	{
 		InitializeComponent();
-	}
+		BindingContext = homePageViewModel;
+    }
 }
