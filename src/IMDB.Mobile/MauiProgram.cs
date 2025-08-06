@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using IMDB.ApiClient.GetAllCategories;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMoviesLatest;
 using IMDB.ApiClient.GetMoviesTopFiveDay;
@@ -71,6 +72,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<ISearchByTitle>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetAllCategories>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

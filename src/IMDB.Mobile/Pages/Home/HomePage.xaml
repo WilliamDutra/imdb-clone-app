@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
+             xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
              x:Class="IMDB.Mobile.Pages.Home.HomePage">
 
     <ScrollView>
@@ -50,6 +51,29 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Discovery</Span>
+                        <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+
+            <ScrollView>
+                <CollectionView ItemsSource="{ Binding Categories }">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pill:PillComponent Label="{ Binding Name }" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
 
 
         </VerticalStackLayout>
