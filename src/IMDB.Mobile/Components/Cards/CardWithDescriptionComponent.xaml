@@ -21,7 +21,9 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="20" />
             </Border.StrokeShape>
-                        
+
+            <Image HeightRequest="250" Aspect="AspectFill" Source="{ Binding Image }" />
+
         </Border>
 
         <Grid 

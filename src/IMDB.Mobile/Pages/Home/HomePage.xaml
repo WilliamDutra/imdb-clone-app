@@ -47,7 +47,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <component:CardWithDescriptionComponent Title="{ Binding Title }" Image="dotnet_bot.png" Rating="5" Description="{ Binding Overview }" />
+                        <component:CardWithDescriptionComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" Description="{ Binding Overview }" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
