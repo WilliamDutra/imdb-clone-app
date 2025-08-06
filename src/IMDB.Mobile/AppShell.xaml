@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:IMDB.Mobile"
     xmlns:home="clr-namespace:IMDB.Mobile.Pages.Home"
+    xmlns:search="clr-namespace:IMDB.Mobile.Pages.Search"
     Shell.BackgroundColor="{ StaticResource ColorPrimary }"
     Title="IMDB.Mobile">
 
@@ -14,7 +15,7 @@
             <ShellContent ContentTemplate="{ DataTemplate home:HomePage }" />
         </Tab>
         <Tab Icon="search_icon.png">
-            <ShellContent ContentTemplate="{ DataTemplate local:MainPage }" />
+            <ShellContent ContentTemplate="{ DataTemplate search:SearchPage }" />
         </Tab>
         <Tab Icon="bookmark_icon.png">
             <ShellContent ContentTemplate="{ DataTemplate local:MainPage }" />

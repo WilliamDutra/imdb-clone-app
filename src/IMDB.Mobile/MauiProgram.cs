@@ -5,6 +5,8 @@ using IMDB.ApiClient.GetMoviesTopFiveDay;
 using IMDB.Mobile.Networks;
 using IMDB.Mobile.Pages.Details;
 using IMDB.Mobile.Pages.Home;
+using IMDB.Mobile.Pages.Search;
+using IMDB.Mobile.Resources.Styles.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -28,6 +30,10 @@ namespace IMDB.Mobile
                     fonts.AddFont("Poppins-Black.ttf", "PoppinsBlack");
                     fonts.AddFont("Poppins-Bold.ttf", "PoppinsBold");
                     fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
+                })
+                .ConfigureMauiHandlers((config) =>
+                {
+                    EntrySearchHandler.Customize();
                 });
 
 #if DEBUG
@@ -42,6 +48,7 @@ namespace IMDB.Mobile
             appBuilder.Services.AddSingleton<INavigationManager, NavigationManager>();
             appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
             appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
+            appBuilder.Services.AddTransientWithShellRoute<SearchPage, SearchPageViewModel>("search");
             return appBuilder;
         }
 

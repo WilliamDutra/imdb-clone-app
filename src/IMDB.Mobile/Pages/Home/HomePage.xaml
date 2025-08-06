@@ -15,7 +15,7 @@
                 </Label.FormattedText>
             </Label>
             <ScrollView Orientation="Horizontal">
-                <CollectionView 
+                <CollectionView  
                     ItemsSource="{Binding MoviesTopFive}"
                     SelectionMode="Single"
                     SelectedItem="{Binding MovieSelected, Mode=TwoWay}"
