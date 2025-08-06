@@ -2,6 +2,7 @@
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMoviesLatest;
 using IMDB.ApiClient.GetMoviesTopFiveDay;
+using IMDB.ApiClient.SearchByTitle;
 using IMDB.Mobile.Networks;
 using IMDB.Mobile.Pages.Details;
 using IMDB.Mobile.Pages.Home;
@@ -66,6 +67,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetMovieById>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<ISearchByTitle>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

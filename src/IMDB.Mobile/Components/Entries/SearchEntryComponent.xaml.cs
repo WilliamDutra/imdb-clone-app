@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace IMDB.Mobile.Components.Entries;
 
 public partial class SearchEntryComponent : ContentView
@@ -8,6 +10,8 @@ public partial class SearchEntryComponent : ContentView
 	public static readonly BindableProperty PlaceHolderProperty
 		= BindableProperty.Create("PlaceHolder", typeof(string), typeof(SearchEntryComponent), "Placeholder...");
 
+	public static readonly BindableProperty SearchCommandProperty
+		= BindableProperty.Create("SearchCommand", typeof(ICommand), typeof(SearchEntryComponent));
 
 	public string TextValue
 	{
@@ -19,6 +23,12 @@ public partial class SearchEntryComponent : ContentView
 	{
 		get => (string)GetValue(PlaceHolderProperty);
 		set => SetValue(PlaceHolderProperty, value);
+	}
+
+	public ICommand SearchCommand
+	{
+		get => (ICommand)GetValue(SearchCommandProperty);
+		set => SetValue(SearchCommandProperty, value);
 	}
 
 	public SearchEntryComponent()

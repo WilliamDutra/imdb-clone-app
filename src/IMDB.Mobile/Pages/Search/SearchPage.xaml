@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IMDB.Mobile.Pages.Search.SearchPage"
-             xmlns:entries="clr-namespace:IMDB.Mobile.Components.Entries">
-    <VerticalStackLayout>
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:entries="clr-namespace:IMDB.Mobile.Components.Entries"
+             xmlns:components="clr-namespace:IMDB.Mobile.Components.Cards"
+             x:Class="IMDB.Mobile.Pages.Search.SearchPage">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10">
 
-        <Label>
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Search</Span>
-                    <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Search</Span>
+                        <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <entries:SearchEntryComponent PlaceHolder="Search films..." TextValue="{ Binding SearchText }" />
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+            <entries:SearchEntryComponent PlaceHolder="Search films..." TextValue="{ Binding SearchText }" SearchCommand="{ Binding SearchFilmsCommand }" />
+
+            <HorizontalStackLayout Spacing="5">
+                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text="Search results" />
+                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text="(" />
+                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text="{ Binding TotalSearched }" />
+                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text=")" />
+            </HorizontalStackLayout>
+
+            <ScrollView Orientation="Vertical">
+                <CollectionView ItemsSource="{ Binding Movies }">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout  ItemSpacing="10" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <components:CardWithDescriptionComponent Title="{ Binding Title }" Image="dotnet_bot.png" Rating="5" Description="{ Binding Overview }" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
