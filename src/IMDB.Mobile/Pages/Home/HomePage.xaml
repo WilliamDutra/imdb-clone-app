@@ -63,7 +63,11 @@
 
 
             <ScrollView>
-                <CollectionView ItemsSource="{ Binding Categories }">
+                <CollectionView
+                    SelectionChangedCommand="{ Binding MoviesByCategoryCommand }"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding CategorySelected, Mode=TwoWay}"
+                    ItemsSource="{ Binding Categories }">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>

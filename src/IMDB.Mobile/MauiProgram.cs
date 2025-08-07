@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Maui;
 using IMDB.ApiClient.GetAllCategories;
 using IMDB.ApiClient.GetMovieById;
+using IMDB.ApiClient.GetMoviesByGenres;
 using IMDB.ApiClient.GetMoviesLatest;
 using IMDB.ApiClient.GetMoviesTopFiveDay;
 using IMDB.ApiClient.SearchByTitle;
 using IMDB.Mobile.Networks;
 using IMDB.Mobile.Pages.Details;
 using IMDB.Mobile.Pages.Home;
+using IMDB.Mobile.Pages.MoviesByGenres;
 using IMDB.Mobile.Pages.Search;
 using IMDB.Mobile.Resources.Styles.Handlers;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,6 +53,7 @@ namespace IMDB.Mobile
             appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
             appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
             appBuilder.Services.AddTransientWithShellRoute<SearchPage, SearchPageViewModel>("search");
+            appBuilder.Services.AddTransientWithShellRoute<MoviesByGenresPage, MoviesByGenresPageViewModel>("movies-by-genres");
             return appBuilder;
         }
 
@@ -76,6 +79,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetAllCategories>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetMoviesByGenres>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

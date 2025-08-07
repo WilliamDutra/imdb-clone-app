@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
+             x:Class="IMDB.Mobile.Pages.MoviesByGenres.MoviesByGenresPage"
+             Title="MoviesByGenresPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+
+            <CollectionView 
+                HeightRequest="500"
+                RemainingItemsThreshold="5"
+                RemainingItemsThresholdReachedCommand="{ Binding RemainingItemsCommand }"
+                ItemsSource="{ Binding Movies }">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <cards:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

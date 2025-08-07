@@ -32,6 +32,9 @@ namespace IMDB.Mobile.Pages.Home
         [ObservableProperty]
         private Movie movieSelected;
 
+        [ObservableProperty]
+        private Category categorySelected;
+
         public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, IGetAllCategories getAllCategories, INavigationManager navigationManager)
         {
             _getMoviesTopFiveDay = getMoviesTopFiveDay;
@@ -44,14 +47,21 @@ namespace IMDB.Mobile.Pages.Home
         }
 
         [RelayCommand]
-        public void Detail()
+        public async void Detail()
         {
             var id = MovieSelected.Id;
             var paramsNavigation = new Dictionary<string, object>();
             paramsNavigation["Id"] = id;
-            _navigationManager.GoToPage("details", paramsNavigation);
+            await _navigationManager.GoToPage("details", paramsNavigation);
         }
 
+        [RelayCommand]
+        public async void MoviesByCategory()
+        {
+            var queryParams = new Dictionary<string, object>();
+            queryParams["genreId"] = categorySelected.Id;
+            await _navigationManager.GoToPage("movies-by-genres", queryParams);
+        }
         private void EachMoviesTopFive()
         {
             var result = _getMoviesTopFiveDay.Execute();
