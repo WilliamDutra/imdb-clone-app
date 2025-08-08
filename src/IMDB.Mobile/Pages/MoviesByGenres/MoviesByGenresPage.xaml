@@ -9,7 +9,7 @@
 
             <CollectionView 
                 HeightRequest="500"
-                RemainingItemsThreshold="5"
+                RemainingItemsThreshold="2"
                 RemainingItemsThresholdReachedCommand="{ Binding RemainingItemsCommand }"
                 ItemsSource="{ Binding Movies }">
                 <CollectionView.ItemsLayout>
