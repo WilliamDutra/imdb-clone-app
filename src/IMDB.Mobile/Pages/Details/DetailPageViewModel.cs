@@ -1,14 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
 using IMDB.ApiClient.GetMovieById;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IMDB.Mobile.Pages.Details
 {
-    public partial class DetailPageViewModel : ObservableObject, IQueryAttributable
+    public partial class DetailPageViewModel : ViewModel, IQueryAttributable
     {
 
         [ObservableProperty]

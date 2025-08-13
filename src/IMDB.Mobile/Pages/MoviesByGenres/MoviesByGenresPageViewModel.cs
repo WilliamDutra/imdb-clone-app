@@ -1,19 +1,15 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using IMDB.ApiClient;
-using IMDB.ApiClient.GetMoviesByGenres;
 using IMDB.ApiClient.Mappings;
-using System;
-using System.Collections.Generic;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IMDB.ApiClient.GetMoviesByGenres;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IMDB.Mobile.Pages.MoviesByGenres
 {
-    public partial class MoviesByGenresPageViewModel : ObservableObject, IQueryAttributable
+    public partial class MoviesByGenresPageViewModel : ViewModel, IQueryAttributable
     {
 
         private IGetMoviesByGenres _getMoviesByGenres;

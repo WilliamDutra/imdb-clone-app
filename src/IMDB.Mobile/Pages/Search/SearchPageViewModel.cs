@@ -1,18 +1,15 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using IMDB.ApiClient;
 using IMDB.ApiClient.Mappings;
+using CommunityToolkit.Mvvm.Input;
 using IMDB.ApiClient.SearchByTitle;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+
 
 namespace IMDB.Mobile.Pages.Search
 {
-    public partial class SearchPageViewModel : ObservableObject
+    public partial class SearchPageViewModel : ViewModel
     {
         [ObservableProperty]
         private string searchText;

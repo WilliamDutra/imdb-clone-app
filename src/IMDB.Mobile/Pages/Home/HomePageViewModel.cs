@@ -1,16 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using IMDB.ApiClient;
-using IMDB.ApiClient.GetAllCategories;
-using IMDB.ApiClient.GetMoviesLatest;
-using IMDB.ApiClient.GetMoviesTopFiveDay;
 using IMDB.ApiClient.Mappings;
-using System;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using IMDB.ApiClient.GetMoviesLatest;
+using IMDB.ApiClient.GetAllCategories;
+using IMDB.ApiClient.GetMoviesTopFiveDay;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IMDB.Mobile.Pages.Home
 {
-    public partial class HomePageViewModel : ObservableObject
+    public partial class HomePageViewModel : ViewModel
     {
         private IGetMoviesTopFiveDay _getMoviesTopFiveDay;
 
