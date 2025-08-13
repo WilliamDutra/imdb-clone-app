@@ -61,6 +61,15 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Back.
+        /// </summary>
+        internal static string text_back_button_details {
+            get {
+                return ResourceManager.GetString("text_back_button_details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Discovery.
         /// </summary>
         internal static string title_home_discovery {

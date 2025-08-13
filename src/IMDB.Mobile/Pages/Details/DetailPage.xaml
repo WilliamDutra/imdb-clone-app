@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:language="clr-namespace:IMDB.Mobile.Resources"
              x:Class="IMDB.Mobile.Pages.Details.DetailPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10">
+
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{ Binding BackToHomePageCommand }"></TapGestureRecognizer>
+            </HorizontalStackLayout.GestureRecognizers>
+            
+            <Image
+                Aspect="AspectFill"
+                VerticalOptions="Center"
+                Source="back_button_icon.png" />
+
+            <Label VerticalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{ x:Static language:Resource.text_back_button_details }" TextColor="White" FontFamily="PoppinsRegular" FontSize="20"></Span>
+                        <Span TextColor="{ StaticResource ColorSecondary }" FontFamily="PoppinsRegular" FontSize="20">.</Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+    
     <ScrollView>
         <VerticalStackLayout>
             <Image 

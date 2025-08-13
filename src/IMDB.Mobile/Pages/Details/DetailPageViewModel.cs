@@ -1,6 +1,7 @@
 ﻿using System;
 using IMDB.ApiClient.GetMovieById;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace IMDB.Mobile.Pages.Details
 {
@@ -21,9 +22,18 @@ namespace IMDB.Mobile.Pages.Details
 
         private IGetMovieById _getMovieById;
 
-        public DetailPageViewModel(IGetMovieById getMovieById)
+        private INavigationManager _navigationManager;
+
+        public DetailPageViewModel(IGetMovieById getMovieById, INavigationManager navigationManager)
         {
             _getMovieById = getMovieById;
+            _navigationManager = navigationManager;
+        }
+
+        [RelayCommand]
+        public async void BackToHomePage()
+        {
+            await _navigationManager.GoToPage("home");
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

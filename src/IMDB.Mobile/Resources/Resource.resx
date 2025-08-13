@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="text_back_button_details" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="title_home_discovery" xml:space="preserve">
     <value>Discovery</value>
   </data>
