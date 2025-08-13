@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:language="clr-namespace:IMDB.Mobile.Resources"
              xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
              xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
              x:Class="IMDB.Mobile.Pages.Home.HomePage">
@@ -10,7 +11,7 @@
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Top Five</Span>
+                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_home_top_five }" />
                         <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
                     </FormattedString>
                 </Label.FormattedText>
@@ -35,7 +36,7 @@
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Latest</Span>
+                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_home_lastest }" />
                         <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
                     </FormattedString>
                 </Label.FormattedText>
@@ -55,7 +56,7 @@
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Discovery</Span>
+                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_home_discovery }" />
                         <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
                     </FormattedString>
                 </Label.FormattedText>
