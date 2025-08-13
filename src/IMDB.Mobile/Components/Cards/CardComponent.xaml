@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              x:Class="IMDB.Mobile.Components.Cards.CardComponent"
              x:Name="this">
 
@@ -20,14 +21,20 @@
             <VerticalStackLayout>
 
                 <Grid>
+                    
+
+                    <ffimageloading:CachedImage 
+                        Source="{ Binding Image }"
+                        CacheDuration="30"
+                        HeightRequest="250"
+                        ErrorPlaceholder="erro_icon_thumb_not_load.png" 
+                        DownsampleToViewSize="True" 
+                        Aspect="AspectFill" />
+                    
                     <Image 
                         Source="bookmark_icon.png" 
                         VerticalOptions="Start"
                         HorizontalOptions="End"/>
-
-                    <Image 
-                       Aspect="AspectFill"
-                       Source="{ Binding Image }" />
 
                 </Grid>
 

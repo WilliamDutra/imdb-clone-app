@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using FFImageLoading.Maui;
 using IMDB.ApiClient.GetAllCategories;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMoviesByGenres;
@@ -25,6 +26,7 @@ namespace IMDB.Mobile
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseFFImageLoading()
                 .AddPages()
                 .AddApiClient()
                 .ConfigureFonts(fonts =>
