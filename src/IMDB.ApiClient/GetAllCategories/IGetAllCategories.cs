@@ -5,7 +5,7 @@ namespace IMDB.ApiClient.GetAllCategories
 {
     public interface IGetAllCategories
     {
-        [Get("/genre/movie/list?language=en")]
+        [Get("/genre/movie/list")]
         Task<Response> Execute();
     }
 }

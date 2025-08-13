@@ -61,29 +61,36 @@ namespace IMDB.Mobile
         {
             
             appBuilder.Services.AddScoped<BearerTokenHandler>();
+            appBuilder.Services.AddScoped<LanguageApiHandler>();
             
             appBuilder.Services.AddRefitClient<IGetMoviesTopFiveDay>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetMoviesLatest>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetMovieById>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<ISearchByTitle>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetAllCategories>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetMoviesByGenres>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             return appBuilder;
