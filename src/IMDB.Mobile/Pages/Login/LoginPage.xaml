@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IMDB.Mobile.Pages.Login.LoginPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
+
+    <VerticalStackLayout Spacing="20">
+
+        <Button Command="{ Binding LoginCommand }" Text="Login" FontFamily="PoppinsBold" FontSize="18" Background="{ StaticResource ColorSecondary }" />
+
+    </VerticalStackLayout>
+</ContentPage>

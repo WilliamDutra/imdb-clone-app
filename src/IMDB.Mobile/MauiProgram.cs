@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using FFImageLoading.Maui;
+using IMDB.ApiClient.CreateSession;
+using IMDB.ApiClient.GetAccessToken;
 using IMDB.ApiClient.GetAllCategories;
+using IMDB.ApiClient.GetAuthenticationToken;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMoviesByGenres;
 using IMDB.ApiClient.GetMoviesLatest;
@@ -9,6 +12,7 @@ using IMDB.ApiClient.SearchByTitle;
 using IMDB.Mobile.Networks;
 using IMDB.Mobile.Pages.Details;
 using IMDB.Mobile.Pages.Home;
+using IMDB.Mobile.Pages.Login;
 using IMDB.Mobile.Pages.MoviesByGenres;
 using IMDB.Mobile.Pages.Search;
 using IMDB.Mobile.Resources.Styles.Handlers;
@@ -52,6 +56,7 @@ namespace IMDB.Mobile
         public static MauiAppBuilder AddPages(this MauiAppBuilder appBuilder)
         {
             appBuilder.Services.AddSingleton<INavigationManager, NavigationManager>();
+            appBuilder.Services.AddTransientWithShellRoute<LoginPage, LoginPageViewModel>("login");
             appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
             appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
             appBuilder.Services.AddTransientWithShellRoute<SearchPage, SearchPageViewModel>("search");
@@ -64,6 +69,7 @@ namespace IMDB.Mobile
             
             appBuilder.Services.AddScoped<BearerTokenHandler>();
             appBuilder.Services.AddScoped<LanguageApiHandler>();
+            appBuilder.Services.AddSingleton<ILocalStorage, LocalStorage>();
             
             appBuilder.Services.AddRefitClient<IGetMoviesTopFiveDay>()
                                 .ConfigureHttpClient(httpClientSettings)
@@ -95,12 +101,29 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
+            appBuilder.Services.AddRefitClient<IGetAuthenticationToken>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetAccessToken>()
+                                .ConfigureHttpClient(httpClientSettings2)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<ICreateSession>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
             return appBuilder;
         }
 
         private static void httpClientSettings(HttpClient client)
         {
             client.BaseAddress = new Uri("https://api.themoviedb.org/3");
+        }
+
+        private static void httpClientSettings2(HttpClient client)
+        {
+            client.BaseAddress = new Uri("https://api.themoviedb.org/4");
         }
     }
 }

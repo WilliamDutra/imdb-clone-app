@@ -2,11 +2,14 @@
 using IMDB.ApiClient;
 using IMDB.ApiClient.Mappings;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+using IMDB.ApiClient.CreateSession;
 using IMDB.ApiClient.GetMoviesLatest;
 using IMDB.ApiClient.GetAllCategories;
 using IMDB.ApiClient.GetMoviesTopFiveDay;
 using CommunityToolkit.Mvvm.ComponentModel;
+using IMDB.ApiClient.GetAuthenticationToken;
+
+using System.Collections.ObjectModel;
 
 namespace IMDB.Mobile.Pages.Home
 {
@@ -35,7 +38,7 @@ namespace IMDB.Mobile.Pages.Home
         [ObservableProperty]
         private Category categorySelected;
 
-        public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, IGetAllCategories getAllCategories, INavigationManager navigationManager)
+        public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, IGetAllCategories getAllCategories, IGetAuthenticationToken getAuthenticationToken, ICreateSession createSession, INavigationManager navigationManager, ILocalStorage localStorage)
         {
             _getMoviesTopFiveDay = getMoviesTopFiveDay;
             _getMoviesLatest = getMoviesLatest;
@@ -68,7 +71,7 @@ namespace IMDB.Mobile.Pages.Home
             result.Wait();
             var moviesResponse = result.Result.Data;
 
-            if(moviesResponse != null )
+            if (moviesResponse != null)
                 MoviesTopFive = MovieMapper.ToMap(moviesResponse);
         }
 
@@ -89,6 +92,8 @@ namespace IMDB.Mobile.Pages.Home
             var categoriesResponse = result.Result.Genres;
             Categories = CategoryMapper.ToMap(categoriesResponse.ToList());
         }
+
+        
 
     }
 }

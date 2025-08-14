@@ -4,13 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:IMDB.Mobile"
+    xmlns:login="clr-namespace:IMDB.Mobile.Pages.Login"
     xmlns:home="clr-namespace:IMDB.Mobile.Pages.Home"
     xmlns:search="clr-namespace:IMDB.Mobile.Pages.Search"
     Shell.BackgroundColor="{ StaticResource ColorPrimary }"
     Title="IMDB.Mobile">
 
-    
     <TabBar>
+        <Tab>
+            <ShellContent ContentTemplate="{ DataTemplate login:LoginPage }" Shell.TabBarIsVisible="False"/>
+        </Tab>
         <Tab Icon="home_icon.png">
             <ShellContent ContentTemplate="{ DataTemplate home:HomePage }" />
         </Tab>
