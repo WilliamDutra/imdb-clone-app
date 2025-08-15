@@ -42,6 +42,7 @@ namespace IMDB.Mobile.Pages.Login
 
             if (!string.IsNullOrEmpty(resultado.SessionId))
             {
+                await SecureStorage.Default.SetAsync("session_id", resultado.SessionId);
                 var currentWindow = Application.Current.Windows.FirstOrDefault();
                 currentWindow.Page = new AppShell();
             }

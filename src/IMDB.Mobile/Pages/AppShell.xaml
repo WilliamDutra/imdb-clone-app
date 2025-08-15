@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:IMDB.Mobile"
+    xmlns:lists="clr-namespace:IMDB.Mobile.Pages.MyLists"
     xmlns:login="clr-namespace:IMDB.Mobile.Pages.Login"
     xmlns:home="clr-namespace:IMDB.Mobile.Pages.Home"
     xmlns:search="clr-namespace:IMDB.Mobile.Pages.Search"
@@ -17,8 +18,8 @@
         <Tab Icon="search_icon.png">
             <ShellContent ContentTemplate="{ DataTemplate search:SearchPage }" />
         </Tab>
-        <Tab Icon="bookmark_icon.png">
-            <ShellContent ContentTemplate="{ DataTemplate local:MainPage }" />
+        <Tab Icon="list_films_icon.png">
+            <ShellContent ContentTemplate="{ DataTemplate lists:MyListsPage }" />
         </Tab>
     </TabBar>
 

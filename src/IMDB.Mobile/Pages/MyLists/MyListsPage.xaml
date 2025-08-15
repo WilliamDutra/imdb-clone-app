@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IMDB.Mobile.Pages.MyLists.MyListsPage"
+             Title="Minhas Listas">
+
+    
+    <VerticalStackLayout Spacing="20">
+        <Grid ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border StrokeThickness="5" Background="{ StaticResource ColorTertiary }">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry Grid.Column="0" Text="{ Binding Name }" />
+            </Border>
+            <Button Grid.Column="1" Text="Criar" Command="{ Binding CreateListCommand }" />
+        </Grid>
+
+        <CollectionView ItemsSource="{ Binding Lists }" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout>
+                        <Label TextColor="White" FontSize="18" FontFamily="PoppinsRegular" Text="{ Binding Name }" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </VerticalStackLayout>
+</ContentPage>
