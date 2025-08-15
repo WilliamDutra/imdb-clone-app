@@ -1,11 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System;
+using CommunityToolkit.Mvvm.Input;
 using IMDB.ApiClient.CreateSession;
 using IMDB.ApiClient.GetAuthenticationToken;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMDB.Mobile.Pages.Login
 {
@@ -17,15 +13,11 @@ namespace IMDB.Mobile.Pages.Login
 
         private ILocalStorage _localStorage;
 
-        private INavigationManager _navigationManager;
-
-        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage, INavigationManager navigationManager)
+        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage)
         {
             _createSession = createSession;
             _getAuthenticationToken = getAuthenticationToken;
             _localStorage = localStorage;
-            _navigationManager = navigationManager;
-            CheckSession();
         }
 
         [RelayCommand]
@@ -42,19 +34,17 @@ namespace IMDB.Mobile.Pages.Login
                 Url = new Uri(authUrl)
             };
 
-            var result = await WebAuthenticator.AuthenticateAsync(options);
+            var autentication = await WebAuthenticator.AuthenticateAsync(options);
 
-            var requestToken = result.Properties["request_token"];
+            var requestToken = autentication.Properties["request_token"];
 
             var resultado = await _createSession.Execute(new CreateSession { RequestToken = requestToken });
-            _localStorage.SetItem("session_id", resultado.SessionId);
-        }
 
-        private void CheckSession()
-        {
-            bool isLogged = !string.IsNullOrEmpty(SecureStorage.Default.GetAsync("session_id").Result) ? true : false;
-            if (isLogged)
-                _navigationManager.GoToPage("home");
+            if (!string.IsNullOrEmpty(resultado.SessionId))
+            {
+                var currentWindow = Application.Current.Windows.FirstOrDefault();
+                currentWindow.Page = new AppShell();
+            }
         }
 
     }

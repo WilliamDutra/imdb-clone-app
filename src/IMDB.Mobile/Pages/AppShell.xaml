@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="IMDB.Mobile.AppShell"
+    x:Class="IMDB.Mobile.Pages.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:IMDB.Mobile"
@@ -11,9 +11,6 @@
     Title="IMDB.Mobile">
 
     <TabBar>
-        <Tab>
-            <ShellContent ContentTemplate="{ DataTemplate login:LoginPage }" Shell.TabBarIsVisible="False"/>
-        </Tab>
         <Tab Icon="home_icon.png">
             <ShellContent ContentTemplate="{ DataTemplate home:HomePage }" />
         </Tab>
