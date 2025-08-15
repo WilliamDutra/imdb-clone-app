@@ -120,6 +120,9 @@
   <data name="text_back_button_details" xml:space="preserve">
     <value>Voltar</value>
   </data>
+  <data name="text_button_add_list_details" xml:space="preserve">
+    <value>Adicionar a minha lista</value>
+  </data>
   <data name="title_home_discovery" xml:space="preserve">
     <value>Descubra</value>
   </data>

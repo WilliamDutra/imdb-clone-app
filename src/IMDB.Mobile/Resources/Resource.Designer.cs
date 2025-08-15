@@ -70,6 +70,15 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Add to my list.
+        /// </summary>
+        internal static string text_button_add_list_details {
+            get {
+                return ResourceManager.GetString("text_button_add_list_details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Discovery.
         /// </summary>
         internal static string title_home_discovery {

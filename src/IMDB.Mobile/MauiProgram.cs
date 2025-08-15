@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using FFImageLoading.Maui;
+using IMDB.ApiClient.AddMovieToList;
 using IMDB.ApiClient.CreateList;
 using IMDB.ApiClient.CreateSession;
 using IMDB.ApiClient.GetAccessToken;
@@ -19,6 +20,7 @@ using IMDB.Mobile.Pages.Login;
 using IMDB.Mobile.Pages.MoviesByGenres;
 using IMDB.Mobile.Pages.MyLists;
 using IMDB.Mobile.Pages.Search;
+using IMDB.Mobile.Popups.MyLists;
 using IMDB.Mobile.Resources.Styles.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -36,6 +38,7 @@ namespace IMDB.Mobile
                 .UseMauiCommunityToolkit()
                 .UseFFImageLoading()
                 .AddPages()
+                .AddPopups()
                 .AddApiClient()
                 .ConfigureFonts(fonts =>
                 {
@@ -130,6 +133,16 @@ namespace IMDB.Mobile
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
+            appBuilder.Services.AddRefitClient<IAddMovieToList>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            return appBuilder;
+        }
+
+        public static MauiAppBuilder AddPopups(this MauiAppBuilder appBuilder)
+        {
+            appBuilder.Services.AddTransientPopup<MyListsPopup, MyListsPopupViewModel>();
             return appBuilder;
         }
 

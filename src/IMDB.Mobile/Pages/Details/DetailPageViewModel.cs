@@ -2,6 +2,9 @@
 using IMDB.ApiClient.GetMovieById;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using IMDB.ApiClient.AddMovieToList;
+using CommunityToolkit.Maui.Core;
+using IMDB.Mobile.Popups.MyLists;
 
 namespace IMDB.Mobile.Pages.Details
 {
@@ -22,12 +25,20 @@ namespace IMDB.Mobile.Pages.Details
 
         private IGetMovieById _getMovieById;
 
+        private IAddMovieToList _addMovieToList;
+
         private INavigationManager _navigationManager;
 
-        public DetailPageViewModel(IGetMovieById getMovieById, INavigationManager navigationManager)
+        private IPopupService _popupService;
+
+        private int MovieId = 0;
+
+        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, INavigationManager navigationManager, IPopupService popupService)
         {
             _getMovieById = getMovieById;
+            _addMovieToList = addMovieToList;
             _navigationManager = navigationManager;
+            _popupService = popupService;
         }
 
         [RelayCommand]
@@ -36,11 +47,20 @@ namespace IMDB.Mobile.Pages.Details
             await _navigationManager.GoToPage("home");
         }
 
+        [RelayCommand]
+        public async void AddToMyList()
+        {
+            _popupService.ShowPopup<MyListsPopupViewModel>();
+        }
+
+
+
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             var id = Convert.ToInt32(query["Id"]);
             var movie = _getMovieById.Execute(id);
             movie.Wait();
+            MovieId = id;
             Title = movie.Result.Title;
             Overview = movie.Result.Overview;
             Rating = "2";

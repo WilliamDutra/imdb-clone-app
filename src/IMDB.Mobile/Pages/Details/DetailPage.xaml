@@ -50,6 +50,8 @@
 
             <Label Text="{ Binding Overview }" />
 
+            <Button BackgroundColor="{ StaticResource ColorSecondary }" TextColor="White" Text="{ Static language:Resource.text_button_add_list_details }" Command="{ Binding AddToMyListCommand }" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
