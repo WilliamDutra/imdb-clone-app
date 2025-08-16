@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IMDB.ApiClient;
@@ -7,7 +8,6 @@ using IMDB.ApiClient.GetAccount;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMyLists;
 using IMDB.ApiClient.Mappings;
-using IMDB.Mobile.Popups.MyLists;
 using System;
 using System.Collections.ObjectModel;
 
@@ -71,6 +71,8 @@ namespace IMDB.Mobile.Pages.Details
             var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
             var listId = ListSelected.Id;
             await _addMovieToList.Execute(sessionId, listId, new AddMovie { MediaId = MovieId });
+            var toast = Toast.Make(string.Format(IMDB.Mobile.Resources.Resource.film_add_with_success_message, ListSelected.Name), ToastDuration.Short);
+            await toast.Show();
         }
 
         public void EachLists()

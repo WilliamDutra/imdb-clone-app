@@ -61,6 +61,15 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Film added in &apos;{0}&apos; with success.
+        /// </summary>
+        internal static string film_add_with_success_message {
+            get {
+                return ResourceManager.GetString("film_add_with_success_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Back.
         /// </summary>
         internal static string text_back_button_details {
