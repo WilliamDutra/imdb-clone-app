@@ -6,6 +6,6 @@ namespace IMDB.ApiClient.GetAuthenticationToken
     public interface IGetAuthenticationToken
     {
         [Get("/authentication/token/new")]
-        Task<TmdbResponse<TokenResponse>> Execute();
+        Task<TmdbAuthenticationTokenResponse> Execute();
     }
 }

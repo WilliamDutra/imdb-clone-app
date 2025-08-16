@@ -36,7 +36,7 @@ namespace IMDB.Mobile.Pages.Login
                 await _navigationManager.GoToPage("errors", parameters);
             }
 
-            var token = autenticationResponse.Data.RequestToken;
+            var token = autenticationResponse.RequestToken;
 
             var authUrl = $"https://www.themoviedb.org/authenticate/{token}?redirect_to=imdb://auth";
             var options = new WebAuthenticatorOptions
@@ -49,7 +49,7 @@ namespace IMDB.Mobile.Pages.Login
             
             var requestToken = autentication.Properties["request_token"];
 
-            var sessionResponse = await _createSession.Execute(new CreateSession { RequestToken = requestToken });
+            var sessionResponse = await _createSession.Execute(new CreateSessionRequest { RequestToken = requestToken });
 
             if(sessionResponse.Success.HasValue && !sessionResponse.Success.Value)
             {
@@ -59,9 +59,9 @@ namespace IMDB.Mobile.Pages.Login
                 await _navigationManager.GoToPage("errors", parameters);
             }
 
-            if (!string.IsNullOrEmpty(sessionResponse.Data.SessionId))
+            if (!string.IsNullOrEmpty(sessionResponse.SessionId))
             {
-                await SecureStorage.Default.SetAsync("session_id", sessionResponse.Data.SessionId);
+                await SecureStorage.Default.SetAsync("session_id", sessionResponse.SessionId);
                 var currentWindow = Application.Current.Windows.FirstOrDefault();
                 currentWindow.Page = new AppShell();
             }

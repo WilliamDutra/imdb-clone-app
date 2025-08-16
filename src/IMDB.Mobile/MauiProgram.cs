@@ -15,6 +15,7 @@ using IMDB.ApiClient.GetMyLists;
 using IMDB.ApiClient.SearchByTitle;
 using IMDB.Mobile.Networks;
 using IMDB.Mobile.Pages.Details;
+using IMDB.Mobile.Pages.Errors;
 using IMDB.Mobile.Pages.Home;
 using IMDB.Mobile.Pages.Login;
 using IMDB.Mobile.Pages.MoviesByGenres;
@@ -64,6 +65,7 @@ namespace IMDB.Mobile
         {
             appBuilder.Services.AddSingleton<INavigationManager, NavigationManager>();
             appBuilder.Services.AddTransientWithShellRoute<LoginPage, LoginPageViewModel>("login");
+            appBuilder.Services.AddTransientWithShellRoute<ErrorsPage, ErrorsPageViewModel>("errors");
             appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
             appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
             appBuilder.Services.AddTransientWithShellRoute<SearchPage, SearchPageViewModel>("search");

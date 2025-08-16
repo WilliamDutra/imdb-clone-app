@@ -89,7 +89,7 @@ namespace IMDB.Mobile.Pages.Home
         {
             var result = _getAllCategories.Execute();
             result.Wait();
-            var categoriesResponse = result.Result.Data.Genres;
+            var categoriesResponse = result.Result.Genres;
             Categories = CategoryMapper.ToMap(categoriesResponse.ToList());
         }
 

@@ -80,7 +80,7 @@ namespace IMDB.Mobile.Pages.Details
             var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
             var responseAccount = _getAccount.Execute(sessionId);
             responseAccount.Wait();
-            var responseLists = _getMyLists.Execute(responseAccount.Result.Data.Id);
+            var responseLists = _getMyLists.Execute(responseAccount.Result.Id);
             responseLists.Wait();
             MyLists = ListsMapper.ToMap(responseLists.Result);
         }

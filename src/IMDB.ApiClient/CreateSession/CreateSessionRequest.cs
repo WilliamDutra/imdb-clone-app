@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IMDB.ApiClient.CreateSession
 {
-    public class CreateSession
+    public class CreateSessionRequest
     {
         [JsonPropertyName("request_token")]
         public string RequestToken { get; set; }
