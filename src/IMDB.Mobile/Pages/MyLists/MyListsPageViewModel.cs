@@ -1,16 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using IMDB.ApiClient;
+using IMDB.ApiClient.Mappings;
 using IMDB.ApiClient.CreateList;
 using IMDB.ApiClient.GetAccount;
 using IMDB.ApiClient.GetMyLists;
-using IMDB.ApiClient.Mappings;
-using System;
-using System.Collections.Generic;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IMDB.Mobile.Pages.MyLists
 {
@@ -23,7 +21,8 @@ namespace IMDB.Mobile.Pages.MyLists
         private IGetMyLists _getMyLists;
 
         [ObservableProperty]
-        private string _name;
+        private string name;
+
 
         [ObservableProperty]
         public ObservableCollection<MyList> lists;
@@ -46,6 +45,8 @@ namespace IMDB.Mobile.Pages.MyLists
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             await _createList.Execute(list, sessionId);
             EachMyLists();
+            var toast = Toast.Make(string.Format(Resources.Resource.list_created_with_success_menssage, Name), ToastDuration.Short);
+            await toast.Show();
         }
 
         public void EachMyLists()

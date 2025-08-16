@@ -70,6 +70,15 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        /// </summary>
+        internal static string list_created_with_success_menssage {
+            get {
+                return ResourceManager.GetString("list_created_with_success_menssage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Back.
         /// </summary>
         internal static string text_back_button_details {

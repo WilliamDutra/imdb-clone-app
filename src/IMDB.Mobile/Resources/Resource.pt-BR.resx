@@ -120,6 +120,9 @@
   <data name="film_add_with_success_message" xml:space="preserve">
     <value>Filme adicionado em '{0}' com sucesso</value>
   </data>
+  <data name="list_created_with_success_menssage" xml:space="preserve">
+    <value>Lista '{0} criada com sucesso</value>
+  </data>
   <data name="text_back_button_details" xml:space="preserve">
     <value>Voltar</value>
   </data>
