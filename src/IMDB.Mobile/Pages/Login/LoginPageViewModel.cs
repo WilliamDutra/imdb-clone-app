@@ -15,12 +15,15 @@ namespace IMDB.Mobile.Pages.Login
 
         private INavigationManager _navigationManager;
 
-        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage, INavigationManager navigationManager)
+        private IShellManager _shellManager;
+
+        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage, INavigationManager navigationManager, IShellManager shellManager)
         {
             _createSession = createSession;
             _getAuthenticationToken = getAuthenticationToken;
             _localStorage = localStorage;
             _navigationManager = navigationManager;
+            _shellManager = shellManager;
         }
 
         [RelayCommand]
@@ -46,12 +49,12 @@ namespace IMDB.Mobile.Pages.Login
             };
 
             var autentication = await WebAuthenticator.AuthenticateAsync(options);
-            
+
             var requestToken = autentication.Properties["request_token"];
 
             var sessionResponse = await _createSession.Execute(new CreateSessionRequest { RequestToken = requestToken });
 
-            if(sessionResponse.Success.HasValue && !sessionResponse.Success.Value)
+            if (sessionResponse.Success.HasValue && !sessionResponse.Success.Value)
             {
                 var parameters = new Dictionary<string, object>();
                 parameters["errors"] = sessionResponse.Message!;
@@ -62,8 +65,7 @@ namespace IMDB.Mobile.Pages.Login
             if (!string.IsNullOrEmpty(sessionResponse.SessionId))
             {
                 await SecureStorage.Default.SetAsync("session_id", sessionResponse.SessionId);
-                var currentWindow = Application.Current.Windows.FirstOrDefault();
-                currentWindow.Page = new AppShell();
+                await _shellManager.SwitchAuthorizeShellRoutes();
             }
         }
 

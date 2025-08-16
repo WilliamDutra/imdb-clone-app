@@ -64,6 +64,8 @@ namespace IMDB.Mobile
         public static MauiAppBuilder AddPages(this MauiAppBuilder appBuilder)
         {
             appBuilder.Services.AddSingleton<INavigationManager, NavigationManager>();
+            appBuilder.Services.AddSingleton<IShellManager, ShellManager>();
+
             appBuilder.Services.AddTransientWithShellRoute<LoginPage, LoginPageViewModel>("login");
             appBuilder.Services.AddTransientWithShellRoute<ErrorsPage, ErrorsPageViewModel>("errors");
             appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
