@@ -32,7 +32,7 @@
     </Shell.TitleView>
     
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Spacing="10">
             <Image 
             Aspect="AspectFill"
             HeightRequest="300"
@@ -57,7 +57,11 @@
                 </Grid.ColumnDefinitions>
                 
                 <Picker
+                    VerticalOptions="Center"
                     Grid.Column="0"
+                    FontSize="18"
+                    FontFamily="PoppinsRegular"
+                    BackgroundColor="{ StaticResource ColorPrimary }"
                     TextColor="White" 
                     Title="Select a list" 
                     ItemsSource="{ Binding MyLists }" 
@@ -65,6 +69,7 @@
                     SelectedItem="{ Binding ListSelected }"/>
                 
                 <Image 
+                    VerticalOptions="Center"
                     Grid.Column="1"
                     Source="bookmark_icon.png"/>
             </Grid>

@@ -13,7 +13,11 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="search_icon.png" />
+            <Image Grid.Column="0" Source="search_icon.png">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding SearchCommand }"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
             <Entry Grid.Column="1" Placeholder="{ Binding PlaceHolder }" Text="{ Binding TextValue }" FontSize="16" FontFamily="PoppinsRegular" TextColor="White">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand }" />

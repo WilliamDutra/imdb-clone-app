@@ -20,11 +20,17 @@ namespace IMDB.Mobile.Pages.Search
         [ObservableProperty]
         private ObservableCollection<Movie> movies;
 
+        [ObservableProperty]
+        private Movie movieSelected;
+
         private ISearchByTitle _searchByTitle;
 
-        public SearchPageViewModel(ISearchByTitle searchByTitle)
+        private INavigationManager _navigationManager;
+
+        public SearchPageViewModel(ISearchByTitle searchByTitle, INavigationManager navigationManager)
         {
             _searchByTitle = searchByTitle;
+            _navigationManager = navigationManager;
         }
 
         [RelayCommand]
@@ -45,6 +51,14 @@ namespace IMDB.Mobile.Pages.Search
             var films = await _searchByTitle.Execute(film);
             TotalSearched = films.TotalResults;
             Movies = MovieMapper.ToMap(films.Data);
+        }
+
+        [RelayCommand]
+        public async Task Detail()
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters["Id"] = MovieSelected.Id;
+            await _navigationManager.GoToPage("details", parameters);
         }
 
     }
