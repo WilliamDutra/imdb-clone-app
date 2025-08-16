@@ -2,13 +2,13 @@
 
 namespace IMDB.ApiClient
 {
-    public class Response<T>
+    public class TmdbResponse<T> : TmdbBaseResponse
     {
         [JsonPropertyName("page")]
         public int Page { get; set; }
 
         [JsonPropertyName("results")]
-        public List<T> Data { get; set; }
+        public T Data { get; set; }
 
         [JsonPropertyName("total_pages")]
         public int TotalPages { get; set; }

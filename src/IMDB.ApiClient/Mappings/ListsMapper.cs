@@ -10,7 +10,7 @@ namespace IMDB.ApiClient.Mappings
 {
     public static class ListsMapper
     {
-        public static ObservableCollection<MyList> ToMap(Response<GetMyLists.List>? response)
+        public static ObservableCollection<MyList> ToMap(TmdbResponse<List<GetMyLists.List>>? response)
         {
             var lists = new ObservableCollection<MyList>();
 

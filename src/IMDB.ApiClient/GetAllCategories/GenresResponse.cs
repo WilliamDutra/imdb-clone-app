@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace IMDB.ApiClient.GetAllCategories
 {
-    public class Response
+    public class GenresResponse
     {
         [JsonPropertyName("genres")]
         public List<Generes> Genres { get; set; }

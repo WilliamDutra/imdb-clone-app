@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace IMDB.ApiClient.GetAuthenticationToken
 {
-    public class Token
+    public class TokenResponse
     {
         [JsonPropertyName("expires_at")]
         public string ExpiresAt { get; set; }

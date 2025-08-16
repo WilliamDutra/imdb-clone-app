@@ -10,6 +10,6 @@ namespace IMDB.ApiClient.CreateSession
     public interface ICreateSession
     {
         [Post("/authentication/session/new")]
-        Task<Session> Execute([Body] CreateSession request);
+        Task<TmdbResponse<SessionResponse>> Execute([Body] CreateSession request);
     }
 }

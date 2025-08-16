@@ -54,7 +54,7 @@ namespace IMDB.Mobile.Pages.MyLists
             var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
             var responseAccount = _getAccount.Execute(sessionId);
             responseAccount.Wait();
-            var accountId = responseAccount.Result.Id;
+            var accountId = responseAccount.Result.Data.Id;
             var responseList = _getMyLists.Execute(accountId);
             responseList.Wait();
             var lists = responseList.Result;

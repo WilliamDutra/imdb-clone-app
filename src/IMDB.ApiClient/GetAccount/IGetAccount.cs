@@ -6,6 +6,6 @@ namespace IMDB.ApiClient.GetAccount
     public interface IGetAccount
     {
         [Get("/account?session_id={sessionId}")]
-        Task<Account> Execute(string sessionId);
+        Task<TmdbResponse<Account>> Execute(string sessionId);
     }
 }

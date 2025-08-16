@@ -7,6 +7,6 @@ namespace IMDB.ApiClient.GetMovieById
     public interface IGetMovieById
     {
         [Get("/movie/{id}")]
-        Task<MovieById> Execute(int id);
+        Task<MovieByIdResponse> Execute(int id);
     }
 }

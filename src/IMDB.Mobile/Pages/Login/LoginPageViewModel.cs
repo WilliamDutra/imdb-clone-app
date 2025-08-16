@@ -13,11 +13,14 @@ namespace IMDB.Mobile.Pages.Login
 
         private ILocalStorage _localStorage;
 
-        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage)
+        private INavigationManager _navigationManager;
+
+        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage, INavigationManager navigationManager)
         {
             _createSession = createSession;
             _getAuthenticationToken = getAuthenticationToken;
             _localStorage = localStorage;
+            _navigationManager = navigationManager;
         }
 
         [RelayCommand]
@@ -25,7 +28,15 @@ namespace IMDB.Mobile.Pages.Login
         {
             var autenticationResponse = await _getAuthenticationToken.Execute();
 
-            var token = autenticationResponse.RequestToken;
+            if (autenticationResponse.Success.HasValue && !autenticationResponse.Success.Value)
+            {
+                var parameters = new Dictionary<string, object>();
+                parameters["errors"] = autenticationResponse.Message!;
+                parameters["code"] = autenticationResponse.StatusCode!;
+                await _navigationManager.GoToPage("errors", parameters);
+            }
+
+            var token = autenticationResponse.Data.RequestToken;
 
             var authUrl = $"https://www.themoviedb.org/authenticate/{token}?redirect_to=imdb://auth";
             var options = new WebAuthenticatorOptions
@@ -35,14 +46,22 @@ namespace IMDB.Mobile.Pages.Login
             };
 
             var autentication = await WebAuthenticator.AuthenticateAsync(options);
-
+            
             var requestToken = autentication.Properties["request_token"];
 
-            var resultado = await _createSession.Execute(new CreateSession { RequestToken = requestToken });
+            var sessionResponse = await _createSession.Execute(new CreateSession { RequestToken = requestToken });
 
-            if (!string.IsNullOrEmpty(resultado.SessionId))
+            if(sessionResponse.Success.HasValue && !sessionResponse.Success.Value)
             {
-                await SecureStorage.Default.SetAsync("session_id", resultado.SessionId);
+                var parameters = new Dictionary<string, object>();
+                parameters["errors"] = sessionResponse.Message!;
+                parameters["code"] = sessionResponse.StatusCode!;
+                await _navigationManager.GoToPage("errors", parameters);
+            }
+
+            if (!string.IsNullOrEmpty(sessionResponse.Data.SessionId))
+            {
+                await SecureStorage.Default.SetAsync("session_id", sessionResponse.Data.SessionId);
                 var currentWindow = Application.Current.Windows.FirstOrDefault();
                 currentWindow.Page = new AppShell();
             }

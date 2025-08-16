@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IMDB.ApiClient.GetMovieById
 {
-    public class MovieById
+    public class MovieByIdResponse
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

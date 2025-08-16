@@ -19,7 +19,7 @@ namespace IMDB.ApiClient.Mappings
             return movies;
         }
 
-        public static Movie ToMap(MovieById response)
+        public static Movie ToMap(MovieByIdResponse response)
         {
             var movie = Movie.Restore(response.Id, response.Title, response.Overview, $"https://image.tmdb.org/t/p/original{response.Poster}");
             return movie;

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace IMDB.ApiClient.GetAccessToken
 {
-    public class AccessToken
+    public class AccessTokenResponse
     {
         [JsonPropertyName("account_id")]
         public string AccountId { get; set; }
