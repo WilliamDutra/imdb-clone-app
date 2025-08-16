@@ -50,8 +50,29 @@
 
             <Label Text="{ Binding Overview }" />
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Picker
+                    Grid.Column="0"
+                    TextColor="White" 
+                    Title="Select a list" 
+                    ItemsSource="{ Binding MyLists }" 
+                    ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{ Binding ListSelected }"/>
+                
+                <Image 
+                    Grid.Column="1"
+                    Source="bookmark_icon.png"/>
+            </Grid>
+            
             <Button BackgroundColor="{ StaticResource ColorSecondary }" TextColor="White" Text="{ Static language:Resource.text_button_add_list_details }" Command="{ Binding AddToMyListCommand }" />
 
+            
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

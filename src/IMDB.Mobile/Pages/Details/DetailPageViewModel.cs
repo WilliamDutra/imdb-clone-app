@@ -1,10 +1,15 @@
-﻿using System;
-using IMDB.ApiClient.GetMovieById;
+﻿using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using IMDB.ApiClient;
 using IMDB.ApiClient.AddMovieToList;
-using CommunityToolkit.Maui.Core;
+using IMDB.ApiClient.GetAccount;
+using IMDB.ApiClient.GetMovieById;
+using IMDB.ApiClient.GetMyLists;
+using IMDB.ApiClient.Mappings;
 using IMDB.Mobile.Popups.MyLists;
+using System;
+using System.Collections.ObjectModel;
 
 namespace IMDB.Mobile.Pages.Details
 {
@@ -23,9 +28,19 @@ namespace IMDB.Mobile.Pages.Details
         [ObservableProperty]
         private string thumbnail;
 
+        [ObservableProperty]
+        private ObservableCollection<MyList> myLists;
+
+        [ObservableProperty]
+        private MyList listSelected;
+
         private IGetMovieById _getMovieById;
 
+        private IGetAccount _getAccount;
+
         private IAddMovieToList _addMovieToList;
+
+        private IGetMyLists _getMyLists;
 
         private INavigationManager _navigationManager;
 
@@ -33,12 +48,15 @@ namespace IMDB.Mobile.Pages.Details
 
         private int MovieId = 0;
 
-        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, INavigationManager navigationManager, IPopupService popupService)
+        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IPopupService popupService)
         {
             _getMovieById = getMovieById;
             _addMovieToList = addMovieToList;
+            _getMyLists = getMyLists;
+            _getAccount = getAccount;
             _navigationManager = navigationManager;
             _popupService = popupService;
+            EachLists();
         }
 
         [RelayCommand]
@@ -50,9 +68,20 @@ namespace IMDB.Mobile.Pages.Details
         [RelayCommand]
         public async void AddToMyList()
         {
-            _popupService.ShowPopup<MyListsPopupViewModel>();
+            var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
+            var listId = ListSelected.Id;
+            await _addMovieToList.Execute(sessionId, listId, new AddMovie { MediaId = MovieId });
         }
 
+        public void EachLists()
+        {
+            var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
+            var responseAccount = _getAccount.Execute(sessionId);
+            responseAccount.Wait();
+            var responseLists = _getMyLists.Execute(responseAccount.Result.Id);
+            responseLists.Wait();
+            MyLists = ListsMapper.ToMap(responseLists.Result);
+        }
 
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
