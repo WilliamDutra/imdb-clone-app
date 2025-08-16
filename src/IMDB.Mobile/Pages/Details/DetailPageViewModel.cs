@@ -62,7 +62,7 @@ namespace IMDB.Mobile.Pages.Details
         [RelayCommand]
         public async void BackToHomePage()
         {
-            await _navigationManager.GoToPage("home");
+            await _navigationManager.GoToPage("..");
         }
 
         [RelayCommand]
