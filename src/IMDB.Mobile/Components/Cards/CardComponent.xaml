@@ -2,13 +2,14 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
              x:Class="IMDB.Mobile.Components.Cards.CardComponent"
              x:Name="this">
 
     <VerticalStackLayout
         BindingContext="{ x:Reference this }"
-        Spacing="5"
-        WidthRequest="180" >
+        Spacing="10"
+        WidthRequest="250" >
         <Border 
             Padding="10" 
             Stroke="{ StaticResource ColorTertiary }" 
@@ -26,7 +27,7 @@
                     <ffimageloading:CachedImage 
                         Source="{ Binding Image }"
                         CacheDuration="30"
-                        HeightRequest="250"
+                        HeightRequest="300"
                         ErrorPlaceholder="erro_icon_thumb_not_load.png" 
                         DownsampleToViewSize="True" 
                         Aspect="AspectFill" />
@@ -43,13 +44,25 @@
         <Label 
             Style="{ StaticResource CardTitle }"
             Text="{ Binding Title }"/>
+
         <HorizontalStackLayout Spacing="10">
-            <Label
-                Style="{ StaticResource RatingNote }"
-                Text="{ Binding Rating }"/>
-            <Image 
-                VerticalOptions="Center"
-                Source="rating_star_full.png"/>
+            
+        <Label
+            Style="{ StaticResource RatingNote }"    
+            Text="{ Binding Rating }" />
+
+        <controls:RatingView
+                ItemCount="10"
+                ItemSize="16"
+                ItemSpacing="6"
+                Value="{ Binding Rating }"
+                RatedFillColor="{ StaticResource ColorSecondary }"
+                UnRatedFillColor="LightGrey"
+                StrokeColor="Black"
+                StrokeWidth="1"
+                HorizontalOptions="Start" />
         </HorizontalStackLayout>
+
+
     </VerticalStackLayout>
 </ContentView>

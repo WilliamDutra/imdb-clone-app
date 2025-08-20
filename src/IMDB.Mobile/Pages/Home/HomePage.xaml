@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:language="clr-namespace:IMDB.Mobile.Resources"
              xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
+             xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
              xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
              x:Class="IMDB.Mobile.Pages.Home.HomePage">
 
@@ -27,12 +28,14 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <component:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="2" />
+                            <component:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </ScrollView>
 
+            
+            
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
