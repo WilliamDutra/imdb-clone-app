@@ -13,7 +13,7 @@ namespace IMDB.ApiClient.Mappings
             foreach (var item in response)
             {
 
-                movies.Add(Movie.Restore(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/original{item.PosterPath}"));
+                movies.Add(Movie.Restore(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/original{item.PosterPath}", item.VoteCount));
             }
 
             return movies;
@@ -21,7 +21,7 @@ namespace IMDB.ApiClient.Mappings
 
         public static Movie ToMap(MovieByIdResponse response)
         {
-            var movie = Movie.Restore(response.Id, response.Title, response.Overview, $"https://image.tmdb.org/t/p/original{response.Poster}");
+            var movie = Movie.Restore(response.Id, response.Title, response.Overview, $"https://image.tmdb.org/t/p/original{response.Poster}", 0);
             return movie;
         }
 
