@@ -20,18 +20,23 @@ namespace IMDB.Mobile.Pages.MyLists
 
         private IGetMyLists _getMyLists;
 
+        private INavigationManager _navigationManager;
+
         [ObservableProperty]
         private string name;
 
+        [ObservableProperty]
+        private MyList myListSelected;
 
         [ObservableProperty]
         public ObservableCollection<MyList> lists;
 
-        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists)
+        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager)
         {
             _createList = createList;
             _getAccount = getAccount;
             _getMyLists = getMyLists;
+            _navigationManager = navigationManager;
             EachMyLists();
         }
 
@@ -47,6 +52,14 @@ namespace IMDB.Mobile.Pages.MyLists
             EachMyLists();
             var toast = Toast.Make(string.Format(Resources.Resource.list_created_with_success_menssage, Name), ToastDuration.Short);
             await toast.Show();
+        }
+
+        [RelayCommand]
+        public async void Detail()
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters["ListId"] = MyListSelected.Id;
+            await _navigationManager.GoToPage("my-list-detail", parameters);
         }
 
         public void EachMyLists()

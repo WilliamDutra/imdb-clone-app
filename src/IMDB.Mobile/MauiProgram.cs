@@ -7,6 +7,7 @@ using IMDB.ApiClient.GetAccessToken;
 using IMDB.ApiClient.GetAccount;
 using IMDB.ApiClient.GetAllCategories;
 using IMDB.ApiClient.GetAuthenticationToken;
+using IMDB.ApiClient.GetListById;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMoviesByGenres;
 using IMDB.ApiClient.GetMoviesLatest;
@@ -20,6 +21,7 @@ using IMDB.Mobile.Pages.Home;
 using IMDB.Mobile.Pages.Login;
 using IMDB.Mobile.Pages.MoviesByGenres;
 using IMDB.Mobile.Pages.MyLists;
+using IMDB.Mobile.Pages.MyLists.MyListDetail;
 using IMDB.Mobile.Pages.Search;
 using IMDB.Mobile.Popups.MyLists;
 using IMDB.Mobile.Resources.Styles.Handlers;
@@ -72,6 +74,7 @@ namespace IMDB.Mobile
             appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
             appBuilder.Services.AddTransientWithShellRoute<SearchPage, SearchPageViewModel>("search");
             appBuilder.Services.AddTransientWithShellRoute<MyListsPage, MyListsPageViewModel>("my-lists");
+            appBuilder.Services.AddTransientWithShellRoute<MyListDetailPage, MyListDetailPageViewModel>("my-list-detail");
             appBuilder.Services.AddTransientWithShellRoute<MoviesByGenresPage, MoviesByGenresPageViewModel>("movies-by-genres");
             return appBuilder;
         }
@@ -138,6 +141,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IAddMovieToList>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetListById>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

@@ -108,6 +108,9 @@
 	  <MauiXaml Update="Pages\MoviesByGenres\MoviesByGenresPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\MyLists\MyListDetail\MyListDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\MyLists\MyListsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

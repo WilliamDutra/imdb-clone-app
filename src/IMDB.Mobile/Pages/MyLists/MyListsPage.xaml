@@ -20,7 +20,11 @@
             <Button Grid.Column="1" Text="Criar" Command="{ Binding CreateListCommand }" />
         </Grid>
 
-        <CollectionView ItemsSource="{ Binding Lists }" >
+        <CollectionView 
+            SelectionMode="Single"
+            SelectedItem="{ Binding MyListSelected }"
+            SelectionChangedCommand="{ Binding DetailCommand }"
+            ItemsSource="{ Binding Lists }" >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <HorizontalStackLayout>
