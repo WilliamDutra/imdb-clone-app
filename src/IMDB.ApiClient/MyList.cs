@@ -17,12 +17,21 @@ namespace IMDB.ApiClient
 
         public int ItemCount { get; private set; }
 
+        public IReadOnlyCollection<Movie> Movies => _Movies;
+
+        private List<Movie> _Movies = new List<Movie>();
+
         private MyList(int id, string name, string description, int itemCount)
         {
             Id = id;
             Name = name;
             Description = description;
             ItemCount = itemCount;
+        }
+
+        public void AddMovie(int id, string name, string overview, string poster, int rating)
+        {
+            _Movies.Add(Movie.Restore(id, name, overview, poster, rating));
         }
 
         public static MyList Restore(int id, string name, string description, int itemCount)

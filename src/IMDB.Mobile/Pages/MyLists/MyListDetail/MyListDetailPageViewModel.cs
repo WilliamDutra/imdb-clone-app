@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using IMDB.ApiClient;
 using IMDB.ApiClient.GetListById;
+using IMDB.ApiClient.Mappings;
 
 namespace IMDB.Mobile.Pages.MyLists.MyListDetail
 {
@@ -9,7 +11,8 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
     {
         private IGetListById _getListById;
 
-        private ObservableCollection<MyList> myList;
+        [ObservableProperty]
+        private MyList listDetail;
 
         public MyListDetailPageViewModel(IGetListById getListById)
         {
@@ -21,6 +24,9 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
             var listId = Convert.ToInt32(query["ListId"].ToString());
             var response = _getListById.Execute(listId);
             response.Wait();
+
+            ListDetail = ListsMapper.ToMap(response.Result);
+
         }
     }
 }

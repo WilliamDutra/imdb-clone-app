@@ -32,5 +32,8 @@ namespace IMDB.ApiClient.GetListById
 
         [JsonPropertyName("overview")]
         public string Overview { get; set; }
+
+        [JsonPropertyName("backdrop_path")]
+        public string Poster { get; set; }
     }
 }

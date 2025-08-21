@@ -4,9 +4,15 @@
              x:Class="IMDB.Mobile.Pages.MyLists.MyListDetail.MyListDetailPage"
              Title="MyListDetailPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+        <CollectionView
+            ItemsSource="{ Binding ListDetail.Movies }">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Title}" TextColor="White" FontFamily="PoppinsRegular" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
     </VerticalStackLayout>
 </ContentPage>

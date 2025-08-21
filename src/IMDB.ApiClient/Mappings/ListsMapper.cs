@@ -21,5 +21,17 @@ namespace IMDB.ApiClient.Mappings
 
             return lists;
         }
+
+        public static MyList ToMap(GetListById.ListById response)
+        {
+            var myList = MyList.Restore(response.Id, "", "", response.FavoriteCount);
+
+            foreach (var item in response.Items)
+            {
+                myList.AddMovie(item.Id, item.Title, item.Overview, item.Poster, 0);
+            }
+
+            return myList;
+        }
     }
 }
