@@ -34,50 +34,29 @@
     <ScrollView>
         <VerticalStackLayout Spacing="10">
             <Image 
-            Aspect="AspectFill"
-            HeightRequest="300"
-            Source="{ Binding Thumbnail }"/>
+                Aspect="AspectFill"
+                HeightRequest="300"
+                Source="{ Binding Thumbnail }"/>
 
             <Label
-            FontSize="36"
-            FontFamily="PoppinsBlack"
-            Text="{ Binding Title }" />
+                FontSize="36"
+                FontFamily="PoppinsBlack"
+                Text="{ Binding Title }" />
 
             <Label
-            FontFamily="PoppinsRegular"
-            FontSize="18"
-            Text="{ Binding Rating }" />
+                FontFamily="PoppinsRegular"
+                FontSize="18"
+                Text="{ Binding Rating }" />
 
-            <Label Text="{ Binding Overview }" />
+            <Label 
+                Text="{ Binding Overview }" />
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                
-                <Picker
-                    VerticalOptions="Center"
-                    Grid.Column="0"
-                    FontSize="18"
-                    FontFamily="PoppinsRegular"
-                    BackgroundColor="{ StaticResource ColorPrimary }"
-                    TextColor="White" 
-                    Title="Select a list" 
-                    ItemsSource="{ Binding MyLists }" 
-                    ItemDisplayBinding="{Binding Name}" 
-                    SelectedItem="{ Binding ListSelected }"/>
-                
-                <Image 
-                    VerticalOptions="Center"
-                    Grid.Column="1"
-                    Source="bookmark_icon.png"/>
-            </Grid>
-            
-            <Button BackgroundColor="{ StaticResource ColorSecondary }" TextColor="White" Text="{ Static language:Resource.text_button_add_list_details }" Command="{ Binding AddToMyListCommand }" />
+            <Button 
+                BackgroundColor="{ StaticResource ColorSecondary }" 
+                ImageSource="bookmark_icon.png"
+                TextColor="White" Text="{ Static language:Resource.text_button_add_list_details }" 
+                Command="{ Binding AddToMyListCommand }"/>
 
-            
-            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -2,18 +2,29 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Background="{ StaticResource ColorPrimary }"
              x:Class="IMDB.Mobile.Popups.MyLists.MyListsPopup">
-    <VerticalStackLayout Background="{ StaticResource ColorPrimary }" HeightRequest="300" WidthRequest="250" Spacing="10" Padding="10">
+    <VerticalStackLayout Spacing="10" Padding="10">
         <Label 
             Text="Minhas listas"
-            FontSize="18"
+            FontSize="24"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <Picker Title="Select a monkey" ItemsSource="{ Binding MyLists }" ItemDisplayBinding="{Binding Name}">
-            
-        </Picker>
-
+        <CollectionView 
+            ItemsSource="{ Binding MyLists }" 
+            SelectedItem="{ Binding ListSelected, Mode=TwoWay}"
+            SelectionMode="Single"
+            SelectionChangedCommand="{ Binding SelectedListCommand }">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{ Binding Name }" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
 </toolkit:Popup>

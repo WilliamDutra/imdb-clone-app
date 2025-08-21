@@ -1,15 +1,17 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using IMDB.ApiClient;
-using IMDB.ApiClient.AddMovieToList;
-using IMDB.ApiClient.GetAccount;
-using IMDB.ApiClient.GetMovieById;
-using IMDB.ApiClient.GetMyLists;
+using CommunityToolkit.Maui;
 using IMDB.ApiClient.Mappings;
-using System;
+using IMDB.ApiClient.GetMyLists;
+using IMDB.ApiClient.GetAccount;
+using CommunityToolkit.Maui.Core;
+using IMDB.Mobile.Popups.MyLists;
+using IMDB.ApiClient.GetMovieById;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
+using IMDB.ApiClient.AddMovieToList;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IMDB.Mobile.Pages.Details
 {
@@ -30,9 +32,6 @@ namespace IMDB.Mobile.Pages.Details
 
         [ObservableProperty]
         private ObservableCollection<MyList> myLists;
-
-        [ObservableProperty]
-        private MyList listSelected;
 
         private IGetMovieById _getMovieById;
 
@@ -68,10 +67,16 @@ namespace IMDB.Mobile.Pages.Details
         [RelayCommand]
         public async void AddToMyList()
         {
-            var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
-            var listId = ListSelected.Id;
+            var sessionId = await SecureStorage.Default.GetAsync("session_id"); ;
+            var parameters = new Dictionary<string, object>();
+            parameters["SessionId"] = sessionId;
+            var result = await _popupService.ShowPopupAsync<MyListsPopupViewModel, MyList>(Shell.Current, new PopupOptions() {  }, shellParameters: parameters);
+
+
+            var listSelected = result.Result;
+            var listId = listSelected.Id;
             await _addMovieToList.Execute(sessionId, listId, new AddMovie { MediaId = MovieId });
-            var toast = Toast.Make(string.Format(IMDB.Mobile.Resources.Resource.film_add_with_success_message, ListSelected.Name), ToastDuration.Short);
+            var toast = Toast.Make(string.Format(IMDB.Mobile.Resources.Resource.film_add_with_success_message, listSelected.Name), ToastDuration.Short);
             await toast.Show();
         }
 
