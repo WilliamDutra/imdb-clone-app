@@ -5,6 +5,9 @@
              xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
              xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
              xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
+             xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Home"
+             xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+             x:DataType="vm:HomePageViewModel"
              x:Class="IMDB.Mobile.Pages.Home.HomePage">
 
     <ScrollView>
@@ -19,16 +22,18 @@
             </Label>
             <ScrollView Orientation="Horizontal">
                 <CollectionView  
-                    ItemsSource="{Binding MoviesTopFive}"
-                    SelectionMode="Single"
-                    SelectedItem="{Binding MovieSelected, Mode=TwoWay}"
-                    SelectionChangedCommand="{ Binding DetailCommand }">
+                    ItemsSource="{Binding MoviesTopFive}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <component:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" />
+                        <DataTemplate x:DataType="model:Movie">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <component:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}" AddToListCommandParameter="{ Binding . }" />
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -45,13 +50,20 @@
                 </Label.FormattedText>
             </Label>
 
-            <CollectionView ItemsSource="{ Binding MoviesLatest }">
+            <CollectionView 
+                SelectionMode="None"
+                ItemsSource="{ Binding MoviesLatest }">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout  ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <component:CardWithDescriptionComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" Description="{ Binding Overview }" />
+                    <DataTemplate x:DataType="model:Movie">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            <component:CardWithDescriptionComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" Description="{ Binding Overview }" />
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -76,7 +88,7 @@
                         <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="model:Category">
                             <pill:PillComponent Label="{ Binding Name }" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

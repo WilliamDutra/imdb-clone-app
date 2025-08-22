@@ -43,7 +43,7 @@
                         VerticalOptions="Start"
                         HorizontalOptions="End">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer />
+                            <TapGestureRecognizer Command="{ Binding AddToListCommand }" CommandParameter="{ Binding AddToListCommandParameter }" />
                         </Image.GestureRecognizers>
                         <Image.Behaviors>
                             <toolkit:IconTintColorBehavior TintColor="{ StaticResource ColorSecondary }" />
