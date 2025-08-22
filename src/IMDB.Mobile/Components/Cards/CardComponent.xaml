@@ -3,15 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="IMDB.Mobile.Components.Cards.CardComponent"
              x:Name="this">
 
-    <VerticalStackLayout
+    <Grid
         BindingContext="{ x:Reference this }"
-        Spacing="10"
-        WidthRequest="250" >
+        WidthRequest="250"
+        RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
         <Border 
-            Padding="10" 
+            Grid.Row="0"
             Stroke="{ StaticResource ColorTertiary }" 
             StrokeThickness="4" 
             Background="{ StaticResource ColorTertiary }">
@@ -22,8 +29,6 @@
             <VerticalStackLayout>
 
                 <Grid>
-                    
-
                     <ffimageloading:CachedImage 
                         Source="{ Binding Image }"
                         CacheDuration="30"
@@ -31,30 +36,39 @@
                         ErrorPlaceholder="erro_icon_thumb_not_load.png" 
                         DownsampleToViewSize="True" 
                         Aspect="AspectFill" />
-                    
-                    <Image 
-                        Source="bookmark_icon.png" 
+
+                    <Image
+                        Margin="10"
+                        Source="bookmark_icon_full.png" 
                         VerticalOptions="Start"
-                        HorizontalOptions="End"/>
+                        HorizontalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Image.GestureRecognizers>
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{ StaticResource ColorSecondary }" />
+                        </Image.Behaviors>
+                    </Image>
 
                 </Grid>
 
             </VerticalStackLayout>
         </Border>
+        
         <Label 
+            Grid.Row="1"
             Style="{ StaticResource CardTitle }"
             Text="{ Binding Title }"/>
 
-        <HorizontalStackLayout Spacing="10">
+        <HorizontalStackLayout Spacing="10" Grid.Row="2">
             
         <Label
             Style="{ StaticResource RatingNote }"    
             Text="{ Binding Rating }" />
 
         <controls:RatingView
-                ItemCount="10"
+                ItemCount="1"
                 ItemSize="16"
-                ItemSpacing="6"
                 Value="{ Binding Rating }"
                 RatedFillColor="{ StaticResource ColorSecondary }"
                 UnRatedFillColor="LightGrey"
@@ -64,5 +78,5 @@
         </HorizontalStackLayout>
 
 
-    </VerticalStackLayout>
+    </Grid>
 </ContentView>
