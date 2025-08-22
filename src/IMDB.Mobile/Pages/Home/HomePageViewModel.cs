@@ -70,6 +70,7 @@ namespace IMDB.Mobile.Pages.Home
         {
             var queryParams = new Dictionary<string, object>();
             queryParams["genreId"] = categorySelected.Id;
+            queryParams["genreName"] = categorySelected.Name;
             await _navigationManager.GoToPage("movies-by-genres", queryParams);
         }
 

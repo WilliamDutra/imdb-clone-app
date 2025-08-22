@@ -32,7 +32,7 @@
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
-                                <component:CardComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}" AddToListCommandParameter="{ Binding . }" />
+                                <component:CardComponent CardHeight="300" CardWidth="250" Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}" AddToListCommandParameter="{ Binding . }" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

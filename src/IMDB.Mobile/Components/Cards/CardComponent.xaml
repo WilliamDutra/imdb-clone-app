@@ -9,7 +9,7 @@
 
     <Grid
         BindingContext="{ x:Reference this }"
-        WidthRequest="250"
+        WidthRequest="{ Binding CardWidth }"
         RowSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -32,7 +32,7 @@
                     <ffimageloading:CachedImage 
                         Source="{ Binding Image }"
                         CacheDuration="30"
-                        HeightRequest="300"
+                        HeightRequest="{ Binding CardHeight }"
                         ErrorPlaceholder="erro_icon_thumb_not_load.png" 
                         DownsampleToViewSize="True" 
                         Aspect="AspectFill" />

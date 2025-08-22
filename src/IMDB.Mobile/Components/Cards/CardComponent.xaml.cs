@@ -14,6 +14,10 @@ public partial class CardComponent : ContentView
 
 	public static readonly BindableProperty AddToListCommandParameterProperty = BindableProperty.Create("AddToListCommandParameter", typeof(object), typeof(CardComponent), default(object));
 
+	public static readonly BindableProperty CardWidthProperty = BindableProperty.Create("CardWidth", typeof(double), typeof(CardComponent), default(double));
+
+	public static readonly BindableProperty CardHeightProperty = BindableProperty.Create("CardHeight", typeof(double), typeof(CardComponent), default(double));
+
     public string Title
 	{
 		get => (string)GetValue(TitleProperty);
@@ -43,6 +47,18 @@ public partial class CardComponent : ContentView
 		get => (object)GetValue(AddToListCommandParameterProperty);
 		set => SetValue(AddToListCommandParameterProperty, value);
 	}
+
+	public new double CardWidth
+	{
+        get => (double)GetValue(CardWidthProperty);
+        set => SetValue(CardWidthProperty, value);
+    }
+
+    public new double CardHeight
+    {
+        get => (double)GetValue(CardHeightProperty);
+        set => SetValue(CardHeightProperty, value);
+    }
 
     public CardComponent()
 	{

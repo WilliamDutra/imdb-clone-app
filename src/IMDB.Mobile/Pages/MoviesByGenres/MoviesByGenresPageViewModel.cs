@@ -14,8 +14,13 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
 
         private IGetMoviesByGenres _getMoviesByGenres;
 
+        private INavigationManager _navigationManager;
+
         [ObservableProperty]
         private ObservableCollection<Movie> movies;
+
+        [ObservableProperty]
+        private string genreName;
 
         private int _TotalPages  = 0;
 
@@ -23,14 +28,16 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
 
         private int _GenreId = 0;
 
-        public MoviesByGenresPageViewModel(IGetMoviesByGenres getMoviesByGenres)
+        public MoviesByGenresPageViewModel(IGetMoviesByGenres getMoviesByGenres, INavigationManager navigationManager)
         {
             _getMoviesByGenres = getMoviesByGenres;
+            _navigationManager = navigationManager;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             int genreId = (int)query["genreId"];
+            GenreName = query["genreName"].ToString();
             _GenreId = genreId;
             EachMoviesByGenres(genreId);
         }
@@ -49,6 +56,21 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
             Movies.AddRange(MovieMapper.ToMap(results.Data));
             await Toast.Make($"página {_CurrentPage}", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
             _CurrentPage++;
+        }
+
+        [RelayCommand]
+        public async void Detail(Movie movie)
+        {
+            var movieId = movie.Id;
+            var parameters = new Dictionary<string, object>();
+            parameters["Id"] = movieId;
+            await _navigationManager.GoToPage("details", parameters);
+        }
+
+        [RelayCommand]
+        public async void BackToHomePage()
+        {
+            await _navigationManager.GoToPage("..");
         }
 
         private async void EachMoviesByGenres(int genreId)
