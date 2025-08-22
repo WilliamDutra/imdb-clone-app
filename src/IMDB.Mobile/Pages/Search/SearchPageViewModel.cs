@@ -50,7 +50,7 @@ namespace IMDB.Mobile.Pages.Search
 
             var films = await _searchByTitle.Execute(film);
             TotalSearched = films.TotalResults;
-            Movies = MovieMapper.ToMap(films.Data);
+            Movies = MovieMapper.ToMap(films.Data.ToList());
         }
 
         [RelayCommand]
