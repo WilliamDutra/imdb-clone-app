@@ -18,6 +18,10 @@ namespace IMDB.ApiClient
 
         public int Rating { get; set; }
 
+        private IReadOnlyCollection<Actor> Cast => _Actors;
+
+        private List<Actor> _Actors = new List<Actor>();
+
         private Movie(int id, string title, string overview, string poster, int rating)
         {
             Title = title;
@@ -25,6 +29,11 @@ namespace IMDB.ApiClient
             Overview = overview;
             Poster = poster;
             Rating = rating;
+        }
+
+        public void AddCast(Actor actor)
+        {
+            _Actors.Add(actor);
         }
 
         public static Movie Restore(int id, string title, string overview, string poster, int rating)
