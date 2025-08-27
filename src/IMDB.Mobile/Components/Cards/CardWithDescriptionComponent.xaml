@@ -26,7 +26,7 @@
             <ffimageloading:CachedImage 
                 CacheDuration="30"
                 DownsampleToViewSize="True"
-                ErrorPlaceholder="erro_icon_thumb_not_load.png" 
+                ErrorPlaceholder="film_icon.png" 
                 HeightRequest="250" 
                 Aspect="AspectFill" 
                 Source="{ Binding Image }" />

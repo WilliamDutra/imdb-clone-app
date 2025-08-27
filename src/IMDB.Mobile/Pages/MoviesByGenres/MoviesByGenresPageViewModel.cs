@@ -43,7 +43,7 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         }
 
         [RelayCommand]
-        public async void RemainingItems()
+        public async Task RemainingItems()
         {
             await Toast.Make($"carregando novos filmes", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
 
@@ -51,11 +51,13 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
                 return;
 
             await Task.Delay(3000);
-            
+
+            _CurrentPage++;
+
             var results = await _getMoviesByGenres.Execute(_GenreId, _CurrentPage);
             Movies.AddRange(MovieMapper.ToMap(results.Data));
             await Toast.Make($"página {_CurrentPage}", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
-            _CurrentPage++;
+            
         }
 
         [RelayCommand]

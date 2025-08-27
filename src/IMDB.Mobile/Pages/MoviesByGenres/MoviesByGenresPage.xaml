@@ -41,6 +41,7 @@
             <CollectionView 
                 HeightRequest="500"
                 RemainingItemsThreshold="1"
+                ItemsUpdatingScrollMode="KeepItemsInView"
                 RemainingItemsThresholdReachedCommand="{ Binding RemainingItemsCommand }"
                 ItemsSource="{ Binding Movies }">
                 <CollectionView.ItemsLayout>
