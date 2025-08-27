@@ -7,6 +7,7 @@ using IMDB.ApiClient.GetAccessToken;
 using IMDB.ApiClient.GetAccount;
 using IMDB.ApiClient.GetAllCategories;
 using IMDB.ApiClient.GetAuthenticationToken;
+using IMDB.ApiClient.GetCastMovie;
 using IMDB.ApiClient.GetListById;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMoviesByGenres;
@@ -145,6 +146,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetListById>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetCastMovie>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

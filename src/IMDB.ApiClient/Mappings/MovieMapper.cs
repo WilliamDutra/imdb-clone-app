@@ -1,4 +1,5 @@
-﻿using IMDB.ApiClient.GetMovieById;
+﻿using IMDB.ApiClient.GetCastMovie;
+using IMDB.ApiClient.GetMovieById;
 using System;
 using System.Collections.ObjectModel;
 
@@ -25,5 +26,14 @@ namespace IMDB.ApiClient.Mappings
             return movie;
         }
 
+        public static ObservableCollection<Actor> ToMap(CastResponse response)
+        {
+            var actors = new ObservableCollection<Actor>();
+            foreach (var item in response.Credits.Cast)
+            {
+                actors.Add(Actor.Restore(item.Id, item.Name, $"https://image.tmdb.org/t/p/original{item.ProfilePath}"));
+            }
+            return actors;
+        }
     }
 }

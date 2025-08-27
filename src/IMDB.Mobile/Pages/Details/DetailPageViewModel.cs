@@ -12,6 +12,7 @@ using CommunityToolkit.Maui.Alerts;
 using IMDB.ApiClient.AddMovieToList;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using IMDB.ApiClient.GetCastMovie;
 
 namespace IMDB.Mobile.Pages.Details
 {
@@ -33,6 +34,9 @@ namespace IMDB.Mobile.Pages.Details
         [ObservableProperty]
         private ObservableCollection<MyList> myLists;
 
+        [ObservableProperty]
+        private ObservableCollection<Actor> actors;
+
         private IGetMovieById _getMovieById;
 
         private IGetAccount _getAccount;
@@ -41,13 +45,15 @@ namespace IMDB.Mobile.Pages.Details
 
         private IGetMyLists _getMyLists;
 
+        private IGetCastMovie _getCastMovie;
+
         private INavigationManager _navigationManager;
 
         private IPopupService _popupService;
 
         private int MovieId = 0;
 
-        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IPopupService popupService)
+        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IPopupService popupService, IGetCastMovie getCastMovie)
         {
             _getMovieById = getMovieById;
             _addMovieToList = addMovieToList;
@@ -55,6 +61,7 @@ namespace IMDB.Mobile.Pages.Details
             _getAccount = getAccount;
             _navigationManager = navigationManager;
             _popupService = popupService;
+            _getCastMovie = getCastMovie;
             EachLists();
         }
 
@@ -70,7 +77,7 @@ namespace IMDB.Mobile.Pages.Details
             var sessionId = await SecureStorage.Default.GetAsync("session_id"); ;
             var parameters = new Dictionary<string, object>();
             parameters["SessionId"] = sessionId;
-            var result = await _popupService.ShowPopupAsync<MyListsPopupViewModel, MyList>(Shell.Current, new PopupOptions() {  }, shellParameters: parameters);
+            var result = await _popupService.ShowPopupAsync<MyListsPopupViewModel, MyList>(Shell.Current, new PopupOptions() { }, shellParameters: parameters);
 
 
             var listSelected = result.Result;
@@ -101,6 +108,9 @@ namespace IMDB.Mobile.Pages.Details
             Overview = movie.Result.Overview;
             Rating = "2";
             Thumbnail = $"https://image.tmdb.org/t/p/original{movie.Result.Poster}";
+            var cast = _getCastMovie.Execute(id);
+            cast.Wait();
+            Actors = MovieMapper.ToMap(cast.Result);
         }
     }
 }
