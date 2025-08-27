@@ -4,6 +4,10 @@
              xmlns:language="clr-namespace:IMDB.Mobile.Resources"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
+             xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Details"
+             xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+             x:DataType="vm:DetailPageViewModel"
              x:Class="IMDB.Mobile.Pages.Details.DetailPage">
 
     <Shell.BackButtonBehavior>
@@ -95,7 +99,7 @@
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontFamily="PoppinsBold" TextColor="White" FontSize="20">Elenco</Span>
+                            <Span FontFamily="PoppinsBold" TextColor="White" FontSize="20" Text="{ Static language:Resource.title_detail_cast }" />
                             <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="20">.</Span>
                         </FormattedString>
                     </Label.FormattedText>
@@ -106,15 +110,8 @@
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid RowSpacing="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <toolkit:AvatarView Grid.Row="0" ImageSource="{ Binding Photo }" Stroke="{ StaticResource ColorSecondary }" />
-                                <Label Text="{ Binding Name }" Grid.Row="1" />
-                            </Grid>
+                        <DataTemplate x:DataType="model:Actor">
+                            <cards:CardViewActorComponent Photo="{ Binding Photo }" Name="{ Binding Name }" CardWidth="120" CardHeight="120" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

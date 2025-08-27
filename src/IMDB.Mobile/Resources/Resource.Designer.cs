@@ -70,7 +70,7 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        ///   Consulta uma cadeia de caracteres localizada semelhante a List &apos;{0}&apos; created with success.
         /// </summary>
         internal static string list_created_with_success_menssage {
             get {
@@ -93,6 +93,15 @@ namespace IMDB.Mobile.Resources {
         internal static string text_button_add_list_details {
             get {
                 return ResourceManager.GetString("text_button_add_list_details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cast.
+        /// </summary>
+        internal static string title_detail_cast {
+            get {
+                return ResourceManager.GetString("title_detail_cast", resourceCulture);
             }
         }
         
