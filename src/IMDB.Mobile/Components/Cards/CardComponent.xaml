@@ -8,7 +8,18 @@
              x:Name="this">
 
     <Grid
-        BindingContext="{ x:Reference this }"
+        BindingContext="{ x:Reference this }">
+        <Grid ZIndex="1" BackgroundColor="{ StaticResource Gray200 }" WidthRequest="{ Binding CardWidth }">
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{ Binding IsLoading }" Value="False">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </Grid.Triggers>
+        </Grid>
+
+
+        <Grid
+        
         WidthRequest="{ Binding CardWidth }"
         RowSpacing="10">
         <Grid.RowDefinitions>
@@ -16,7 +27,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Border 
             Grid.Row="0"
             Stroke="{ StaticResource ColorTertiary }" 
@@ -62,11 +73,11 @@
 
         <HorizontalStackLayout Spacing="10" Grid.Row="2">
             
-        <Label
-            Style="{ StaticResource RatingNote }"    
-            Text="{ Binding Rating }" />
+            <Label
+                Style="{ StaticResource RatingNote }"    
+                Text="{ Binding Rating }" />
 
-        <controls:RatingView
+            <controls:RatingView
                 ItemCount="1"
                 ItemSize="16"
                 Value="{ Binding Rating }"
@@ -75,8 +86,11 @@
                 StrokeColor="Black"
                 StrokeWidth="1"
                 HorizontalOptions="Start" />
+            
         </HorizontalStackLayout>
 
+
+    </Grid>
 
     </Grid>
 </ContentView>

@@ -18,6 +18,7 @@ public partial class CardComponent : ContentView
 
 	public static readonly BindableProperty CardHeightProperty = BindableProperty.Create("CardHeight", typeof(double), typeof(CardComponent), default(double));
 
+	public static readonly BindableProperty IsLoadingProperty = BindableProperty.Create("IsLoading", typeof(bool), typeof(CardComponent), false);
     public string Title
 	{
 		get => (string)GetValue(TitleProperty);
@@ -59,6 +60,12 @@ public partial class CardComponent : ContentView
         get => (double)GetValue(CardHeightProperty);
         set => SetValue(CardHeightProperty, value);
     }
+
+	public bool IsLoading
+	{
+		get => (bool)GetValue(IsLoadingProperty);
+		set => SetValue(IsLoadingProperty, value);
+	}
 
     public CardComponent()
 	{

@@ -10,7 +10,7 @@ namespace IMDB.Mobile
 
         protected ViewModel()
         {
-            IsBusy = false;
+            IsBusy = true;
         }
 
     }
