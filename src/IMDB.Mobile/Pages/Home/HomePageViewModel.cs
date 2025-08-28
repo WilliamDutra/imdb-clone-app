@@ -82,40 +82,37 @@ namespace IMDB.Mobile.Pages.Home
             parameters["SessionId"] = sessionId;
             var optionSelected = await _popupService.ShowPopupAsync<MyListsPopupViewModel, MyList>(shell: Shell.Current, options: new PopupOptions(), shellParameters: parameters);
             var listSelected = optionSelected.Result;
-            await _addMovieToList.Execute(sessionId, listSelected.Id, new AddMovie { MediaId = movie.Id  });
+            await _addMovieToList.Execute(sessionId, listSelected.Id, new AddMovie { MediaId = movie.Id });
             var toast = Toast.Make(string.Format(IMDB.Mobile.Resources.Resource.film_add_with_success_message, listSelected.Name), ToastDuration.Short);
             await toast.Show();
         }
 
-        private void EachMoviesTopFive()
+        private async Task EachMoviesTopFive()
         {
-            var result = _getMoviesTopFiveDay.Execute();
-            result.Wait();
-            var moviesResponse = result.Result.Data;
+            var result = await _getMoviesTopFiveDay.Execute();
+            var moviesResponse = result.Data;
 
             if (moviesResponse != null)
                 MoviesTopFive = MovieMapper.ToMap(moviesResponse);
         }
 
-        private void EachMoviesLatest()
+        private async Task EachMoviesLatest()
         {
-            var result = _getMoviesLatest.Execute();
-            result.Wait();
-            var moviesResponse = result.Result.Data;
+            var result = await _getMoviesLatest.Execute();
+            var moviesResponse = result.Data;
 
             MoviesLatest = MovieMapper.ToMap(moviesResponse);
 
         }
 
-        private void EachAllCategories()
+        private async Task EachAllCategories()
         {
-            var result = _getAllCategories.Execute();
-            result.Wait();
-            var categoriesResponse = result.Result.Genres;
+            var result = await _getAllCategories.Execute();
+            var categoriesResponse = result.Genres;
             Categories = CategoryMapper.ToMap(categoriesResponse.ToList());
         }
 
-        
+
 
     }
 }
