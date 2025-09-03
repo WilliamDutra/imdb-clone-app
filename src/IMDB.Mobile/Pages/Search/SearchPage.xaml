@@ -30,6 +30,8 @@
                 <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text=")" />
             </HorizontalStackLayout>
 
+            <ActivityIndicator IsVisible="{ Binding IsBusy }" IsRunning="True" Color="{StaticResource ColorSecondary}" HeightRequest="100" />
+
             <ScrollView Orientation="Vertical">
                 <CollectionView 
                     ItemsSource="{ Binding Movies }" 

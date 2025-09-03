@@ -31,6 +31,7 @@ namespace IMDB.Mobile.Pages.Search
         {
             _searchByTitle = searchByTitle;
             _navigationManager = navigationManager;
+            IsBusy = false;
         }
 
         [RelayCommand]
@@ -47,10 +48,11 @@ namespace IMDB.Mobile.Pages.Search
 
             if (film.Count() < 5)
                 return;
-
+            IsBusy = true;
             var films = await _searchByTitle.Execute(film);
             TotalSearched = films.TotalResults;
             Movies = MovieMapper.ToMap(films.Data.ToList());
+            IsBusy = false;
         }
 
         [RelayCommand]
