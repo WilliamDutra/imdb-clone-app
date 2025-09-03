@@ -4,9 +4,10 @@
              xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
              xmlns:vm="clr-namespace:IMDB.Mobile.Pages.MoviesByGenres"
              xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="moviesByGenresPage"
              x:DataType="vm:MoviesByGenresPageViewModel"
-             x:Class="IMDB.Mobile.Pages.MoviesByGenres.MoviesByGenresPage"
-             Title="MoviesByGenresPage">
+             x:Class="IMDB.Mobile.Pages.MoviesByGenres.MoviesByGenresPage">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" />
@@ -34,30 +35,30 @@
             </Label>
         </HorizontalStackLayout>
     </Shell.TitleView>
-    
-    <ScrollView>
-        <VerticalStackLayout>
-
-            <CollectionView 
-                HeightRequest="500"
+    <VerticalStackLayout>
+        <CollectionView 
+                HeightRequest="450"
                 RemainingItemsThreshold="1"
                 ItemsUpdatingScrollMode="KeepItemsInView"
                 RemainingItemsThresholdReachedCommand="{ Binding RemainingItemsCommand }"
                 ItemsSource="{ Binding Movies }">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="5" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Movie">
-                        <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MoviesByGenresPageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                            <cards:CardComponent CardHeight="250" CardWidth="150" Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Movie">
+                    <Grid>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MoviesByGenresPageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+                        <cards:CardComponent CardHeight="250" CardWidth="150" Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <VerticalStackLayout HeightRequest="20">
+            <ActivityIndicator IsVisible="{ Binding IsBusy }" IsRunning="True" Color="{ StaticResource ColorSecondary }" />
         </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
+
 </ContentPage>

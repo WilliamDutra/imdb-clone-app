@@ -39,12 +39,15 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
             int genreId = (int)query["genreId"];
             GenreName = query["genreName"].ToString();
             _GenreId = genreId;
+            IsBusy = true;
             EachMoviesByGenres(genreId);
+            IsBusy = false;
         }
 
         [RelayCommand]
         public async Task RemainingItems()
         {
+            IsBusy = true;
             await Toast.Make($"carregando novos filmes", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
 
             if (_CurrentPage > _TotalPages)
@@ -57,7 +60,7 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
             var results = await _getMoviesByGenres.Execute(_GenreId, _CurrentPage);
             Movies.AddRange(MovieMapper.ToMap(results.Data));
             await Toast.Make($"página {_CurrentPage}", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
-            
+            IsBusy = false;
         }
 
         [RelayCommand]
@@ -70,7 +73,7 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         }
 
         [RelayCommand]
-        public async void BackToHomePage()
+        public async Task BackToHomePage()
         {
             await _navigationManager.GoToPage("..");
         }
