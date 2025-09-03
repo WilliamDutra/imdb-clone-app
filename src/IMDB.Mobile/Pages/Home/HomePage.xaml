@@ -7,8 +7,14 @@
              xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
              xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Home"
              xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="vm:HomePageViewModel"
+             x:Name="homePage"
              x:Class="IMDB.Mobile.Pages.Home.HomePage">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded" Command="{ Binding InitializeCommand }" BindingContext="{ Binding Source={x:Reference homePage}, Path=BindingContext}" />
+    </ContentPage.Behaviors>
 
     <ScrollView>
         <VerticalStackLayout>
@@ -20,6 +26,9 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
+
+            <ActivityIndicator IsRunning="True" Color="{ StaticResource ColorSecondary }" HeightRequest="100" IsVisible="{ Binding IsBusy }"/>
+
             <ScrollView Orientation="Horizontal">
                 <CollectionView  
                     ItemsSource="{Binding MoviesTopFive}">
@@ -48,6 +57,8 @@
                 </Label.FormattedText>
             </Label>
 
+            <ActivityIndicator IsRunning="True" Color="{ StaticResource ColorSecondary }" HeightRequest="100" IsVisible="{ Binding IsBusy }"/>
+
             <CollectionView 
                 SelectionMode="None"
                 ItemsSource="{ Binding MoviesLatest }">
@@ -75,6 +86,7 @@
                 </Label.FormattedText>
             </Label>
 
+            <ActivityIndicator IsRunning="True" Color="{ StaticResource ColorSecondary }" HeightRequest="100" IsVisible="{ Binding IsBusy }"/>
 
             <ScrollView>
                 <CollectionView

@@ -1,19 +1,20 @@
-﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using IMDB.ApiClient;
-using IMDB.ApiClient.AddMovieToList;
-using IMDB.ApiClient.CreateSession;
-using IMDB.ApiClient.GetAllCategories;
-using IMDB.ApiClient.GetAuthenticationToken;
-using IMDB.ApiClient.GetMoviesLatest;
-using IMDB.ApiClient.GetMoviesTopFiveDay;
+using CommunityToolkit.Maui;
 using IMDB.ApiClient.Mappings;
+using CommunityToolkit.Maui.Core;
 using IMDB.Mobile.Popups.MyLists;
-using System;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
+using IMDB.ApiClient.CreateSession;
+using IMDB.ApiClient.AddMovieToList;
+using IMDB.ApiClient.GetMoviesLatest;
 using System.Collections.ObjectModel;
+using IMDB.ApiClient.GetAllCategories;
+using IMDB.ApiClient.GetMoviesTopFiveDay;
+using CommunityToolkit.Mvvm.ComponentModel;
+using IMDB.ApiClient.GetAuthenticationToken;
+
 
 namespace IMDB.Mobile.Pages.Home
 {
@@ -51,9 +52,6 @@ namespace IMDB.Mobile.Pages.Home
             _navigationManager = navigationManager;
             _popupService = popupService;
             _addMovieToList = addMovieToList;
-            EachMoviesTopFive();
-            EachMoviesLatest();
-            EachAllCategories();
         }
 
         [RelayCommand]
@@ -89,20 +87,24 @@ namespace IMDB.Mobile.Pages.Home
 
         private async Task EachMoviesTopFive()
         {
+            IsBusy = true;
             var result = await _getMoviesTopFiveDay.Execute();
             var moviesResponse = result.Data;
 
             if (moviesResponse != null)
                 MoviesTopFive = MovieMapper.ToMap(moviesResponse);
+
+            IsBusy = false;
         }
 
         private async Task EachMoviesLatest()
         {
+            IsBusy = true;
             var result = await _getMoviesLatest.Execute();
             var moviesResponse = result.Data;
 
             MoviesLatest = MovieMapper.ToMap(moviesResponse);
-
+            IsBusy = false;
         }
 
         private async Task EachAllCategories()
@@ -110,6 +112,14 @@ namespace IMDB.Mobile.Pages.Home
             var result = await _getAllCategories.Execute();
             var categoriesResponse = result.Genres;
             Categories = CategoryMapper.ToMap(categoriesResponse.ToList());
+        }
+
+        [RelayCommand]
+        public async Task Initialize()
+        {
+            await EachMoviesTopFive();
+            await EachMoviesLatest();
+            await EachAllCategories();
         }
 
 
