@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IMDB.Mobile.Pages.MyLists.MyListsPage"
-             Title="Minhas Listas">
+             xmlns:language="clr-namespace:IMDB.Mobile.Resources"
+             x:Name="myListsPage"
+             x:Class="IMDB.Mobile.Pages.MyLists.MyListsPage">
 
     
     <VerticalStackLayout Spacing="20">
+
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_mylists }" />
+                    <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
         <Grid ColumnSpacing="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

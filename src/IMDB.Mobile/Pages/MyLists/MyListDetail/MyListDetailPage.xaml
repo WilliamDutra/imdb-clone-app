@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IMDB.Mobile.Pages.MyLists.MyListDetail.MyListDetailPage"
-             Title="MyListDetailPage">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="IMDB.Mobile.Pages.MyLists.MyListDetail.MyListDetailPage">
+    
     <VerticalStackLayout>
 
         <CollectionView
             ItemsSource="{ Binding ListDetail.Movies }">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding Title}" TextColor="White" FontFamily="PoppinsRegular" />
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding Title}" TextColor="White" FontFamily="PoppinsRegular" />
+                        <Image Source="trash.png" HeightRequest="20" WidthRequest="20">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{ StaticResource ColorSecondary }" />
+                            </Image.Behaviors>
+                        </Image>
+                    </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

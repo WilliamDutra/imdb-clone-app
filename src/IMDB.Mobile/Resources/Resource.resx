@@ -141,4 +141,7 @@
   <data name="title_home_top_five" xml:space="preserve">
     <value>Top Five</value>
   </data>
+  <data name="title_mylists" xml:space="preserve">
+    <value>My Lists</value>
+  </data>
 </root>

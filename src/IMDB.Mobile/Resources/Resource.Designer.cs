@@ -131,5 +131,14 @@ namespace IMDB.Mobile.Resources {
                 return ResourceManager.GetString("title_home_top_five", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a My Lists.
+        /// </summary>
+        internal static string title_mylists {
+            get {
+                return ResourceManager.GetString("title_mylists", resourceCulture);
+            }
+        }
     }
 }
