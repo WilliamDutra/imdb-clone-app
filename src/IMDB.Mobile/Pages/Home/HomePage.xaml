@@ -14,6 +14,7 @@
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded" Command="{ Binding InitializeCommand }" BindingContext="{ Binding Source={x:Reference homePage}, Path=BindingContext}" />
+        <toolkit:StatusBarBehavior StatusBarColor="{ StaticResource ColorPrimary }" />
     </ContentPage.Behaviors>
 
     <ScrollView>
