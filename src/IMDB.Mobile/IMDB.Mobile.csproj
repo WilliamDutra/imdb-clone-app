@@ -91,6 +91,9 @@
 	  <MauiXaml Update="Components\Entries\SearchEntryComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\Labels\TitleComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\Pills\PillComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
