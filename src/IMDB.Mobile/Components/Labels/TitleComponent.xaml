@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Name="titleComponent"
-             x:Class="IMDB.Mobile.Components.Labels.TitleComponent">
-    <Label BindingContext="{ x:Reference titleComponent }">
-        <Label.FormattedText>
-            <FormattedString>
-                <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ Binding TextValue }" />
-                <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
-            </FormattedString>
-        </Label.FormattedText>
-    </Label>
+<ContentView
+    x:Class="IMDB.Mobile.Components.Labels.TitleComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skeleton="clr-namespace:IMDB.Mobile.Components.Skeletons"
+    x:Name="titleComponent">
+
+    <Grid BindingContext="{x:Reference titleComponent}">
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        FontFamily="PoppinsBold"
+                        FontSize="28"
+                        Text="{Binding TextValue}"
+                        TextColor="White" />
+                    <Span
+                        FontFamily="PoppinsBold"
+                        FontSize="28"
+                        TextColor="{StaticResource ColorSecondary}">
+                        .
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+            <Label.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsLoading}"
+                    TargetType="Label"
+                    Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+
+        <skeleton:SkeletonView HeightRequest="30">
+            <skeleton:SkeletonView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsLoading}"
+                    TargetType="skeleton:SkeletonView"
+                    Value="False">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </skeleton:SkeletonView.Triggers>
+        </skeleton:SkeletonView>
+    </Grid>
 </ContentView>

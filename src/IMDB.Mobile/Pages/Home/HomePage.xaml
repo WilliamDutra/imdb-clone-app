@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:language="clr-namespace:IMDB.Mobile.Resources"
-             xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
-             xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
-             xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
-             xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Home"
-             xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:DataType="vm:HomePageViewModel"
-             x:Name="homePage"
-             x:Class="IMDB.Mobile.Pages.Home.HomePage">
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.Home.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
+    xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
+    xmlns:labels="clr-namespace:IMDB.Mobile.Components.Labels"
+    xmlns:language="clr-namespace:IMDB.Mobile.Resources"
+    xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+    xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
+    xmlns:skeleton="clr-namespace:IMDB.Mobile.Components.Skeletons"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Home"
+    x:Name="homePage"
+    x:DataType="vm:HomePageViewModel">
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Loaded" Command="{ Binding InitializeCommand }" BindingContext="{ Binding Source={x:Reference homePage}, Path=BindingContext}" />
-        <toolkit:StatusBarBehavior StatusBarColor="{ StaticResource ColorPrimary }" />
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Source={x:Reference homePage}, Path=BindingContext}"
+            Command="{Binding InitializeCommand}"
+            EventName="Loaded" />
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource ColorPrimary}" />
     </ContentPage.Behaviors>
 
     <ScrollView>
         <VerticalStackLayout>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_home_top_five }" />
-                        <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_top_five}" />
 
-            <ActivityIndicator IsRunning="True" Color="{ StaticResource ColorSecondary }" HeightRequest="100" IsVisible="{ Binding IsBusy }"/>
+            <ActivityIndicator
+                HeightRequest="100"
+                IsRunning="True"
+                IsVisible="{Binding IsBusy}"
+                Color="{StaticResource ColorSecondary}" />
 
             <ScrollView Orientation="Horizontal">
-                <CollectionView  
-                    ItemsSource="{Binding MoviesTopFive}">
+                <CollectionView ItemsSource="{Binding MoviesTopFive}">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Movie">
@@ -42,29 +44,32 @@
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
-                                <component:CardComponent CardHeight="300" CardWidth="250" Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}" AddToListCommandParameter="{ Binding . }" IsLoading="False" />
+                                <component:CardComponent
+                                    Title="{Binding Title}"
+                                    AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}"
+                                    AddToListCommandParameter="{Binding .}"
+                                    CardHeight="300"
+                                    CardWidth="250"
+                                    Image="{Binding Poster}"
+                                    IsLoading="False"
+                                    Rating="{Binding Rating}" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </ScrollView>
 
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_home_lastest }" />
-                        <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_lastest}" />
 
-            <ActivityIndicator IsRunning="True" Color="{ StaticResource ColorSecondary }" HeightRequest="100" IsVisible="{ Binding IsBusy }"/>
+            <ActivityIndicator
+                HeightRequest="100"
+                IsRunning="True"
+                IsVisible="{Binding IsBusy}"
+                Color="{StaticResource ColorSecondary}" />
 
-            <CollectionView 
-                SelectionMode="None"
-                ItemsSource="{ Binding MoviesLatest }">
+            <CollectionView ItemsSource="{Binding MoviesLatest}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout  ItemSpacing="10" Orientation="Vertical" />
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Movie">
@@ -72,35 +77,36 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
-                            <component:CardWithDescriptionComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="{ Binding Rating }" Description="{ Binding Overview }" />
+                            <component:CardWithDescriptionComponent
+                                Title="{Binding Title}"
+                                Description="{Binding Overview}"
+                                Image="{Binding Poster}"
+                                Rating="{Binding Rating}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_home_discovery }" />
-                        <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_discovery}" />
 
-            <ActivityIndicator IsRunning="True" Color="{ StaticResource ColorSecondary }" HeightRequest="100" IsVisible="{ Binding IsBusy }"/>
+            <ActivityIndicator
+                HeightRequest="100"
+                IsRunning="True"
+                IsVisible="{Binding IsBusy}"
+                Color="{StaticResource ColorSecondary}" />
 
             <ScrollView>
                 <CollectionView
-                    SelectionChangedCommand="{ Binding MoviesByCategoryCommand }"
-                    SelectionMode="Single"
+                    ItemsSource="{Binding Categories}"
                     SelectedItem="{Binding CategorySelected, Mode=TwoWay}"
-                    ItemsSource="{ Binding Categories }">
+                    SelectionChangedCommand="{Binding MoviesByCategoryCommand}"
+                    SelectionMode="Single">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout  ItemSpacing="10" Orientation="Horizontal" />
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Category">
-                            <pill:PillComponent Label="{ Binding Name }" />
+                            <pill:PillComponent Label="{Binding Name}" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
