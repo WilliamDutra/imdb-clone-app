@@ -1,96 +1,97 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-             xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="IMDB.Mobile.Components.Cards.CardComponent"
-             x:Name="this">
+<ContentView
+    x:Class="IMDB.Mobile.Components.Cards.CardComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="this">
 
-    <Grid
-        BindingContext="{ x:Reference this }">
-        <Grid ZIndex="1" BackgroundColor="{ StaticResource Gray200 }" WidthRequest="{ Binding CardWidth }">
+    <Grid BindingContext="{x:Reference this}">
+        <Grid
+            BackgroundColor="{StaticResource Gray200}"
+            WidthRequest="{Binding CardWidth}"
+            ZIndex="1">
             <Grid.Triggers>
-                <DataTrigger TargetType="Grid" Binding="{ Binding IsLoading }" Value="False">
+                <DataTrigger
+                    Binding="{Binding IsLoading}"
+                    TargetType="Grid"
+                    Value="False">
                     <Setter Property="IsVisible" Value="False" />
                 </DataTrigger>
             </Grid.Triggers>
         </Grid>
 
 
-        <Grid
-        
-        WidthRequest="{ Binding CardWidth }"
-        RowSpacing="10">
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid RowSpacing="10" WidthRequest="{Binding CardWidth}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <Border 
-            Grid.Row="0"
-            Stroke="{ StaticResource ColorTertiary }" 
-            StrokeThickness="4" 
-            Background="{ StaticResource ColorTertiary }">
+            <Border
+                Grid.Row="0"
+                Background="{StaticResource ColorTertiary}"
+                Stroke="{StaticResource ColorTertiary}"
+                StrokeThickness="4">
 
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="20" />
-            </Border.StrokeShape>
-            <VerticalStackLayout>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+                <VerticalStackLayout>
 
-                <Grid>
-                    <ffimageloading:CachedImage 
-                        Source="{ Binding Image }"
-                        CacheDuration="30"
-                        HeightRequest="{ Binding CardHeight }"
-                        ErrorPlaceholder="erro_icon_thumb_not_load.png" 
-                        DownsampleToViewSize="True" 
-                        Aspect="AspectFill" />
+                    <Grid>
+                        <ffimageloading:CachedImage
+                            Aspect="AspectFill"
+                            CacheDuration="30"
+                            DownsampleToViewSize="True"
+                            ErrorPlaceholder="erro_icon_thumb_not_load.png"
+                            HeightRequest="{Binding CardHeight}"
+                            Source="{Binding Image}" />
 
-                    <Image
-                        Margin="10"
-                        Source="bookmark_icon_full.png" 
-                        VerticalOptions="Start"
-                        HorizontalOptions="End">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{ Binding AddToListCommand }" CommandParameter="{ Binding AddToListCommandParameter }" />
-                        </Image.GestureRecognizers>
-                        <Image.Behaviors>
-                            <toolkit:IconTintColorBehavior TintColor="{ StaticResource ColorSecondary }" />
-                        </Image.Behaviors>
-                    </Image>
+                        <Image
+                            Margin="10"
+                            HorizontalOptions="End"
+                            Source="bookmark_icon_full.png"
+                            VerticalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddToListCommand}" CommandParameter="{Binding AddToListCommandParameter}" />
+                            </Image.GestureRecognizers>
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource ColorSecondary}" />
+                            </Image.Behaviors>
+                        </Image>
 
-                </Grid>
+                    </Grid>
 
-            </VerticalStackLayout>
-        </Border>
-        
-        <Label 
-            Grid.Row="1"
-            Style="{ StaticResource CardTitle }"
-            Text="{ Binding Title }"/>
+                </VerticalStackLayout>
+            </Border>
 
-        <HorizontalStackLayout Spacing="10" Grid.Row="2">
-            
             <Label
-                Style="{ StaticResource RatingNote }"    
-                Text="{ Binding Rating }" />
+                Grid.Row="1"
+                Style="{StaticResource CardTitle}"
+                Text="{Binding Title}" />
 
-            <controls:RatingView
-                ItemCount="1"
-                ItemSize="16"
-                Value="{ Binding Rating }"
-                RatedFillColor="{ StaticResource ColorSecondary }"
-                UnRatedFillColor="LightGrey"
-                StrokeColor="Black"
-                StrokeWidth="1"
-                HorizontalOptions="Start" />
-            
-        </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Row="2" Spacing="10">
+
+                <Label Style="{StaticResource RatingNote}" Text="{Binding Rating}" />
+
+                <controls:RatingView
+                    HorizontalOptions="Start"
+                    ItemCount="1"
+                    ItemSize="16"
+                    RatedFillColor="{StaticResource ColorSecondary}"
+                    StrokeColor="Black"
+                    StrokeWidth="1"
+                    UnRatedFillColor="LightGrey"
+                    Value="{Binding Rating}" />
+
+            </HorizontalStackLayout>
 
 
-    </Grid>
+        </Grid>
 
     </Grid>
 </ContentView>

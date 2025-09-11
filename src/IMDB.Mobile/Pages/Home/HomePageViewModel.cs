@@ -33,6 +33,9 @@ namespace IMDB.Mobile.Pages.Home
         private IPopupService _popupService;
 
         [ObservableProperty]
+        private ObservableCollection<string> fakeTopFive;
+
+        [ObservableProperty]
         private ObservableCollection<Movie> moviesTopFive;
 
         [ObservableProperty]
@@ -117,12 +120,20 @@ namespace IMDB.Mobile.Pages.Home
         [RelayCommand]
         public async Task Initialize()
         {
+            EachFakeTopFive();
             await EachMoviesTopFive();
             await EachMoviesLatest();
             await EachAllCategories();
         }
 
-
+        private void EachFakeTopFive()
+        {
+            FakeTopFive = new ObservableCollection<string>();
+            FakeTopFive.Add("01");
+            FakeTopFive.Add("02");
+            FakeTopFive.Add("03");
+            FakeTopFive.Add("04");
+        }
 
     }
 }

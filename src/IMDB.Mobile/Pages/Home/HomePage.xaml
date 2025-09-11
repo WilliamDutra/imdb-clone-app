@@ -27,36 +27,45 @@
         <VerticalStackLayout>
             <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_top_five}" />
 
-            <ActivityIndicator
-                HeightRequest="100"
-                IsRunning="True"
-                IsVisible="{Binding IsBusy}"
-                Color="{StaticResource ColorSecondary}" />
-
             <ScrollView Orientation="Horizontal">
-                <CollectionView ItemsSource="{Binding MoviesTopFive}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Movie">
-                            <Grid>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
-                                <component:CardComponent
-                                    Title="{Binding Title}"
-                                    AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}"
-                                    AddToListCommandParameter="{Binding .}"
-                                    CardHeight="300"
-                                    CardWidth="250"
-                                    Image="{Binding Poster}"
-                                    IsLoading="False"
-                                    Rating="{Binding Rating}" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <VerticalStackLayout>
+
+                    <CollectionView ItemsSource="{Binding MoviesTopFive}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Movie">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                    <component:CardComponent
+                                        Title="{Binding Title}"
+                                        AddToListCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=AddCommand}"
+                                        AddToListCommandParameter="{Binding .}"
+                                        CardHeight="300"
+                                        CardWidth="250"
+                                        Image="{Binding Poster}"
+                                        IsLoading="False"
+                                        Rating="{Binding Rating}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!--<CollectionView ItemsSource="{Binding FakeTopFive}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <component:CardSkeletonComponent CardHeight="300" CardWidth="250" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>-->
+
+                </VerticalStackLayout>
             </ScrollView>
 
             <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_lastest}" />

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="IMDB.Mobile.Components.Cards.CardSkeletonComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+    <Grid
+        BindingContext="{x:Reference this}"
+        RowSpacing="10"
+        WidthRequest="{Binding CardWidth}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Background="{StaticResource Gray200}"
+            Stroke="{StaticResource Gray200}"
+            StrokeThickness="4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20" />
+            </Border.StrokeShape>
+            <VerticalStackLayout>
+
+                <Grid HeightRequest="{Binding CardHeight}" />
+
+            </VerticalStackLayout>
+        </Border>
+
+
+        <HorizontalStackLayout Grid.Row="2" Spacing="10" />
+
+
+    </Grid>
+</ContentView>
