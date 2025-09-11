@@ -59,6 +59,7 @@ namespace IMDB.Mobile.Pages.MyLists
         {
             var parameters = new Dictionary<string, object>();
             parameters["ListId"] = MyListSelected.Id;
+            parameters["ListName"] = MyListSelected.Name;
             await _navigationManager.GoToPage("my-list-detail", parameters);
         }
 
