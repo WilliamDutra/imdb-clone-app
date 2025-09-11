@@ -25,7 +25,11 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_top_five}" />
+
+            <labels:TitleComponent
+                Margin="0,10"
+                IsLoading="{Binding IsBusy}"
+                TextValue="{x:Static language:Resource.title_home_top_five}" />
 
             <ScrollView Orientation="Horizontal">
                 <VerticalStackLayout>
@@ -54,7 +58,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <!--<CollectionView ItemsSource="{Binding FakeTopFive}">
+                    <CollectionView ItemsSource="{Binding FakeTopFive}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                         </CollectionView.ItemsLayout>
@@ -63,18 +67,24 @@
                                 <component:CardSkeletonComponent CardHeight="300" CardWidth="250" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                    </CollectionView>-->
+                        <CollectionView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsBusy}"
+                                TargetType="CollectionView"
+                                Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </CollectionView.Triggers>
+                    </CollectionView>
 
                 </VerticalStackLayout>
             </ScrollView>
 
-            <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_lastest}" />
+            <labels:TitleComponent
+                Margin="0,10"
+                IsLoading="{Binding IsBusy}"
+                TextValue="{x:Static language:Resource.title_home_lastest}" />
 
-            <ActivityIndicator
-                HeightRequest="100"
-                IsRunning="True"
-                IsVisible="{Binding IsBusy}"
-                Color="{StaticResource ColorSecondary}" />
 
             <CollectionView ItemsSource="{Binding MoviesLatest}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
@@ -96,13 +106,29 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <labels:TitleComponent IsLoading="{Binding IsBusy}" TextValue="{x:Static language:Resource.title_home_discovery}" />
+            <CollectionView ItemsSource="{Binding FakeTopFive}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <component:CardSkeletonComponent CardHeight="300" CardWidth="250" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsBusy}"
+                        TargetType="CollectionView"
+                        Value="False">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </CollectionView.Triggers>
+            </CollectionView>
 
-            <ActivityIndicator
-                HeightRequest="100"
-                IsRunning="True"
-                IsVisible="{Binding IsBusy}"
-                Color="{StaticResource ColorSecondary}" />
+            <labels:TitleComponent
+                Margin="0,15"
+                IsLoading="{Binding IsBusy}"
+                TextValue="{x:Static language:Resource.title_home_discovery}" />
 
             <ScrollView>
                 <CollectionView

@@ -120,19 +120,22 @@ namespace IMDB.Mobile.Pages.Home
         [RelayCommand]
         public async Task Initialize()
         {
-            EachFakeTopFive();
+            await EachFakeTopFive();
             await EachMoviesTopFive();
             await EachMoviesLatest();
             await EachAllCategories();
         }
 
-        private void EachFakeTopFive()
+        private async Task EachFakeTopFive()
         {
             FakeTopFive = new ObservableCollection<string>();
-            FakeTopFive.Add("01");
-            FakeTopFive.Add("02");
-            FakeTopFive.Add("03");
-            FakeTopFive.Add("04");
+            await Task.Run(() =>
+            {
+                FakeTopFive.Add("01");
+                FakeTopFive.Add("02");
+                FakeTopFive.Add("03");
+                FakeTopFive.Add("04");
+            });
         }
 
     }
