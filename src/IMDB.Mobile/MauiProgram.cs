@@ -30,6 +30,7 @@ using IMDB.Mobile.Resources.Styles.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace IMDB.Mobile
 {
@@ -41,6 +42,7 @@ namespace IMDB.Mobile
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseSkiaSharp()
                 .UseFFImageLoading()
                 .AddPages()
                 .AddPopups()

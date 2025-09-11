@@ -10,6 +10,7 @@
     xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
     xmlns:pill="clr-namespace:IMDB.Mobile.Components.Pills"
     xmlns:skeleton="clr-namespace:IMDB.Mobile.Components.Skeletons"
+    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Home"
     x:Name="homePage"
@@ -64,17 +65,23 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <component:CardSkeletonComponent CardHeight="300" CardWidth="250" />
+                                <Grid>
+                                    <skia:SKLottieView
+                                        HeightRequest="300"
+                                        RepeatCount="-1"
+                                        Source="skeleton_animation.json"
+                                        WidthRequest="250" />
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                        <CollectionView.Triggers>
+                        <!--<CollectionView.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsBusy}"
                                 TargetType="CollectionView"
                                 Value="False">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
-                        </CollectionView.Triggers>
+                        </CollectionView.Triggers>-->
                     </CollectionView>
 
                 </VerticalStackLayout>
@@ -84,7 +91,6 @@
                 Margin="0,10"
                 IsLoading="{Binding IsBusy}"
                 TextValue="{x:Static language:Resource.title_home_lastest}" />
-
 
             <CollectionView ItemsSource="{Binding MoviesLatest}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
@@ -112,7 +118,13 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <component:CardSkeletonComponent CardHeight="300" CardWidth="250" />
+                        <skia:SKLottieView
+                            HeightRequest="300"
+                            HorizontalOptions="Start"
+                            RepeatCount="-1"
+                            Source="skeleton_animation.json"
+                            WidthRequest="250" />
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.Triggers>
