@@ -90,40 +90,37 @@ namespace IMDB.Mobile.Pages.Home
 
         private async Task EachMoviesTopFive()
         {
-            IsBusy = true;
             var result = await _getMoviesTopFiveDay.Execute();
             var moviesResponse = result.Data;
 
             if (moviesResponse != null)
-                MoviesTopFive = MovieMapper.ToMap(moviesResponse);
-
-            IsBusy = false;
+                await Task.Run(() => MoviesTopFive = MovieMapper.ToMap(moviesResponse));
         }
 
         private async Task EachMoviesLatest()
         {
-            IsBusy = true;
             var result = await _getMoviesLatest.Execute();
             var moviesResponse = result.Data;
 
-            MoviesLatest = MovieMapper.ToMap(moviesResponse);
-            IsBusy = false;
+            await Task.Run(() => MoviesLatest = MovieMapper.ToMap(moviesResponse));
         }
 
         private async Task EachAllCategories()
         {
             var result = await _getAllCategories.Execute();
             var categoriesResponse = result.Genres;
-            Categories = CategoryMapper.ToMap(categoriesResponse.ToList());
+            await Task.Run(() => Categories = CategoryMapper.ToMap(categoriesResponse.ToList()));
         }
 
         [RelayCommand]
         public async Task Initialize()
         {
+            IsBusy = true;
             await EachFakeTopFive();
             await EachMoviesTopFive();
             await EachMoviesLatest();
             await EachAllCategories();
+            IsBusy = false;
         }
 
         private async Task EachFakeTopFive()
