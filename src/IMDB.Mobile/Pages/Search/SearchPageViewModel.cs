@@ -21,6 +21,9 @@ namespace IMDB.Mobile.Pages.Search
         private ObservableCollection<Movie> movies;
 
         [ObservableProperty]
+        private ObservableCollection<string> fakeSearchFilms;
+
+        [ObservableProperty]
         private Movie movieSelected;
 
         private ISearchByTitle _searchByTitle;
@@ -37,6 +40,7 @@ namespace IMDB.Mobile.Pages.Search
         [RelayCommand]
         public async Task SearchFilms()
         {
+            IsBusy = true;
             var film = SearchText;
 
             if (string.IsNullOrEmpty(film))
@@ -48,7 +52,7 @@ namespace IMDB.Mobile.Pages.Search
 
             if (film.Count() < 5)
                 return;
-            IsBusy = true;
+            
             var films = await _searchByTitle.Execute(film);
             TotalSearched = films.TotalResults;
             Movies = MovieMapper.ToMap(films.Data.ToList());

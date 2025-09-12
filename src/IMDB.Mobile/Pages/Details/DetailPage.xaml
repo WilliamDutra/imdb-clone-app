@@ -1,130 +1,149 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:language="clr-namespace:IMDB.Mobile.Resources"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
-             xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Details"
-             xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
-             x:DataType="vm:DetailPageViewModel"
-             x:Class="IMDB.Mobile.Pages.Details.DetailPage">
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.Details.DetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    xmlns:language="clr-namespace:IMDB.Mobile.Resources"
+    xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Details"
+    x:DataType="vm:DetailPageViewModel">
 
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False"/>
+        <BackButtonBehavior IsVisible="False" />
     </Shell.BackButtonBehavior>
 
     <Shell.TitleView>
         <HorizontalStackLayout Spacing="10">
 
             <HorizontalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer Command="{ Binding BackToHomePageCommand }"></TapGestureRecognizer>
+                <TapGestureRecognizer Command="{Binding BackToHomePageCommand}" />
             </HorizontalStackLayout.GestureRecognizers>
-            
+
             <Image
                 Aspect="AspectFill"
-                VerticalOptions="Center"
-                Source="back_button_icon.png" />
+                Source="back_button_icon.png"
+                VerticalOptions="Center" />
 
             <Label VerticalTextAlignment="Center">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{ x:Static language:Resource.text_back_button_details }" TextColor="White" FontFamily="PoppinsRegular" FontSize="20"></Span>
-                        <Span TextColor="{ StaticResource ColorSecondary }" FontFamily="PoppinsRegular" FontSize="20">.</Span>
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="{x:Static language:Resource.text_back_button_details}"
+                            TextColor="White" />
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            TextColor="{StaticResource ColorSecondary}">
+                            .
+                        </Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
         </HorizontalStackLayout>
     </Shell.TitleView>
-    
+
     <ScrollView>
         <Grid RowSpacing="10">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <ffimageloading:CachedImage 
-                Source="{ Binding Thumbnail }"
+            <ffimageloading:CachedImage
+                Aspect="AspectFill"
                 CacheDuration="30"
+                DownsampleToViewSize="True"
+                ErrorPlaceholder="erro_icon_thumb_not_load.png"
                 HeightRequest="400"
-                ErrorPlaceholder="erro_icon_thumb_not_load.png" 
-                DownsampleToViewSize="True" 
-                Aspect="AspectFill" />
+                Source="{Binding Thumbnail}" />
 
             <BoxView HeightRequest="100" VerticalOptions="End">
                 <BoxView.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#00FFFFFF" Offset="0.0" />
-                        <GradientStop Color="{ StaticResource ColorPrimary }" Offset="2.0" />
+                        <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                        <GradientStop Offset="2.0" Color="{StaticResource ColorPrimary}" />
                     </LinearGradientBrush>
                 </BoxView.Background>
             </BoxView>
 
 
             <VerticalStackLayout
+                Grid.Row="0"
                 Padding="10"
                 HorizontalOptions="Start"
-                VerticalOptions="End"
-                Grid.Row="0">
-                
-                <Label
-                    FontSize="26"
-                    WidthRequest="300"
-                    LineBreakMode="WordWrap"
-                    FontFamily="PoppinsBlack"
-                    Text="{ Binding Title }" />
+                VerticalOptions="End">
 
-                <HorizontalStackLayout
-                    Spacing="10">
+                <Label
+                    FontFamily="PoppinsBlack"
+                    FontSize="26"
+                    LineBreakMode="WordWrap"
+                    Text="{Binding Title}"
+                    WidthRequest="300" />
+
+                <HorizontalStackLayout Spacing="10">
                     <Label
-                        VerticalTextAlignment="Center"
                         FontFamily="PoppinsRegular"
                         FontSize="18"
-                        Text="{ Binding Rating }" />
-                    <Image VerticalOptions="Center" Source="rating_star_full.png" />
+                        Text="{Binding Rating}"
+                        VerticalTextAlignment="Center" />
+                    <Image Source="rating_star_full.png" VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
 
-            <Label
-                Grid.Row="1"
-                Text="{ Binding Overview }" />
+            <Label Grid.Row="1" Text="{Binding Overview}" />
 
-            <VerticalStackLayout
-                Padding="10"
-                Grid.Row="2">
+            <VerticalStackLayout Grid.Row="2" Padding="10">
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontFamily="PoppinsBold" TextColor="White" FontSize="20" Text="{ Static language:Resource.title_detail_cast }" />
-                            <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="20">.</Span>
+                            <Span
+                                FontFamily="PoppinsBold"
+                                FontSize="20"
+                                Text="{Static language:Resource.title_detail_cast}"
+                                TextColor="White" />
+                            <Span
+                                FontFamily="PoppinsBold"
+                                FontSize="20"
+                                TextColor="{StaticResource ColorSecondary}">
+                                .
+                            </Span>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <CollectionView ItemsSource="{ Binding Actors }" Margin="0, 20">
+                <CollectionView Margin="0,20" ItemsSource="{Binding Actors}">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Actor">
-                            <cards:CardViewActorComponent Photo="{ Binding Photo }" Name="{ Binding Name }" CardWidth="120" CardHeight="120" />
+                            <cards:CardViewActorComponent
+                                Name="{Binding Name}"
+                                CardHeight="120"
+                                CardWidth="120"
+                                Photo="{Binding Photo}" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                
-                
+
+
             </VerticalStackLayout>
-            
-            <Button 
+
+            <Button
                 Grid.Row="3"
-                BackgroundColor="{ StaticResource ColorSecondary }" 
+                BackgroundColor="{StaticResource ColorSecondary}"
+                Command="{Binding AddToMyListCommand}"
                 ImageSource="bookmark_icon.png"
-                TextColor="White" Text="{ Static language:Resource.text_button_add_list_details }" 
-                Command="{ Binding AddToMyListCommand }"/>
+                Text="{Static language:Resource.text_button_add_list_details}"
+                TextColor="White" />
 
         </Grid>
     </ScrollView>

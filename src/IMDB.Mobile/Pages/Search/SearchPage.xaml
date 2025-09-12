@@ -1,49 +1,118 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:entries="clr-namespace:IMDB.Mobile.Components.Entries"
-             xmlns:components="clr-namespace:IMDB.Mobile.Components.Cards"
-             xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Search"
-             xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
-             x:DataType="vm:SearchPageViewModel"
-             x:Class="IMDB.Mobile.Pages.Search.SearchPage">
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.Search.SearchPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:IMDB.Mobile.Components.Cards"
+    xmlns:entries="clr-namespace:IMDB.Mobile.Components.Entries"
+    xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Search"
+    x:Name="searchPage"
+    x:DataType="vm:SearchPageViewModel">
     <ScrollView>
         <VerticalStackLayout Spacing="10">
 
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28">Search</Span>
-                        <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
+                        <Span
+                            FontFamily="PoppinsBold"
+                            FontSize="28"
+                            TextColor="White">
+                            Search
+                        </Span>
+                        <Span
+                            FontFamily="PoppinsBold"
+                            FontSize="28"
+                            TextColor="{StaticResource ColorSecondary}">
+                            .
+                        </Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
 
-            <entries:SearchEntryComponent PlaceHolder="Search films" TextValue="{ Binding SearchText }" SearchCommand="{ Binding Source={RelativeSource AncestorType={x:Type vm:SearchPageViewModel}}, Path=SearchFilmsCommand}"  />
-            
+            <Border Background="{StaticResource ColorTertiary}" StrokeThickness="5">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Grid
+                    Padding="2"
+                    BackgroundColor="{StaticResource ColorTertiary}"
+                    ColumnSpacing="5"
+                    VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="search_icon.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SearchFilmsCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Entry
+                        Grid.Column="1"
+                        FontFamily="PoppinsRegular"
+                        FontSize="16"
+                        Placeholder="Search..."
+                        Text="{Binding SearchText}"
+                        TextColor="White">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                BindingContext="{Binding Source={x:Reference searchPage}, Path=BindingContext}"
+                                Command="{Binding SearchFilmsCommand}"
+                                EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </Grid>
+            </Border>
+
 
             <HorizontalStackLayout Spacing="5">
-                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text="Search results" />
-                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text="(" />
-                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text="{ Binding TotalSearched }" />
-                <Label FontFamily="PoppinsRegular" TextColor="White" FontSize="16" Text=")" />
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
+                    Text="Search results"
+                    TextColor="White" />
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
+                    Text="("
+                    TextColor="White" />
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
+                    Text="{Binding TotalSearched}"
+                    TextColor="White" />
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
+                    Text=")"
+                    TextColor="White" />
             </HorizontalStackLayout>
 
-            <ActivityIndicator IsVisible="{ Binding IsBusy }" IsRunning="True" Color="{StaticResource ColorSecondary}" HeightRequest="100" />
+            <ActivityIndicator
+                HeightRequest="100"
+                IsRunning="True"
+                IsVisible="{Binding IsBusy}"
+                Color="{StaticResource ColorSecondary}" />
 
             <ScrollView Orientation="Vertical">
-                <CollectionView 
-                    ItemsSource="{ Binding Movies }" 
-                    SelectionMode="Single"
-                    SelectedItem="{ Binding MovieSelected }"
-                    SelectionChangedCommand="{ Binding DetailCommand }">
+                <CollectionView
+                    ItemsSource="{Binding Movies}"
+                    SelectedItem="{Binding MovieSelected}"
+                    SelectionChangedCommand="{Binding DetailCommand}"
+                    SelectionMode="Single">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout  ItemSpacing="10" Orientation="Vertical" />
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Movie">
-                            <components:CardWithDescriptionComponent Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" Description="{ Binding Overview }" />
+                            <components:CardWithDescriptionComponent
+                                Title="{Binding Title}"
+                                Description="{Binding Overview}"
+                                Image="{Binding Poster}"
+                                Rating="5" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

@@ -92,9 +92,6 @@
 	  <MauiXaml Update="Components\Cards\CardWithDescriptionComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Entries\SearchEntryComponent.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Components\Labels\TitleComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -160,6 +157,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Components\Buttons\" />
+	  <Folder Include="Components\Entries\" />
 	</ItemGroup>
 
 	<ItemGroup>
