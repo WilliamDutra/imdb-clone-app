@@ -74,7 +74,7 @@
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                        <!--<CollectionView.Triggers>
+                        <CollectionView.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsBusy}"
                                 TargetType="CollectionView"
