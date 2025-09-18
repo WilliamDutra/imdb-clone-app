@@ -86,6 +86,9 @@
 	  <MauiXaml Update="Components\Cards\CardSkeletonComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\Cards\CardWithActionComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\Cards\CardViewActorComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -141,6 +144,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Components\Cards\CardWithActionComponent.xaml.cs">
+	    <DependentUpon>CardWithActionComponent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Resource.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>

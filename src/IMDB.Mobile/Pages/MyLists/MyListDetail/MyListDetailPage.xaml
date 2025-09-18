@@ -3,9 +3,11 @@
     x:Class="IMDB.Mobile.Pages.MyLists.MyListDetail.MyListDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
     xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.MyLists.MyListDetail"
+    x:Name="myListDetailPage"
     x:DataType="vm:MyListDetailPageViewModel">
 
     <Shell.BackButtonBehavior>
@@ -46,26 +48,26 @@
 
     <VerticalStackLayout>
 
-        <CollectionView ItemsSource="{Binding ListDetail.Movies}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Movie">
-                    <HorizontalStackLayout>
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            Text="{Binding Title}"
-                            TextColor="White" />
-                        <Image
-                            HeightRequest="20"
-                            Source="trash.png"
-                            WidthRequest="20">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource ColorSecondary}" />
-                            </Image.Behaviors>
-                        </Image>
-                    </HorizontalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <ScrollView Orientation="Vertical">
+            <CollectionView ItemsSource="{Binding ListDetail.Movies}" VerticalScrollBarVisibility="Default">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Movie">
+                        <VerticalStackLayout>
+                            <cards:CardWithActionComponent
+                                DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:MyListDetailPageViewModel}}, Path=DeleteCommand}"
+                                Id="{Binding Id}"
+                                ImageSource="{Binding Poster}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
 
     </VerticalStackLayout>
 </ContentPage>

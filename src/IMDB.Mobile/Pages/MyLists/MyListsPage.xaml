@@ -1,49 +1,67 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:language="clr-namespace:IMDB.Mobile.Resources"
-             x:Name="myListsPage"
-             x:Class="IMDB.Mobile.Pages.MyLists.MyListsPage">
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.MyLists.MyListsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
+    xmlns:language="clr-namespace:IMDB.Mobile.Resources"
+    x:Name="myListsPage">
 
-    
+
     <VerticalStackLayout Spacing="20">
 
         <Label>
             <Label.FormattedText>
                 <FormattedString>
-                    <Span FontFamily="PoppinsBold" TextColor="White" FontSize="28" Text="{ x:Static language:Resource.title_mylists }" />
-                    <Span FontFamily="PoppinsBold" TextColor="{ StaticResource ColorSecondary }" FontSize="28">.</Span>
+                    <Span
+                        FontFamily="PoppinsBold"
+                        FontSize="28"
+                        Text="{x:Static language:Resource.title_mylists}"
+                        TextColor="White" />
+                    <Span
+                        FontFamily="PoppinsBold"
+                        FontSize="28"
+                        TextColor="{StaticResource ColorSecondary}">
+                        .
+                    </Span>
                 </FormattedString>
             </Label.FormattedText>
         </Label>
 
         <Grid ColumnSpacing="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Border StrokeThickness="5" Background="{ StaticResource ColorTertiary }">
+            <Border Background="{StaticResource ColorTertiary}" StrokeThickness="5">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
                 </Border.StrokeShape>
-                <Entry Grid.Column="0" Text="{ Binding Name }" />
+                <Entry Grid.Column="0" Text="{Binding Name}" />
             </Border>
-            <Button Grid.Column="1" Text="Criar" Command="{ Binding CreateListCommand }" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding CreateListCommand}"
+                Text="Criar" />
         </Grid>
 
-        <CollectionView 
-            SelectionMode="Single"
-            SelectedItem="{ Binding MyListSelected }"
-            SelectionChangedCommand="{ Binding DetailCommand }"
-            ItemsSource="{ Binding Lists }" >
+        <CollectionView
+            ItemsSource="{Binding Lists}"
+            SelectedItem="{Binding MyListSelected}"
+            SelectionChangedCommand="{Binding DetailCommand}"
+            SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <HorizontalStackLayout>
-                        <Label TextColor="White" FontSize="18" FontFamily="PoppinsRegular" Text="{ Binding Name }" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="{Binding Name}"
+                            TextColor="White" />
                     </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
+
     </VerticalStackLayout>
 </ContentPage>
