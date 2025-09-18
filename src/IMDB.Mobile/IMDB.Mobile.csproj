@@ -50,8 +50,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
+		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
@@ -66,6 +65,7 @@
 	<ItemGroup>
 	  <None Remove="Pages\Login\LoginPageViewModel.cs~RF114c77be.TMP" />
 	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+	  <None Remove="Resources\Splash\splah.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -162,6 +162,10 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Raw\skeleton_animation.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\splah.svg" Resize="True" BaseSize="300,185" Color="#111111" />
 	</ItemGroup>
 
 </Project>
