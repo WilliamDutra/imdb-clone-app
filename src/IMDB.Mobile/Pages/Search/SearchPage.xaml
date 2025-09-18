@@ -51,11 +51,8 @@
                     </Image>
                     <Entry
                         Grid.Column="1"
-                        FontFamily="PoppinsRegular"
-                        FontSize="16"
                         Placeholder="Search..."
-                        Text="{Binding SearchText}"
-                        TextColor="White">
+                        Text="{Binding SearchText}">
                         <Entry.Behaviors>
                             <toolkit:EventToCommandBehavior
                                 BindingContext="{Binding Source={x:Reference searchPage}, Path=BindingContext}"
