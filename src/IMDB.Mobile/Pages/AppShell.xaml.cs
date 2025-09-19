@@ -1,9 +1,14 @@
+using IMDB.ApiClient.GetAccount;
+
 namespace IMDB.Mobile.Pages;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
+	
+	public AppShell(AppShellViewModel appShellViewModel)
 	{
 		InitializeComponent();
+		BindingContext = appShellViewModel;
 	}
+
 }

@@ -8,9 +8,18 @@
     xmlns:local="clr-namespace:IMDB.Mobile"
     xmlns:login="clr-namespace:IMDB.Mobile.Pages.Login"
     xmlns:search="clr-namespace:IMDB.Mobile.Pages.Search"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="appShell"
     Title="IMDB.Mobile"
     Shell.FlyoutBackgroundColor="{StaticResource ColorPrimary}"
     Shell.FlyoutBehavior="Flyout">
+
+    <Shell.Behaviors>
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Source={x:Reference appShell}, Path=BindingContext}"
+            Command="{Binding InitializeCommand}"
+            EventName="Loaded" />
+    </Shell.Behaviors>
 
     <TabBar>
         <Tab Icon="home_icon.png">
@@ -35,18 +44,31 @@
 
             <Image
                 HeightRequest="50"
-                Source="user_avatar.png"
-                WidthRequest="50" />
-            <StackLayout Grid.Column="1" VerticalOptions="Center">
+                Source="film_icon.png"
+                WidthRequest="50">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="White" />
+                </Image.Behaviors>
+            </Image>
+            <HorizontalStackLayout
+                Grid.Column="1"
+                Spacing="10"
+                VerticalOptions="Center">
                 <Label
-                    FontSize="18"
-                    Text="Olá, João!"
+                    FontFamily="PoppinsRegular"
+                    FontSize="20"
+                    Text="Olá"
                     TextColor="White" />
                 <Label
-                    FontSize="14"
-                    Text="joao@email.com"
-                    TextColor="Gray" />
-            </StackLayout>
+                    FontSize="20"
+                    Text="{Binding Username}"
+                    TextColor="White" />
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="20"
+                    Text="!"
+                    TextColor="White" />
+            </HorizontalStackLayout>
         </Grid>
     </Shell.FlyoutHeader>
 

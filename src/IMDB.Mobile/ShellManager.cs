@@ -5,7 +5,14 @@ namespace IMDB.Mobile
 {
     public class ShellManager : IShellManager
     {
-        public async Task SwitchAuthorizeShellRoutes() => Application.Current.MainPage = new AppShell();
+        private AppShellViewModel _appShellViewModel;
+
+        public ShellManager(AppShellViewModel appShellViewModel)
+        {
+            _appShellViewModel = appShellViewModel;
+        }
+
+        public async Task SwitchAuthorizeShellRoutes() => Application.Current.MainPage = new AppShell(_appShellViewModel);
 
 
         public async Task SwitchUnAuthorizeShellRoutes() => Application.Current.MainPage = new LoginAppShell();

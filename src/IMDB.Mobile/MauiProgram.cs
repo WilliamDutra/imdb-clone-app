@@ -18,6 +18,7 @@ using IMDB.ApiClient.GetMoviesTopFiveDay;
 using IMDB.ApiClient.GetMyLists;
 using IMDB.ApiClient.SearchByTitle;
 using IMDB.Mobile.Networks;
+using IMDB.Mobile.Pages;
 using IMDB.Mobile.Pages.Details;
 using IMDB.Mobile.Pages.Errors;
 using IMDB.Mobile.Pages.Home;
@@ -72,6 +73,7 @@ namespace IMDB.Mobile
         {
             appBuilder.Services.AddSingleton<INavigationManager, NavigationManager>();
             appBuilder.Services.AddSingleton<IShellManager, ShellManager>();
+            appBuilder.Services.AddTransient<AppShellViewModel>();
 
             appBuilder.Services.AddTransientWithShellRoute<LoginPage, LoginPageViewModel>("login");
             appBuilder.Services.AddTransientWithShellRoute<ErrorsPage, ErrorsPageViewModel>("errors");

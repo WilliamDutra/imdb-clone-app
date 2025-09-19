@@ -6,10 +6,13 @@ namespace IMDB.Mobile
     {
         private IShellManager _shellManager;
 
-        public App(IShellManager shellManager)
+        private AppShellViewModel _appShellViewModel;
+
+        public App(IShellManager shellManager, AppShellViewModel appShellViewModel)
         {
             InitializeComponent();
             _shellManager = shellManager;
+            _appShellViewModel = appShellViewModel;
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
@@ -18,7 +21,7 @@ namespace IMDB.Mobile
 
             if (!string.IsNullOrEmpty(sessionId))
             {
-                return new Window(new AppShell());
+                return new Window(new AppShell(_appShellViewModel));
             }
             else
             {
