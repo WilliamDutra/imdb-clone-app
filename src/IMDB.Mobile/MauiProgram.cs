@@ -3,6 +3,7 @@ using FFImageLoading.Maui;
 using IMDB.ApiClient.AddMovieToList;
 using IMDB.ApiClient.CreateList;
 using IMDB.ApiClient.CreateSession;
+using IMDB.ApiClient.DeleteList;
 using IMDB.ApiClient.DeleteMovieOfList;
 using IMDB.ApiClient.GetAccessToken;
 using IMDB.ApiClient.GetAccount;
@@ -157,6 +158,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IDeleteMovieOfList>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IDeleteList>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

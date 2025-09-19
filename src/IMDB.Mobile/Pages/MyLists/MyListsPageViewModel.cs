@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using IMDB.ApiClient.DeleteList;
 
 namespace IMDB.Mobile.Pages.MyLists
 {
@@ -19,6 +20,8 @@ namespace IMDB.Mobile.Pages.MyLists
         private IGetAccount _getAccount;
 
         private IGetMyLists _getMyLists;
+
+        private IDeleteList _deleteList;
 
         private INavigationManager _navigationManager;
 
@@ -31,11 +34,12 @@ namespace IMDB.Mobile.Pages.MyLists
         [ObservableProperty]
         public ObservableCollection<MyList> lists;
 
-        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager)
+        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IDeleteList deleteList)
         {
             _createList = createList;
             _getAccount = getAccount;
             _getMyLists = getMyLists;
+            _deleteList = deleteList;
             _navigationManager = navigationManager;
             EachMyLists();
         }
@@ -64,9 +68,11 @@ namespace IMDB.Mobile.Pages.MyLists
         }
 
         [RelayCommand]
-        public async Task Delete()
+        public async Task Delete(int listId)
         {
-
+            var sessionId = await SecureStorage.Default.GetAsync("session_id");
+            await _deleteList.Execute(listId, sessionId);
+            EachMyLists();
         }
 
 
