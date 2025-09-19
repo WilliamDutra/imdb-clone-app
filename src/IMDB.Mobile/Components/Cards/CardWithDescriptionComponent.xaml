@@ -1,78 +1,74 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-             x:Class="IMDB.Mobile.Components.Cards.CardWithDescriptionComponent"
-             x:Name="this">
-    
-    <Grid
-        BindingContext="{ x:Reference this }">
+<ContentView
+    x:Class="IMDB.Mobile.Components.Cards.CardWithDescriptionComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    x:Name="this">
+
+    <Grid BindingContext="{x:Reference this}">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        
-        <Border 
+
+        <Border
             Grid.Column="0"
-            Stroke="{ StaticResource ColorTertiary }" 
-            StrokeThickness="4" 
-            Background="{ StaticResource ColorTertiary }">
+            Background="{StaticResource ColorTertiary}"
+            Stroke="{StaticResource ColorTertiary}"
+            StrokeThickness="4">
 
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="20" />
             </Border.StrokeShape>
 
-            <ffimageloading:CachedImage 
+            <ffimageloading:CachedImage
+                Aspect="AspectFit"
                 CacheDuration="30"
                 DownsampleToViewSize="True"
-                ErrorPlaceholder="film_icon.png" 
-                HeightRequest="250" 
-                Aspect="AspectFill" 
-                Source="{ Binding Image }" />
+                ErrorPlaceholder="film_icon.png"
+                HeightRequest="250"
+                Source="{Binding Image}" />
 
         </Border>
 
-        <Grid 
-            Padding="5"
-            Grid.Column="1">
+        <Grid Grid.Column="1" Padding="5">
 
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <Label
                 Grid.Row="0"
-                Style="{ StaticResource CardTitle }"
+                Style="{StaticResource CardTitle}"
                 Text="{Binding Title}" />
 
-            <HorizontalStackLayout 
-                Spacing="10"
-                Grid.Row="1">
+            <HorizontalStackLayout Grid.Row="1" Spacing="10">
 
                 <Label
-                    Style="{ StaticResource RatingNote }"
-                    VerticalOptions="Center"
-                    Text="{ Binding Rating }" />
+                    Style="{StaticResource RatingNote}"
+                    Text="{Binding Rating}"
+                    VerticalOptions="Center" />
 
-                <Image Source="rating_star_full.png"/>
-                <Image Source="rating_star_full.png"/>
-                <Image Source="rating_star_full.png"/>
-                <Image Source="rating_star_full.png"/>
+                <Image Source="rating_star_full.png" />
+                <Image Source="rating_star_full.png" />
+                <Image Source="rating_star_full.png" />
+                <Image Source="rating_star_full.png" />
 
             </HorizontalStackLayout>
-            
+
             <Label
                 Grid.Row="2"
-                Style="{ StaticResource CardDescription }"
                 LineBreakMode="WordWrap"
-                Text="{Binding Description }" />
+                Style="{StaticResource CardDescription}"
+                Text="{Binding Description}" />
 
         </Grid>
 
-        
-        
+
+
     </Grid>
 </ContentView>

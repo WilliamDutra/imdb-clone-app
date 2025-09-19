@@ -27,7 +27,7 @@
         </Border>
         <ffimageloading:CachedImage
             Grid.Row="0"
-            Aspect="AspectFill"
+            Aspect="AspectFit"
             CacheDuration="30"
             DownsampleToViewSize="True"
             ErrorPlaceholder="erro_icon_thumb_not_load.png"
