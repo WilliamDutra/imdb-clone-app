@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
-             xmlns:vm="clr-namespace:IMDB.Mobile.Pages.MoviesByGenres"
-             xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Name="moviesByGenresPage"
-             x:DataType="vm:MoviesByGenresPageViewModel"
-             x:Class="IMDB.Mobile.Pages.MoviesByGenres.MoviesByGenresPage">
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.MoviesByGenres.MoviesByGenresPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
+    xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:IMDB.Mobile.Pages.MoviesByGenres"
+    x:Name="moviesByGenresPage"
+    x:DataType="vm:MoviesByGenresPageViewModel">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Source={x:Reference moviesByGenresPage}, Path=BindingContext}"
+            Command="{Binding InitializeCommand}"
+            EventName="Loaded" />
+    </ContentPage.Behaviors>
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" />
@@ -17,33 +25,46 @@
         <HorizontalStackLayout Spacing="10">
 
             <HorizontalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer Command="{ Binding BackToHomePageCommand }"></TapGestureRecognizer>
+                <TapGestureRecognizer Command="{Binding BackToHomePageCommand}" />
             </HorizontalStackLayout.GestureRecognizers>
 
             <Image
                 Aspect="AspectFill"
-                VerticalOptions="Center"
-                Source="back_button_icon.png" />
+                Source="back_button_icon.png"
+                VerticalOptions="Center" />
 
             <Label VerticalTextAlignment="Center">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{ Binding GenreName }" TextColor="White" FontFamily="PoppinsRegular" FontSize="20"></Span>
-                        <Span TextColor="{ StaticResource ColorSecondary }" FontFamily="PoppinsRegular" FontSize="20">.</Span>
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="{Binding GenreName}"
+                            TextColor="White" />
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            TextColor="{StaticResource ColorSecondary}">
+                            .
+                        </Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
         </HorizontalStackLayout>
     </Shell.TitleView>
     <VerticalStackLayout>
-        <CollectionView 
-                HeightRequest="450"
-                RemainingItemsThreshold="1"
-                ItemsUpdatingScrollMode="KeepItemsInView"
-                RemainingItemsThresholdReachedCommand="{ Binding RemainingItemsCommand }"
-                ItemsSource="{ Binding Movies }">
+        <CollectionView
+            HeightRequest="450"
+            ItemsSource="{Binding Movies}"
+            ItemsUpdatingScrollMode="KeepItemsInView"
+            RemainingItemsThreshold="1"
+            RemainingItemsThresholdReachedCommand="{Binding RemainingItemsCommand}">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="5" />
+                <GridItemsLayout
+                    HorizontalItemSpacing="15"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="5" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Movie">
@@ -51,13 +72,21 @@
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MoviesByGenresPageViewModel}}, Path=DetailCommand}" CommandParameter="{Binding .}" />
                         </Grid.GestureRecognizers>
-                        <cards:CardComponent CardHeight="250" CardWidth="150" Title="{ Binding Title }" Image="{ Binding Poster }" Rating="5" />
+                        <cards:CardComponent
+                            Title="{Binding Title}"
+                            CardHeight="250"
+                            CardWidth="150"
+                            Image="{Binding Poster}"
+                            Rating="5" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
         <VerticalStackLayout HeightRequest="20">
-            <ActivityIndicator IsVisible="{ Binding IsBusy }" IsRunning="True" Color="{ StaticResource ColorSecondary }" />
+            <ActivityIndicator
+                IsRunning="True"
+                IsVisible="{Binding IsBusy}"
+                Color="{StaticResource ColorSecondary}" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 

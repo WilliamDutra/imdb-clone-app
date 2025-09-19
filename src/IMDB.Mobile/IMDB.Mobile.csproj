@@ -174,4 +174,8 @@
 	  <MauiSplashScreen Include="Resources\Splash\splah.svg" Resize="True" BaseSize="300,185" Color="#111111" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Resources\AppIcon\icon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+	</ItemGroup>
+
 </Project>

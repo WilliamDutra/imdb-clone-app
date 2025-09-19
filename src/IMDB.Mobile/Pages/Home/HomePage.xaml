@@ -35,7 +35,7 @@
             <ScrollView Orientation="Horizontal">
                 <VerticalStackLayout>
 
-                    <CollectionView ItemsSource="{Binding MoviesTopFive}">
+                    <CollectionView HorizontalScrollBarVisibility="Never" ItemsSource="{Binding MoviesTopFive}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                         </CollectionView.ItemsLayout>
@@ -100,7 +100,10 @@
                 IsLoading="{Binding IsBusy}"
                 TextValue="{x:Static language:Resource.title_home_lastest}" />
 
-            <CollectionView ItemsSource="{Binding MoviesLatest}" SelectionMode="None">
+            <CollectionView
+                HorizontalScrollBarVisibility="Never"
+                ItemsSource="{Binding MoviesLatest}"
+                SelectionMode="None">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
@@ -160,16 +163,20 @@
 
             <ScrollView>
                 <CollectionView
+                    HorizontalScrollBarVisibility="Never"
                     ItemsSource="{Binding Categories}"
-                    SelectedItem="{Binding CategorySelected, Mode=TwoWay}"
-                    SelectionChangedCommand="{Binding MoviesByCategoryCommand}"
                     SelectionMode="Single">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Category">
-                            <pill:PillComponent Label="{Binding Name}" />
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=MoviesByCategoryCommand}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <pill:PillComponent Label="{Binding Name}" />
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

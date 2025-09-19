@@ -64,7 +64,7 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         }
 
         [RelayCommand]
-        public async void Detail(Movie movie)
+        public async Task Detail(Movie movie)
         {
             var movieId = movie.Id;
             var parameters = new Dictionary<string, object>();
@@ -76,6 +76,12 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         public async Task BackToHomePage()
         {
             await _navigationManager.GoToPage("..");
+        }
+
+        [RelayCommand]
+        public async Task Initialize()
+        {
+
         }
 
         private async void EachMoviesByGenres(int genreId)

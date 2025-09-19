@@ -44,9 +44,6 @@ namespace IMDB.Mobile.Pages.Home
         [ObservableProperty]
         private ObservableCollection<Category> categories;
 
-        [ObservableProperty]
-        private Category categorySelected;
-
         public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, IGetAllCategories getAllCategories, IGetAuthenticationToken getAuthenticationToken, ICreateSession createSession, INavigationManager navigationManager, ILocalStorage localStorage, IPopupService popupService, IAddMovieToList addMovieToList)
         {
             _getMoviesTopFiveDay = getMoviesTopFiveDay;
@@ -67,11 +64,11 @@ namespace IMDB.Mobile.Pages.Home
         }
 
         [RelayCommand]
-        public async void MoviesByCategory()
+        public async Task MoviesByCategory(Category categorie)
         {
             var queryParams = new Dictionary<string, object>();
-            queryParams["genreId"] = categorySelected.Id;
-            queryParams["genreName"] = categorySelected.Name;
+            queryParams["genreId"] = categorie.Id;
+            queryParams["genreName"] = categorie.Name;
             await _navigationManager.GoToPage("movies-by-genres", queryParams);
         }
 
