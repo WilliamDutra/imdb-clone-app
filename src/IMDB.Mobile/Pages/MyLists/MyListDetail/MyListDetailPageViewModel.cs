@@ -5,8 +5,6 @@ using IMDB.ApiClient.DeleteMovieOfList;
 using IMDB.ApiClient.GetListById;
 using IMDB.ApiClient.Mappings;
 using System;
-using System.Collections.ObjectModel;
-using static Java.Util.Jar.Attributes;
 
 namespace IMDB.Mobile.Pages.MyLists.MyListDetail
 {
