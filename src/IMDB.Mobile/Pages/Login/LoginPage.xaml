@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="IMDB.Mobile.Pages.Login.LoginPage">
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.Login.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Behaviors>
-        <toolkit:StatusBarBehavior StatusBarColor="{ StaticResource ColorPrimary }" />
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource ColorPrimary}" />
     </ContentPage.Behaviors>
-    
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" />
     </Shell.BackButtonBehavior>
 
 
-    <VerticalStackLayout Spacing="20">
+    <VerticalStackLayout Spacing="30">
 
-        <Button Command="{ Binding LoginCommand }" Text="Login" FontFamily="PoppinsBold" FontSize="18" Background="{ StaticResource ColorSecondary }" />
+        <Image HeightRequest="200" Source="film_icon.png">
+            <Image.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="{StaticResource ColorSecondary}" />
+            </Image.Behaviors>
+        </Image>
+
+        <Button
+            Background="{StaticResource ColorSecondary}"
+            Command="{Binding LoginCommand}"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            Text="Login" />
 
     </VerticalStackLayout>
 </ContentPage>

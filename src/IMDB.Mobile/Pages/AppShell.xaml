@@ -8,7 +8,9 @@
     xmlns:local="clr-namespace:IMDB.Mobile"
     xmlns:login="clr-namespace:IMDB.Mobile.Pages.Login"
     xmlns:search="clr-namespace:IMDB.Mobile.Pages.Search"
-    Title="IMDB.Mobile">
+    Title="IMDB.Mobile"
+    Shell.FlyoutBackgroundColor="{StaticResource ColorPrimary}"
+    Shell.FlyoutBehavior="Flyout">
 
     <TabBar>
         <Tab Icon="home_icon.png">
@@ -21,5 +23,33 @@
             <ShellContent ContentTemplate="{DataTemplate lists:MyListsPage}" />
         </Tab>
     </TabBar>
+
+    <MenuItem IconImageSource="trash.png" Text="Sair" />
+
+    <Shell.FlyoutHeader>
+        <Grid Padding="20" BackgroundColor="{StaticResource ColorPrimary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                HeightRequest="50"
+                Source="user_avatar.png"
+                WidthRequest="50" />
+            <StackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label
+                    FontSize="18"
+                    Text="Olá, João!"
+                    TextColor="White" />
+                <Label
+                    FontSize="14"
+                    Text="joao@email.com"
+                    TextColor="Gray" />
+            </StackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+
 
 </Shell>
