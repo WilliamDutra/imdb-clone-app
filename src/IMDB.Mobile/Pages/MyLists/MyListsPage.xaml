@@ -52,16 +52,27 @@
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <HorizontalStackLayout>
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="{Binding Name}"
-                            TextColor="White" />
-                    </HorizontalStackLayout>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    BackgroundColor="Red"
+                                    Command="{Binding DeleteCommand}"
+                                    Text="Remover" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <VerticalStackLayout Padding="0,10">
+                            <Label
+                                FontFamily="PoppinsRegular"
+                                FontSize="18"
+                                Text="{Binding Name}"
+                                VerticalOptions="Center" />
+                        </VerticalStackLayout>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
 
     </VerticalStackLayout>
 </ContentPage>

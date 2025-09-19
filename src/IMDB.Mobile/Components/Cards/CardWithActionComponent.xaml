@@ -8,10 +8,11 @@
     x:Name="cardWithAction">
     <Grid
         BindingContext="{Binding Source={x:Reference cardWithAction}}"
-        HeightRequest="200"
+        HeightRequest="260"
         RowSpacing="10"
         WidthRequest="100">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -31,7 +32,13 @@
             DownsampleToViewSize="True"
             ErrorPlaceholder="erro_icon_thumb_not_load.png"
             Source="{Binding ImageSource}" />
-        <Image Grid.Row="1" Source="trash.png">
+        <Label
+            Grid.Row="1"
+            FontFamily="PoppinsRegular"
+            FontSize="12"
+            Text="{Binding Title}"
+            TextColor="White" />
+        <Image Grid.Row="2" Source="trash.png">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding DeleteCommand}" CommandParameter="{Binding Id}" />
             </Image.GestureRecognizers>

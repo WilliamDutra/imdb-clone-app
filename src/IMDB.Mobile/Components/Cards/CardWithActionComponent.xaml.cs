@@ -10,6 +10,8 @@ public partial class CardWithActionComponent : ContentView
 
     public static readonly BindableProperty IdProperty = BindableProperty.Create("Id", typeof(int), typeof(CardWithActionComponent), default(int));
 
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(CardWithActionComponent), string.Empty);
+
     public ImageSource ImageSource
     {
         get => (ImageSource)GetValue(ImageSourceProperty);
@@ -26,6 +28,12 @@ public partial class CardWithActionComponent : ContentView
     {
         get => (int)GetValue(IdProperty);
         set => SetValue(IdProperty, value);
+    }
+
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
     }
 
     public CardWithActionComponent()

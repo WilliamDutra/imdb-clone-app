@@ -49,7 +49,7 @@
     <VerticalStackLayout>
 
         <ScrollView Orientation="Vertical">
-            <CollectionView ItemsSource="{Binding ListDetail.Movies}" VerticalScrollBarVisibility="Default">
+            <CollectionView ItemsSource="{Binding ListDetail.Movies}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
@@ -60,6 +60,7 @@
                     <DataTemplate x:DataType="model:Movie">
                         <VerticalStackLayout>
                             <cards:CardWithActionComponent
+                                Title="{Binding Title}"
                                 DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:MyListDetailPageViewModel}}, Path=DeleteCommand}"
                                 Id="{Binding Id}"
                                 ImageSource="{Binding Poster}" />
