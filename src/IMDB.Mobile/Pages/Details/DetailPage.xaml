@@ -7,9 +7,18 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:language="clr-namespace:IMDB.Mobile.Resources"
     xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+    xmlns:skeleton="clr-namespace:IMDB.Mobile.Components.Skeletons"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Details"
+    x:Name="detailPage"
     x:DataType="vm:DetailPageViewModel">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Source={x:Reference detailPage}, Path=BindingContext}"
+            Command="{Binding InitializeCommand}"
+            EventName="Loaded" />
+    </ContentPage.Behaviors>
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" />
@@ -48,103 +57,147 @@
     </Shell.TitleView>
 
     <ScrollView>
-        <Grid RowSpacing="10">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
 
-            <ffimageloading:CachedImage
-                Aspect="AspectFill"
-                CacheDuration="30"
-                DownsampleToViewSize="True"
-                ErrorPlaceholder="erro_icon_thumb_not_load.png"
-                HeightRequest="400"
-                Source="{Binding Thumbnail}" />
+        <VerticalStackLayout>
 
-            <BoxView HeightRequest="100" VerticalOptions="End">
-                <BoxView.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Offset="0.0" Color="#00FFFFFF" />
-                        <GradientStop Offset="2.0" Color="{StaticResource ColorPrimary}" />
-                    </LinearGradientBrush>
-                </BoxView.Background>
-            </BoxView>
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <ffimageloading:CachedImage
+                    Aspect="AspectFill"
+                    CacheDuration="30"
+                    DownsampleToViewSize="True"
+                    ErrorPlaceholder="erro_icon_thumb_not_load.png"
+                    HeightRequest="400"
+                    Source="{Binding Thumbnail}" />
+
+                <BoxView HeightRequest="100" VerticalOptions="End">
+                    <BoxView.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                            <GradientStop Offset="2.0" Color="{StaticResource ColorPrimary}" />
+                        </LinearGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
 
 
-            <VerticalStackLayout
-                Grid.Row="0"
-                Padding="10"
-                HorizontalOptions="Start"
-                VerticalOptions="End">
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Padding="10"
+                    HorizontalOptions="Start"
+                    VerticalOptions="End">
 
-                <Label
-                    FontFamily="PoppinsBlack"
-                    FontSize="26"
-                    LineBreakMode="WordWrap"
-                    Text="{Binding Title}"
-                    WidthRequest="300" />
-
-                <HorizontalStackLayout Spacing="10">
                     <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="{Binding Rating}"
-                        VerticalTextAlignment="Center" />
-                    <Image Source="rating_star_full.png" VerticalOptions="Center" />
-                </HorizontalStackLayout>
+                        FontFamily="PoppinsBlack"
+                        FontSize="26"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Title}"
+                        WidthRequest="300" />
 
-            </VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="{Binding Rating}"
+                            VerticalTextAlignment="Center" />
+                        <Image Source="rating_star_full.png" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-            <Label Grid.Row="1" Text="{Binding Overview}" />
+                </VerticalStackLayout>
 
-            <VerticalStackLayout Grid.Row="2" Padding="10">
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontFamily="PoppinsBold"
-                                FontSize="20"
-                                Text="{Static language:Resource.title_detail_cast}"
-                                TextColor="White" />
-                            <Span
-                                FontFamily="PoppinsBold"
-                                FontSize="20"
-                                TextColor="{StaticResource ColorSecondary}">
-                                .
-                            </Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <Label Grid.Row="1" Text="{Binding Overview}" />
 
-                <CollectionView Margin="0,20" ItemsSource="{Binding Actors}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Actor">
-                            <cards:CardViewActorComponent
-                                Name="{Binding Name}"
-                                CardHeight="120"
-                                CardWidth="120"
-                                Photo="{Binding Photo}" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <VerticalStackLayout Grid.Row="2" Padding="10">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontFamily="PoppinsBold"
+                                    FontSize="20"
+                                    Text="{Static language:Resource.title_detail_cast}"
+                                    TextColor="White" />
+                                <Span
+                                    FontFamily="PoppinsBold"
+                                    FontSize="20"
+                                    TextColor="{StaticResource ColorSecondary}">
+                                    .
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <CollectionView Margin="0,20" ItemsSource="{Binding Actors}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Actor">
+                                <cards:CardViewActorComponent
+                                    Name="{Binding Name}"
+                                    CardHeight="120"
+                                    CardWidth="120"
+                                    Photo="{Binding Photo}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
 
-            </VerticalStackLayout>
+                </VerticalStackLayout>
 
-            <Button
-                Grid.Row="3"
-                BackgroundColor="{StaticResource ColorSecondary}"
-                Command="{Binding AddToMyListCommand}"
-                ImageSource="bookmark_icon.png"
-                Text="{Static language:Resource.text_button_add_list_details}"
-                TextColor="White" />
+                <Button
+                    Grid.Row="3"
+                    BackgroundColor="{StaticResource ColorSecondary}"
+                    Command="{Binding AddToMyListCommand}"
+                    ImageSource="bookmark_icon.png"
+                    Text="{Static language:Resource.text_button_add_list_details}"
+                    TextColor="White" />
 
-        </Grid>
+                <Grid.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsBusy}"
+                        TargetType="Grid"
+                        Value="True">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+            </Grid>
+
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <skeleton:SkeletonView
+                    Grid.Row="0"
+                    BackgroundColor="{StaticResource Gray100}"
+                    HeightRequest="350" />
+                <skeleton:SkeletonView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource Gray100}"
+                    HeightRequest="60" />
+                <skeleton:SkeletonView
+                    Grid.Row="2"
+                    BackgroundColor="{StaticResource Gray100}"
+                    HeightRequest="150" />
+
+                <Grid.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsBusy}"
+                        TargetType="Grid"
+                        Value="False">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Grid.Triggers>
+
+            </Grid>
+
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

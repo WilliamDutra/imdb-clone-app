@@ -8,11 +8,11 @@ using CommunityToolkit.Maui.Core;
 using IMDB.Mobile.Popups.MyLists;
 using IMDB.ApiClient.GetMovieById;
 using CommunityToolkit.Mvvm.Input;
+using IMDB.ApiClient.GetCastMovie;
 using CommunityToolkit.Maui.Alerts;
 using IMDB.ApiClient.AddMovieToList;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using IMDB.ApiClient.GetCastMovie;
 
 namespace IMDB.Mobile.Pages.Details
 {
@@ -62,7 +62,6 @@ namespace IMDB.Mobile.Pages.Details
             _navigationManager = navigationManager;
             _popupService = popupService;
             _getCastMovie = getCastMovie;
-            EachLists();
         }
 
         [RelayCommand]
@@ -72,7 +71,7 @@ namespace IMDB.Mobile.Pages.Details
         }
 
         [RelayCommand]
-        public async void AddToMyList()
+        public async Task AddToMyList()
         {
             var sessionId = await SecureStorage.Default.GetAsync("session_id"); ;
             var parameters = new Dictionary<string, object>();
@@ -87,14 +86,20 @@ namespace IMDB.Mobile.Pages.Details
             await toast.Show();
         }
 
-        public void EachLists()
+        [RelayCommand]
+        public async Task Initialize()
         {
-            var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
-            var responseAccount = _getAccount.Execute(sessionId);
-            responseAccount.Wait();
-            var responseLists = _getMyLists.Execute(responseAccount.Result.Id);
-            responseLists.Wait();
-            MyLists = ListsMapper.ToMap(responseLists.Result);
+            IsBusy = true;
+            await EachLists();
+            IsBusy = false;
+        }
+
+        public async Task EachLists()
+        {
+            var sessionId = await SecureStorage.Default.GetAsync("session_id");
+            var responseAccount = await _getAccount.Execute(sessionId);
+            var responseLists = await _getMyLists.Execute(responseAccount.Id);
+            MyLists = ListsMapper.ToMap(responseLists);
         }
 
 
