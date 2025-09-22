@@ -29,8 +29,12 @@ using IMDB.Mobile.Pages.MyLists.MyListDetail;
 using IMDB.Mobile.Pages.Search;
 using IMDB.Mobile.Popups.MyLists;
 using IMDB.Mobile.Resources.Styles.Handlers;
-using Microsoft.Extensions.DependencyInjection;
+#if ANDROID
+using Plugin.Firebase.Core.Platforms.Android;
+#endif
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+using Plugin.Firebase.Auth;
 using Refit;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -49,6 +53,7 @@ namespace IMDB.Mobile
                 .AddPages()
                 .AddPopups()
                 .AddApiClient()
+                .AddFirebaseServices()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -185,5 +190,20 @@ namespace IMDB.Mobile
         {
             client.BaseAddress = new Uri("https://api.themoviedb.org/4");
         }
+
+        private static MauiAppBuilder AddFirebaseServices(this MauiAppBuilder builder)
+        {
+            builder.ConfigureLifecycleEvents(events => {
+                #if ANDROID
+                events.AddAndroid(android => android.OnCreate((activity, _) =>
+                    CrossFirebase.Initialize(activity)));
+                #endif
+
+            });
+
+            builder.Services.AddSingleton(_ => CrossFirebaseAuth.Current);
+            return builder;
+        }
+
     }
 }
