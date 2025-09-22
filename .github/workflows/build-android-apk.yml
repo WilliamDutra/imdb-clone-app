@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   
 env:
-  DIRETORIO_APP_MOBIBLE: './src/IMDB.Mobile'
+  DIRETORIO_APP_MOBILE: './src/IMDB.Mobile'
   DIRETORIO_APK: 'bin/Release/net9.0-android'
   ARQUIVO_APK: 'imdb.clone'
 
@@ -37,11 +37,11 @@ jobs:
         run: dotnet restore IMDB.sln
 
       - name: compilar .apk android
-        run: dotnet build -c Release -f net9.0-android /p:AndroidCreatePackage=true
+        run: dotnet build #{{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -c Release -f net9.0-android /p:AndroidCreatePackage=true
         
       - name: Listar APK gerado
         run: |
-          cd ${{ env.DIRETORIO_APP_MOBIBLE }}
+          cd ${{ env.DIRETORIO_APP_MOBILE }}
           cd ${{ env.DIRETORIO_APK }}
           echo 'Diretório com o resultado do build:'
           pwd
