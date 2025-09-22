@@ -1,0 +1,49 @@
+name: build-android-apk
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+  workflow_dispatch:
+  
+env:
+  DIRETORIO_APP_MOBIBLE: './src/IMDB.Mobile'
+  DIRETORIO_APK: 'bin/Release/net9.0-android'
+  ARQUIVO_APK: 'imdb.clone'
+
+jobs:
+  build-aplicativo-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: configurar java 17
+        uses: actions/setup-java@v4.3.0
+        with:
+          java-version: 17
+          distribuition: adopt
+          
+      - name: setup .net
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: instalar workload .net maui
+        run: dotnet workload install maui
+
+      - name: restaurar pacotes nuget
+        run: dotnet restore *.sln
+
+      - name: compilar .apk android
+        run: dotnet build -c Release -f net9.0-android p:AndroidCreatePackage=true
+        
+      - name: Listar APK gerado
+        run: |
+          cd ${{ env.DIRETORIO_APP_MOBIBLE }}
+          cd ${{ env.DIRETORIO_APK }}
+          echo 'Diretório com o resultado do build:'
+          pwd
+          echo ''
+          echo 'Arquivos gerados:'
+          ls
