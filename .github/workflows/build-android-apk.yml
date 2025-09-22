@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v4.3.0
         with:
           java-version: 17
-          distribuition: adopt
+          distribution: adopt
           
       - name: setup .net
         uses: actions/setup-dotnet@v4
