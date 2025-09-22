@@ -10,7 +10,7 @@ on:
 env:
   DIRETORIO_APP_MOBILE: './src/IMDB.Mobile'
   DIRETORIO_APK: 'bin/Release/net9.0-android'
-  ARQUIVO_APK: 'imdb.clone.apk'
+  ARQUIVO_APK: 'com.companyname.imdb.mobile.apk'
 
 jobs:
   build-aplicativo-android:
