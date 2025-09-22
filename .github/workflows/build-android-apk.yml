@@ -37,7 +37,7 @@ jobs:
         run: dotnet restore IMDB.sln
 
       - name: compilar .apk android
-        run: dotnet build -c Release -f net9.0-android p:AndroidCreatePackage=true
+        run: dotnet build -c Release -f net9.0-android /p:AndroidCreatePackage=true
         
       - name: Listar APK gerado
         run: |
