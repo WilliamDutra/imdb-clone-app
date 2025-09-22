@@ -10,7 +10,7 @@ on:
 env:
   DIRETORIO_APP_MOBILE: './src/IMDB.Mobile'
   DIRETORIO_APK: 'bin/Release/net9.0-android'
-  ARQUIVO_APK: 'imdb.clone'
+  ARQUIVO_APK: 'imdb.clone.apk'
 
 jobs:
   build-aplicativo-android:
@@ -39,7 +39,7 @@ jobs:
       - name: compilar .apk android
         run: dotnet build ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -c Release -f net9.0-android /p:AndroidCreatePackage=true
         
-      - name: Listar APK gerado
+      - name: listar APK gerado
         run: |
           cd ${{ env.DIRETORIO_APP_MOBILE }}
           cd ${{ env.DIRETORIO_APK }}
@@ -48,3 +48,10 @@ jobs:
           echo ''
           echo 'Arquivos gerados:'
           ls
+          
+      - name: gerar artefato do apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARQUIVO_APK }}
+          path: ${{ env.DIRETORIO_APP_MOBILE }}/${{ env.DIRETORIO_APK }}/${{ env.ARQUIVO_APK }}
+        
