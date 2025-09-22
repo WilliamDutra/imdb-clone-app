@@ -36,13 +36,16 @@ jobs:
       - name: restaurar pacotes nuget
         run: dotnet restore IMDB.sln
 
-      - name: compilar .apk android
-        run: dotnet build ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -c Release -f net9.0-android /p:AndroidCreatePackage=true
-        
+      - name: compilar projeto maui
+        run: dotnet build ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -c Release -f net9.0-android /
+
+      - name: gerar .apk android
+        run: dotnet publish ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -f net9.0-android -c Release /p:AndroidCreatePackage=true
+      
       - name: listar APK gerado
         run: |
           cd ${{ env.DIRETORIO_APP_MOBILE }}
-          cd ${{ env.DIRETORIO_APK }}
+          cd ${{ env.DIRETORIO_APK }}/publish/
           echo 'Diretório com o resultado do build:'
           pwd
           echo ''
