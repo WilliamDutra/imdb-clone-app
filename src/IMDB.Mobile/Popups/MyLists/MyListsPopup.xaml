@@ -1,30 +1,78 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Background="{ StaticResource ColorPrimary }"
-             x:Class="IMDB.Mobile.Popups.MyLists.MyListsPopup">
-    <VerticalStackLayout Spacing="10" Padding="10">
-        <Label 
-            Text="Minhas listas"
-            FontSize="24"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+<bottomsheet:BottomSheet
+    x:Class="IMDB.Mobile.Popups.MyLists.MyListsPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bottomsheet="http://pluginmauibottomsheet.com"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    BackgroundColor="{StaticResource ColorTertiary}"
+    CurrentState="Medium"
+    States="Peek,Medium">
 
-        <CollectionView 
-            ItemsSource="{ Binding MyLists }" 
-            SelectedItem="{ Binding ListSelected, Mode=TwoWay}"
-            SelectionMode="Single"
-            SelectionChangedCommand="{ Binding SelectedListCommand }">
+    <bottomsheet:BottomSheet.BottomSheetStyle>
+        <bottomsheet:BottomSheetStyle>
+            <bottomsheet:BottomSheetStyle.HeaderStyle>
+                <bottomsheet:BottomSheetHeaderStyle
+                    TitleTextColor="White"
+                    TitleTextFontFamily="PoppinsBold"
+                    TitleTextFontSize="22" />
+            </bottomsheet:BottomSheetStyle.HeaderStyle>
+        </bottomsheet:BottomSheetStyle>
+    </bottomsheet:BottomSheet.BottomSheetStyle>
+
+
+    <bottomsheet:BottomSheet.Header>
+        <bottomsheet:BottomSheetHeader TitleText="Minhas listas" />
+    </bottomsheet:BottomSheet.Header>
+
+
+    <bottomsheet:BottomSheet.Content>
+        <bottomsheet:BottomSheetContent>
+            <bottomsheet:BottomSheetContent.ContentTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <CollectionView
+                            ItemsSource="{Binding MyLists}"
+                            SelectedItem="{Binding ListSelected, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding SelectedListCommand}"
+                            SelectionMode="Single">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </bottomsheet:BottomSheetContent.ContentTemplate>
+        </bottomsheet:BottomSheetContent>
+    </bottomsheet:BottomSheet.Content>
+
+
+    <!--<VerticalStackLayout Padding="10" Spacing="10">
+    -->
+
+    <!--<CollectionView
+            ItemsSource="{Binding MyLists}"
+            SelectedItem="{Binding ListSelected, Mode=TwoWay}"
+            SelectionChangedCommand="{Binding SelectedListCommand}"
+            SelectionMode="Single">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{ Binding Name }" />
+                    <Label Text="{Binding Name}" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+        </CollectionView>-->
 
-    </VerticalStackLayout>
-</toolkit:Popup>
+    <!--</VerticalStackLayout>-->
+
+</bottomsheet:BottomSheet>

@@ -35,6 +35,7 @@ using Plugin.Firebase.Core.Platforms.Android;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 using Plugin.Firebase.Auth;
+using Plugin.Maui.BottomSheet.Hosting;
 using Refit;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -50,6 +51,7 @@ namespace IMDB.Mobile
                 .UseMauiCommunityToolkit()
                 .UseSkiaSharp()
                 .UseFFImageLoading()
+                .UseBottomSheet()
                 .AddPages()
                 .AddPopups()
                 .AddApiClient()
@@ -177,7 +179,7 @@ namespace IMDB.Mobile
 
         public static MauiAppBuilder AddPopups(this MauiAppBuilder appBuilder)
         {
-            appBuilder.Services.AddTransientPopup<MyListsPopup, MyListsPopupViewModel>();
+            appBuilder.Services.AddBottomSheet<MyListsPopup, MyListsPopupViewModel>("mylist-popup");
             return appBuilder;
         }
 

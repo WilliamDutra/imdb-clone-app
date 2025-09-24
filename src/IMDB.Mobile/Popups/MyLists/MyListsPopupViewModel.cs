@@ -1,12 +1,13 @@
-﻿using System;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using IMDB.ApiClient;
-using CommunityToolkit.Maui;
-using IMDB.ApiClient.Mappings;
 using IMDB.ApiClient.GetAccount;
 using IMDB.ApiClient.GetMyLists;
-using CommunityToolkit.Mvvm.Input;
+using IMDB.ApiClient.Mappings;
+using Plugin.Maui.BottomSheet.Navigation;
+using System;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IMDB.Mobile.Popups.MyLists
 {
@@ -22,30 +23,34 @@ namespace IMDB.Mobile.Popups.MyLists
         [ObservableProperty]
         private MyList listSelected;
 
-        private IPopupService _popupService;
+        private IBottomSheetNavigationService _bottomSheetNavigationService;
 
-        public MyListsPopupViewModel(IGetMyLists getMyLists, IGetAccount getAccount, IPopupService popupService)
+        public MyListsPopupViewModel(IGetMyLists getMyLists, IGetAccount getAccount, IBottomSheetNavigationService bottomSheetNavigationService)
         {
             _getMyLists = getMyLists;
             _getAccount = getAccount;
-            _popupService = popupService;
+            _bottomSheetNavigationService = bottomSheetNavigationService;   
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             var sessionId = query["SessionId"].ToString();
-            var responseAccount = _getAccount.Execute(sessionId);
-            responseAccount.Wait();
-            var responseLists = _getMyLists.Execute(responseAccount.Result.Id);
-            responseLists.Wait();
-            MyLists = ListsMapper.ToMap(responseLists.Result);
+
+            Task.Run(async () =>
+            {
+                var responseAccount = await _getAccount.Execute(sessionId);
+                var responseLists = await _getMyLists.Execute(responseAccount.Id);
+                MyLists = ListsMapper.ToMap(responseLists);
+            });
         }
 
         [RelayCommand]
-        public async void SelectedList()
+        public async Task SelectedList()
         {
             var selectedList = ListSelected;
-            await _popupService.ClosePopupAsync(Shell.Current, selectedList);
+            var parameters = new BottomSheetNavigationParameters();
+            parameters["listSelected"] = selectedList;
+            await _bottomSheetNavigationService.GoBackAsync(parameters);
         }
 
     }
