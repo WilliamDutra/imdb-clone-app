@@ -28,7 +28,8 @@ namespace IMDB.Mobile.Pages
         [RelayCommand]
         public async Task Sair()
         {
-            
+            await SecureStorage.Default.SetAsync("session_id", "");
+            Application.Current.MainPage = new LoginAppShell();
         }
 
     }

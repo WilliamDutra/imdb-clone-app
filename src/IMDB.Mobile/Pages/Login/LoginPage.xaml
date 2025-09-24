@@ -18,7 +18,7 @@
     <VerticalStackLayout Spacing="30">
 
         <Image
-            Margin="30"
+            Margin="0,100,0,30"
             HeightRequest="200"
             Source="film_icon.png">
             <Image.Behaviors>
