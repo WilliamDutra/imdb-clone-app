@@ -17,7 +17,10 @@
 
     <VerticalStackLayout Spacing="30">
 
-        <Image HeightRequest="200" Source="film_icon.png">
+        <Image
+            Margin="30"
+            HeightRequest="200"
+            Source="film_icon.png">
             <Image.Behaviors>
                 <toolkit:IconTintColorBehavior TintColor="{StaticResource ColorSecondary}" />
             </Image.Behaviors>

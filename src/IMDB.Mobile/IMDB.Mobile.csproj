@@ -79,7 +79,6 @@
 		<PackageReference Include="Plugin.Firebase.RemoteConfig" Version="3.1.1" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0-preview.18" />
-		<PackageReference Include="XGENO.Maui.RatingView" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

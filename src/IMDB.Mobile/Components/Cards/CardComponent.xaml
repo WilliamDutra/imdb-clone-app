@@ -3,7 +3,6 @@
     x:Class="IMDB.Mobile.Components.Cards.CardComponent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="this">
@@ -78,15 +77,16 @@
 
                 <Label Style="{StaticResource RatingNote}" Text="{Binding Rating}" />
 
-                <controls:RatingView
+                <toolkit:RatingView
+                    CustomShapePath="M15.5626 19.2229C15.4005 19.2228 15.2408 19.1834 15.0973 19.1081L10.0001 16.4284L4.90296 19.1081C4.73778 19.1949 4.55161 19.2338 4.3655 19.2203C4.17938 19.2069 4.00074 19.1416 3.84977 19.032C3.6988 18.9223 3.58152 18.7726 3.51119 18.5997C3.44086 18.4269 3.42028 18.2378 3.45178 18.0539L4.42542 12.3781L0.301885 8.35913C0.168302 8.22885 0.0738231 8.0638 0.0291246 7.88263C-0.0155739 7.70147 -0.00870976 7.51141 0.0489412 7.33394C0.106592 7.15648 0.212732 6.99867 0.355365 6.87836C0.497998 6.75805 0.671438 6.68004 0.856085 6.65313L6.55482 5.825L9.10312 0.661341C9.19523 0.505393 9.3264 0.376153 9.4837 0.286372C9.64099 0.196591 9.81898 0.149371 10.0001 0.149371C10.1812 0.149371 10.3592 0.196591 10.5165 0.286372C10.6738 0.376153 10.805 0.505393 10.8971 0.661341L13.4454 5.82491L19.1441 6.65304C19.3288 6.67995 19.5022 6.75796 19.6449 6.87827C19.7875 6.99858 19.8936 7.15639 19.9513 7.33385C20.0089 7.51132 20.0158 7.70138 19.9711 7.88254C19.9264 8.06371 19.8319 8.22876 19.6983 8.35904L15.5748 12.378L16.5484 18.0538C16.573 18.1974 16.566 18.3446 16.5278 18.4851C16.4896 18.6257 16.4212 18.7562 16.3273 18.8675C16.2334 18.9788 16.1163 19.0683 15.9842 19.1297C15.8521 19.1911 15.7083 19.2229 15.5626 19.2229Z"
+                    EmptyShapeColor="LightGray"
+                    FillColor="{StaticResource ColorSecondary}"
                     HorizontalOptions="Start"
-                    ItemCount="1"
-                    ItemSize="16"
-                    RatedFillColor="{StaticResource ColorSecondary}"
-                    StrokeColor="Black"
-                    StrokeWidth="1"
-                    UnRatedFillColor="LightGrey"
-                    Value="{Binding Rating}" />
+                    IsReadOnly="True"
+                    MaximumRating="1"
+                    Rating="1"
+                    ShapeBorderColor="Transparent"
+                    ShapeBorderThickness="0" />
 
             </HorizontalStackLayout>
 

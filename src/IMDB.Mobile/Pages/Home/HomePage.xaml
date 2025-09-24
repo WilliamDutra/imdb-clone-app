@@ -4,7 +4,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:component="clr-namespace:IMDB.Mobile.Components.Cards"
-    xmlns:controls="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.RatingView"
     xmlns:labels="clr-namespace:IMDB.Mobile.Components.Labels"
     xmlns:language="clr-namespace:IMDB.Mobile.Resources"
     xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
