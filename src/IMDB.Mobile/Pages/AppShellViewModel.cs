@@ -24,5 +24,12 @@ namespace IMDB.Mobile.Pages
             var account = await _getAccount.Execute(sessionId);
             Username = account.Username;
         }
+
+        [RelayCommand]
+        public async Task Sair()
+        {
+            
+        }
+
     }
 }
