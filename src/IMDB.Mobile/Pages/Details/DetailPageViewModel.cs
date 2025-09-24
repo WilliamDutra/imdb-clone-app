@@ -106,16 +106,20 @@ namespace IMDB.Mobile.Pages.Details
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             var id = Convert.ToInt32(query["Id"]);
-            var movie = _getMovieById.Execute(id);
-            movie.Wait();
-            MovieId = id;
-            Title = movie.Result.Title;
-            Overview = movie.Result.Overview;
-            Rating = "2";
-            Thumbnail = $"https://image.tmdb.org/t/p/original{movie.Result.Poster}";
-            var cast = _getCastMovie.Execute(id);
-            cast.Wait();
-            Actors = MovieMapper.ToMap(cast.Result);
+
+            Task.Run(async () =>
+            {
+                var movie = await _getMovieById.Execute(id);
+                MovieId = id;
+                Title = movie.Title;
+                Overview = movie.Overview;
+                Rating = "2";
+                Thumbnail = $"https://image.tmdb.org/t/p/original{movie.Poster}";
+
+                var cast = await _getCastMovie.Execute(id);
+                Actors = MovieMapper.ToMap(cast);
+
+            });
         }
     }
 }
