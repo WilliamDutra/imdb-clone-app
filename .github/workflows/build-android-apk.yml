@@ -36,8 +36,18 @@ jobs:
       - name: restaurar pacotes nuget
         run: dotnet restore IMDB.sln
 
+      - name: decodficar certificado
+        run: | 
+              echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > base64 -d > imdb-clone-app.keystore
+
       - name: gerar .apk android
-        run: dotnet publish ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -f net9.0-android -c Release /p:AndroidCreatePackage=true
+        run: | 
+              dotnet publish ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -f net9.0-android -c Release `
+              /p:AndroidKeyStore=true `
+              /p:AndroidSigningKeyAlias=${{ secrets.ANDROID_KEY_ALIAS }} `
+              /p:AndroidSigningKeyPass=${{ secrets.ANDROID_KEY_PASSWORD }} `
+              /p:AndroidSigningStorePass=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} `
+              /p:AndroidSigningKeyStore=my-release-key.keystore
       
       - name: listar APK gerado
         run: |
@@ -52,6 +62,7 @@ jobs:
       - name: gerar artefato do apk
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ARQUIVO_APK }}
-          path: ${{ env.DIRETORIO_APP_MOBILE }}/${{ env.DIRETORIO_APK }}/${{ env.ARQUIVO_APK }}
+          name: signed-apk
+          path: '**/*.apk'
+
         
