@@ -36,9 +36,10 @@ jobs:
       - name: restaurar pacotes nuget
         run: dotnet restore IMDB.sln
 
-      - name: decodficar certificado
-        run: | 
-              echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > imdb-clone-app.keystore
+      - name: decodificar certificado
+        shell: powershell
+        run: |
+              [System.Convert]::FromBase64String("${{ secrets.ANDROID_KEYSTORE_BASE64 }}") | Set-Content -Encoding Byte imdb-clone-app.keystore
 
       - name: gerar .apk android
         run: | 
