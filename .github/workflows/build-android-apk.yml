@@ -47,7 +47,7 @@ jobs:
               /p:AndroidSigningKeyAlias=${{ secrets.ANDROID_KEY_ALIAS }} `
               /p:AndroidSigningKeyPass=${{ secrets.ANDROID_KEY_PASSWORD }} `
               /p:AndroidSigningStorePass=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} `
-              /p:AndroidSigningKeyStore=my-release-key.keystore
+              /p:AndroidSigningKeyStore=imdb-clone-app.keystore
       
       - name: listar APK gerado
         run: |
