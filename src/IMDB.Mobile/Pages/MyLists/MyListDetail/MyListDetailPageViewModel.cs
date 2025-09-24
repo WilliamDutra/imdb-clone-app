@@ -41,23 +41,25 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
         public async Task Delete(int movieId)
         {
             await _deleteMovieOfList.Execute(ListId, new MovieRequest { MediaId = movieId });
-            GetList(ListId);
+            await GetList(ListId);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             var listId = Convert.ToInt32(query["ListId"].ToString());
-            ListId = listId;
-            var name = query["ListName"].ToString();
-            ListName = name;
-            GetList(listId);
+            Task.Run(async () =>
+            {
+                ListId = listId;
+                var name = query["ListName"].ToString();
+                ListName = name;
+                await GetList(listId);
+            });
         }
 
-        private void GetList(int listId)
+        private async Task GetList(int listId)
         {
-            var response = _getListById.Execute(listId);
-            response.Wait();
-            ListDetail = ListsMapper.ToMap(response.Result);
+            var response = await _getListById.Execute(listId);
+            ListDetail = ListsMapper.ToMap(response);
         }
     }
 }

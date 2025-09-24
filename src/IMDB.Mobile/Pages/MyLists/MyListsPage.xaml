@@ -10,6 +10,12 @@
     x:Name="myListsPage"
     Shell.NavBarIsVisible="False">
 
+    <ContentPage.Behaviors>
+        <toolkit:AnimationBehavior
+            BindingContext="{Binding Source={x:Reference myListsPage}, Path=BindingContext}"
+            Command="{Binding InitializeCommand}"
+            EventName="Loaded" />
+    </ContentPage.Behaviors>
 
     <VerticalStackLayout Spacing="20">
 

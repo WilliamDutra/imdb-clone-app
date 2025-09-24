@@ -41,11 +41,10 @@ namespace IMDB.Mobile.Pages.MyLists
             _getMyLists = getMyLists;
             _deleteList = deleteList;
             _navigationManager = navigationManager;
-            EachMyLists();
         }
 
         [RelayCommand]
-        public async void CreateList()
+        public async Task CreateList()
         {
             var list = new ApiClient.CreateList.List();
             list.Name = Name;
@@ -53,7 +52,7 @@ namespace IMDB.Mobile.Pages.MyLists
             list.Iso6391 = "pt";
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             await _createList.Execute(list, sessionId);
-            EachMyLists();
+            await EachMyLists();
             var toast = Toast.Make(string.Format(Resources.Resource.list_created_with_success_menssage, Name), ToastDuration.Short);
             await toast.Show();
         }
@@ -72,19 +71,25 @@ namespace IMDB.Mobile.Pages.MyLists
         {
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             await _deleteList.Execute(listId, sessionId);
-            EachMyLists();
+            await EachMyLists();
+        }
+
+        [RelayCommand]
+        public async Task Initialize()
+        {
+            IsBusy = true;
+            await EachMyLists();
+            IsBusy = false;
         }
 
 
-        public void EachMyLists()
+        public async Task EachMyLists()
         {
-            var sessionId = SecureStorage.Default.GetAsync("session_id").Result;
-            var responseAccount = _getAccount.Execute(sessionId);
-            responseAccount.Wait();
-            var accountId = responseAccount.Result.Id;
-            var responseList = _getMyLists.Execute(accountId);
-            responseList.Wait();
-            var lists = responseList.Result;
+            var sessionId = await SecureStorage.Default.GetAsync("session_id");
+            var responseAccount = await _getAccount.Execute(sessionId);
+            var accountId = responseAccount.Id;
+            var responseList = await _getMyLists.Execute(accountId);
+            var lists = responseList;
             Lists = ListsMapper.ToMap(lists);
         }
     }
