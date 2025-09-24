@@ -55,7 +55,7 @@ namespace IMDB.Mobile.Pages.Home
         }
 
         [RelayCommand]
-        public async void Detail(Movie movie)
+        public async Task Detail(Movie movie)
         {
             var id = movie.Id;
             var paramsNavigation = new Dictionary<string, object>();

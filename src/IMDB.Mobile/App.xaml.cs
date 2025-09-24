@@ -1,4 +1,5 @@
 ﻿using IMDB.Mobile.Pages;
+using Plugin.Firebase.RemoteConfig;
 
 namespace IMDB.Mobile
 {
@@ -11,6 +12,7 @@ namespace IMDB.Mobile
         public App(IShellManager shellManager, AppShellViewModel appShellViewModel)
         {
             InitializeComponent();
+            UseFirebaseRemoteConfig();
             _shellManager = shellManager;
             _appShellViewModel = appShellViewModel;
         }
@@ -28,5 +30,15 @@ namespace IMDB.Mobile
                 return new Window(new LoginAppShell());
             }
         }
+
+        private async Task UseFirebaseRemoteConfig()
+        {
+            var remoteConfig = CrossFirebaseRemoteConfig.Current;
+
+            await remoteConfig.EnsureInitializedAsync();
+            await remoteConfig.FetchAsync();
+            await remoteConfig.ActivateAsync();
+        }
+
     }
 }

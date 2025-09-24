@@ -14,11 +14,6 @@ namespace IMDB.Mobile.Networks
         {
             var remoteConfig = CrossFirebaseRemoteConfig.Current;
 
-
-            await remoteConfig.EnsureInitializedAsync();
-            await remoteConfig.FetchAsync();
-            await remoteConfig.ActivateAsync();
-
             var apiKey = remoteConfig.GetString("apiKeyImdb");
             
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
