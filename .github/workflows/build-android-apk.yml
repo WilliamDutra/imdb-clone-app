@@ -39,7 +39,7 @@ jobs:
       - name: decodificar certificado
         shell: powershell
         run: |
-              [System.Convert]::FromBase64String("${{ secrets.ANDROID_KEYSTORE_BASE64 }}") | Set-Content -Encoding Byte imdb-clone-app.keystore
+              [System.Convert]::FromBase64String("${{ secrets.ANDROID_KEYSTORE_BASE64 }}") | Set-Content -Encoding Byte ${{ env.DIRETORIO_APP_MOBILE }}\imdb-clone-app.keystore
 
       - name: gerar .apk android
         run: | 
