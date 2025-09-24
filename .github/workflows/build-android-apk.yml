@@ -38,7 +38,7 @@ jobs:
 
       - name: decodficar certificado
         run: | 
-              echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > base64 -d > imdb-clone-app.keystore
+              echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > imdb-clone-app.keystore
 
       - name: gerar .apk android
         run: | 
