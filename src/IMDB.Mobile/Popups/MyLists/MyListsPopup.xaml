@@ -7,22 +7,36 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     BackgroundColor="{StaticResource ColorTertiary}"
     CurrentState="Medium"
-    States="Peek,Medium">
-
-    <bottomsheet:BottomSheet.BottomSheetStyle>
-        <bottomsheet:BottomSheetStyle>
-            <bottomsheet:BottomSheetStyle.HeaderStyle>
-                <bottomsheet:BottomSheetHeaderStyle
-                    TitleTextColor="White"
-                    TitleTextFontFamily="PoppinsBold"
-                    TitleTextFontSize="22" />
-            </bottomsheet:BottomSheetStyle.HeaderStyle>
-        </bottomsheet:BottomSheetStyle>
-    </bottomsheet:BottomSheet.BottomSheetStyle>
-
+    IsDraggable="True"
+    States="Peek,Medium,Large">
 
     <bottomsheet:BottomSheet.Header>
-        <bottomsheet:BottomSheetHeader TitleText="Minhas listas" />
+        <bottomsheet:BottomSheetHeader>
+            <bottomsheet:BottomSheetHeader.HeaderDataTemplate>
+                <DataTemplate>
+                    <ContentView>
+                        <Grid>
+                            <Label HorizontalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontFamily="PoppinsBold"
+                                            FontSize="18"
+                                            Text="Minhas " />
+                                        <Span
+                                            FontFamily="PoppinsBold"
+                                            FontSize="18"
+                                            Text="listas" />
+                                        <Span FontSize="28" TextColor="{StaticResource ColorSecondary}">.</Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </ContentView>
+                </DataTemplate>
+            </bottomsheet:BottomSheetHeader.HeaderDataTemplate>
+        </bottomsheet:BottomSheetHeader>
+
     </bottomsheet:BottomSheet.Header>
 
 
@@ -30,49 +44,35 @@
         <bottomsheet:BottomSheetContent>
             <bottomsheet:BottomSheetContent.ContentTemplate>
                 <DataTemplate>
-                    <VerticalStackLayout>
-                        <CollectionView
-                            ItemsSource="{Binding MyLists}"
-                            SelectedItem="{Binding ListSelected, Mode=TwoWay}"
-                            SelectionChangedCommand="{Binding SelectedListCommand}"
-                            SelectionMode="Single">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Label
-                                        HorizontalOptions="Center"
-                                        Text="{Binding Name}"
-                                        VerticalOptions="Center" />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </VerticalStackLayout>
+                    <CollectionView
+                        ItemsSource="{Binding MyLists}"
+                        SelectedItem="{Binding ListSelected, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding SelectedListCommand}"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Background="{StaticResource ColorPrimary}" StrokeThickness="2">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10" />
+                                        </Border.StrokeShape>
+                                        <Label
+                                            Padding="8"
+                                            FontFamily="PoppinsRegular"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Name}"
+                                            VerticalOptions="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </DataTemplate>
             </bottomsheet:BottomSheetContent.ContentTemplate>
         </bottomsheet:BottomSheetContent>
     </bottomsheet:BottomSheet.Content>
-
-
-    <!--<VerticalStackLayout Padding="10" Spacing="10">
-    -->
-
-    <!--<CollectionView
-            ItemsSource="{Binding MyLists}"
-            SelectedItem="{Binding ListSelected, Mode=TwoWay}"
-            SelectionChangedCommand="{Binding SelectedListCommand}"
-            SelectionMode="Single">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Name}" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>-->
-
-    <!--</VerticalStackLayout>-->
 
 </bottomsheet:BottomSheet>
