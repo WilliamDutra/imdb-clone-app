@@ -53,39 +53,43 @@
     </MenuItem>
 
     <Shell.FlyoutHeader>
-        <Grid Padding="20" BackgroundColor="{StaticResource ColorPrimary}">
+        <Grid
+            Padding="20"
+            BackgroundColor="{StaticResource ColorPrimary}"
+            ColumnSpacing="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image
-                HeightRequest="50"
-                Source="film_icon.png"
-                WidthRequest="50">
-                <Image.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="White" />
-                </Image.Behaviors>
-            </Image>
-            <HorizontalStackLayout
-                Grid.Column="1"
-                Spacing="10"
-                VerticalOptions="Center">
-                <Label
-                    FontFamily="PoppinsRegular"
-                    FontSize="20"
-                    Text="Olá"
-                    TextColor="White" />
-                <Label
-                    FontSize="20"
-                    Text="{Binding Username}"
-                    TextColor="White" />
-                <Label
-                    FontFamily="PoppinsRegular"
-                    FontSize="20"
-                    Text="!"
-                    TextColor="White" />
-            </HorizontalStackLayout>
+            <toolkit:AvatarView
+                Grid.Column="0"
+                Background="{StaticResource ColorTertiary}"
+                BorderColor="{StaticResource ColorSecondary}"
+                ImageSource="{Binding Photo}"
+                StrokeThickness="2" />
+
+            <Label Grid.Column="1" VerticalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="Olá "
+                            TextColor="White" />
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="{Binding Username}"
+                            TextColor="White" />
+                        <Span
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text=" !"
+                            TextColor="White" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </Grid>
     </Shell.FlyoutHeader>
 

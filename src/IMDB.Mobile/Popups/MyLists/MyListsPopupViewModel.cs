@@ -39,7 +39,7 @@ namespace IMDB.Mobile.Popups.MyLists
             Task.Run(async () =>
             {
                 var responseAccount = await _getAccount.Execute(sessionId);
-                var responseLists = await _getMyLists.Execute(responseAccount.Id);
+                var responseLists = await _getMyLists.Execute(responseAccount.Id, sessionId);
                 MyLists = ListsMapper.ToMap(responseLists);
             });
         }

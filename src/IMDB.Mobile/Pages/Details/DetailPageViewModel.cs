@@ -71,7 +71,7 @@ namespace IMDB.Mobile.Pages.Details
         }
 
         [RelayCommand]
-        public async void BackToHomePage()
+        public async Task BackToHomePage()
         {
             await _navigationManager.GoToPage("..");
         }
@@ -99,7 +99,7 @@ namespace IMDB.Mobile.Pages.Details
         {
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             var responseAccount = await _getAccount.Execute(sessionId);
-            var responseLists = await _getMyLists.Execute(responseAccount.Id);
+            var responseLists = await _getMyLists.Execute(responseAccount.Id, sessionId);
             MyLists = ListsMapper.ToMap(responseLists);
         }
 

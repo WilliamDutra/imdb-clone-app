@@ -12,6 +12,9 @@ namespace IMDB.Mobile.Pages
         [ObservableProperty]
         private string username;
 
+        [ObservableProperty]
+        private string photo;
+
         public AppShellViewModel(IGetAccount getAccount)
         {
             _getAccount = getAccount;
@@ -23,6 +26,7 @@ namespace IMDB.Mobile.Pages
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             var account = await _getAccount.Execute(sessionId);
             Username = account.Username;
+            Photo = $"https://www.gravatar.com/avatar/{account.Avatar.Gravatar.Hash}?s=200&d=identicon";
         }
 
         [RelayCommand]

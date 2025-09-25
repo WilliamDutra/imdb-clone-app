@@ -13,5 +13,22 @@ namespace IMDB.ApiClient
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        [JsonPropertyName("avatar")]
+        public Avatar Avatar { get; set; }
+
+    }
+
+    public class Avatar
+    {
+        [JsonPropertyName("gravatar")]
+        public Gravatar Gravatar { get; set; }
+
+    }
+
+    public class Gravatar
+    {
+        [JsonPropertyName("hash")]
+        public string Hash { get; set; }
     }
 }

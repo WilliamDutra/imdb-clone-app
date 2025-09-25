@@ -5,7 +5,7 @@ namespace IMDB.ApiClient.GetMyLists
 {
     public interface IGetMyLists
     {
-        [Get("/account/{accountId}/lists")]
-        Task<TmdbResponse<System.Collections.Generic.List<List>>> Execute(int accountId);
+        [Get("/account/{accountId}/lists?session_id={sessionId}")]
+        Task<TmdbResponse<System.Collections.Generic.List<List>>> Execute(int accountId, string sessionId);
     }
 }

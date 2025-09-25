@@ -88,7 +88,7 @@ namespace IMDB.Mobile.Pages.MyLists
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             var responseAccount = await _getAccount.Execute(sessionId);
             var accountId = responseAccount.Id;
-            var responseList = await _getMyLists.Execute(accountId);
+            var responseList = await _getMyLists.Execute(accountId, sessionId);
             var lists = responseList;
             Lists = ListsMapper.ToMap(lists);
         }
