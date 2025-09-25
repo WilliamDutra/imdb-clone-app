@@ -26,7 +26,7 @@ namespace IMDB.Mobile.Pages.Details
         private string title;
 
         [ObservableProperty]
-        private string rating;
+        private int rating;
 
         [ObservableProperty]
         private string overview;
@@ -117,7 +117,7 @@ namespace IMDB.Mobile.Pages.Details
                     MovieId = id;
                     Title = movie.Title;
                     Overview = movie.Overview;
-                    Rating = "2";
+                    Rating = (int)movie.Rating;
                     Thumbnail = $"https://image.tmdb.org/t/p/original{movie.Poster}";
 
                     var cast = await _getCastMovie.Execute(id);

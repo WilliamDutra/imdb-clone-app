@@ -21,5 +21,8 @@ namespace IMDB.ApiClient.GetMovieById
         [JsonPropertyName("poster_path")]
         public string Poster { get; set; }
 
+        [JsonPropertyName("vote_average")]
+        public decimal Rating {get; set; }
+
     }
 }

@@ -61,31 +61,34 @@
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.LeftItems>
-                            <SwipeItems>
-                                <SwipeItemView>
-                                    <VerticalStackLayout Padding="10" Background="{StaticResource ColorSecondary}">
-                                        <Image Source="trash.png">
-                                            <Image.Behaviors>
-                                                <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                                            </Image.Behaviors>
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:MyListsPageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding Id}" />
-                                            </Image.GestureRecognizers>
-                                        </Image>
-                                    </VerticalStackLayout>
-                                </SwipeItemView>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
-                        <VerticalStackLayout Padding="0,10">
-                            <Label
-                                FontFamily="PoppinsRegular"
-                                FontSize="18"
-                                Text="{Binding Name}"
-                                VerticalOptions="Center" />
-                        </VerticalStackLayout>
-                    </SwipeView>
+                    <Grid>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItemView>
+                                        <VerticalStackLayout Padding="10" Background="{StaticResource ColorSecondary}">
+                                            <Image Source="trash.png">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                                                </Image.Behaviors>
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:MyListsPageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding Id}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </VerticalStackLayout>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <VerticalStackLayout Padding="0,10">
+                                <Label
+                                    Margin="10,0,0,0"
+                                    FontFamily="PoppinsRegular"
+                                    FontSize="18"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center" />
+                            </VerticalStackLayout>
+                        </SwipeView>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
