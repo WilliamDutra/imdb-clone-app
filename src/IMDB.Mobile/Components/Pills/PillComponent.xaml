@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Name="this"
-             x:Class="IMDB.Mobile.Components.Pills.PillComponent">
-    <Border StrokeThickness="10" Stroke="{ StaticResource ColorSecondary }">
+<ContentView
+    x:Class="IMDB.Mobile.Components.Pills.PillComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="pillComponent"
+    MaximumWidthRequest="100">
+    <Border
+        Background="{StaticResource ColorSecondary}"
+        BindingContext="{x:Reference pillComponent}"
+        Stroke="{StaticResource ColorSecondary}"
+        StrokeThickness="10">
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="20" />
         </Border.StrokeShape>
-        <VerticalStackLayout HorizontalOptions="Center" Background="{ StaticResource ColorSecondary }"  BindingContext="{ x:Reference this }">
-            
-            <Label 
-                Grid.Column="0"
-                TextColor="White"
-                FontFamily="PoppinsRegular"
-                Text="{ Binding Label }"/>
-
-        </VerticalStackLayout>
+        <Label
+            FontFamily="PoppinsRegular"
+            FontSize="16"
+            HorizontalOptions="Center"
+            LineBreakMode="TailTruncation"
+            Text="{Binding Label}"
+            TextColor="White"
+            VerticalOptions="Center" />
     </Border>
 </ContentView>
