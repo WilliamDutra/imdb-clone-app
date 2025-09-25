@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "",
-    "project_id": "",
-    "storage_bucket": ""
+    "project_number": "602449814873",
+    "project_id": "imdb-clone-app-5a4c1",
+    "storage_bucket": "imdb-clone-app-5a4c1.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "",
+        "mobilesdk_app_id": "1:602449814873:android:6efd42548e002af8c7d848",
         "android_client_info": {
-          "package_name": ""
+          "package_name": "com.companyname.imdb.mobile"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": ""
+          "current_key": "AIzaSyAiIk0icYju0_inqivCrYJZEHUf6kC5jT4"
         }
       ],
       "services": {
