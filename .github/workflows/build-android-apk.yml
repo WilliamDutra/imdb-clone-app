@@ -41,6 +41,11 @@ jobs:
         run: |
               [System.Convert]::FromBase64String("${{ secrets.ANDROID_KEYSTORE_BASE64 }}") | Set-Content -Encoding Byte ${{ env.DIRETORIO_APP_MOBILE }}\imdb-clone-app.keystore
 
+      - name: gerar google-services.json
+        shell: powershell
+        run: |
+              [System.Convert]::FromBase64String("${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}") | Set-Content -Encoding Byte ${{ env.DIRETORIO_APP_MOBILE }}\google-services.json
+
       - name: gerar .apk android
         run: | 
               dotnet publish ${{ env.DIRETORIO_APP_MOBILE }}/IMDB.Mobile.csproj -f net9.0-android -c Release `
