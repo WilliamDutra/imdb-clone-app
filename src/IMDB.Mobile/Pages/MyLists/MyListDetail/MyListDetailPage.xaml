@@ -47,28 +47,24 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
-
-        <ScrollView Orientation="Vertical">
-            <CollectionView ItemsSource="{Binding ListDetail.Movies}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        Orientation="Vertical"
-                        Span="3"
-                        VerticalItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Movie">
-                        <VerticalStackLayout>
-                            <cards:CardWithActionComponent
-                                Title="{Binding Title}"
-                                DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:MyListDetailPageViewModel}}, Path=DeleteCommand}"
-                                Id="{Binding Id}"
-                                ImageSource="{Binding Poster}" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
-
+        <CollectionView ItemsSource="{Binding ListDetail.Movies}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Vertical"
+                    Span="3"
+                    VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Movie">
+                    <VerticalStackLayout>
+                        <cards:CardWithActionComponent
+                            Title="{Binding Title}"
+                            DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:MyListDetailPageViewModel}}, Path=DeleteCommand}"
+                            Id="{Binding Id}"
+                            ImageSource="{Binding Poster}" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

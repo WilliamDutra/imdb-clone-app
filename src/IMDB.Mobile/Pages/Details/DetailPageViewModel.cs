@@ -118,7 +118,7 @@ namespace IMDB.Mobile.Pages.Details
                     Title = movie.Title;
                     Overview = movie.Overview;
                     Rating = (int)movie.Rating;
-                    Thumbnail = $"https://image.tmdb.org/t/p/original{movie.Poster}";
+                    Thumbnail = $"https://image.tmdb.org/t/p/w500{movie.Poster}";
 
                     var cast = await _getCastMovie.Execute(id);
                     Actors = MovieMapper.ToMap(cast);

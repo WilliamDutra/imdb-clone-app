@@ -24,6 +24,8 @@
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource ColorPrimary}" />
     </ContentPage.Behaviors>
 
+
+
     <ScrollView>
         <VerticalStackLayout>
 

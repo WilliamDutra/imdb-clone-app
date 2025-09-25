@@ -73,7 +73,7 @@
                     Aspect="AspectFill"
                     CacheDuration="30"
                     DownsampleToViewSize="True"
-                    ErrorPlaceholder="erro_icon_thumb_not_load.png"
+                    ErrorPlaceholder="film_icon.png"
                     HeightRequest="400"
                     Source="{Binding Thumbnail}" />
 

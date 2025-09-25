@@ -28,7 +28,7 @@ namespace IMDB.ApiClient.Mappings
 
             foreach (var item in response.Items)
             {
-                myList.AddMovie(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/original{item.Poster}", 0);
+                myList.AddMovie(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/w185{item.Poster}", 0);
             }
 
             return myList;

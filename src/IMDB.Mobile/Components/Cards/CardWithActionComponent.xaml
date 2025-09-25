@@ -27,7 +27,7 @@
         </Border>
         <ffimageloading:CachedImage
             Grid.Row="0"
-            Aspect="AspectFit"
+            Aspect="AspectFill"
             CacheDuration="30"
             DownsampleToViewSize="True"
             ErrorPlaceholder="erro_icon_thumb_not_load.png"
@@ -36,6 +36,7 @@
             Grid.Row="1"
             FontFamily="PoppinsRegular"
             FontSize="12"
+            HorizontalOptions="Center"
             Text="{Binding Title}"
             TextColor="White" />
         <Image Grid.Row="2" Source="trash.png">

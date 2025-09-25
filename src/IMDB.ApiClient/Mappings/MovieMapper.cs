@@ -14,7 +14,7 @@ namespace IMDB.ApiClient.Mappings
             foreach (var item in response)
             {
 
-                movies.Add(Movie.Restore(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/original{item.PosterPath}", (int)item.VoteAverage));
+                movies.Add(Movie.Restore(item.Id, item.Title, item.Overview, $"https://image.tmdb.org/t/p/w342{item.PosterPath}", (int)item.VoteAverage));
             }
 
             return movies;

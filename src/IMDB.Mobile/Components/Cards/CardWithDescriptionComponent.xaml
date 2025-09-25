@@ -25,7 +25,7 @@
             </Border.StrokeShape>
 
             <ffimageloading:CachedImage
-                Aspect="AspectFit"
+                Aspect="AspectFill"
                 CacheDuration="30"
                 DownsampleToViewSize="True"
                 ErrorPlaceholder="film_icon.png"
