@@ -61,6 +61,15 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Create.
+        /// </summary>
+        internal static string button_create_mylists {
+            get {
+                return ResourceManager.GetString("button_create_mylists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Film added in &apos;{0}&apos; with success.
         /// </summary>
         internal static string film_add_with_success_message {

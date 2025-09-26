@@ -34,6 +34,9 @@ namespace IMDB.Mobile.Pages.MyLists
         [ObservableProperty]
         public ObservableCollection<MyList> lists;
 
+        [ObservableProperty]
+        private ObservableCollection<string> fakeLists;
+
         public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IDeleteList deleteList)
         {
             _createList = createList;
@@ -52,9 +55,12 @@ namespace IMDB.Mobile.Pages.MyLists
             list.Iso6391 = "pt";
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             await _createList.Execute(list, sessionId);
+            Name = string.Empty;
+            IsBusy = true;
             await EachMyLists();
             var toast = Toast.Make(string.Format(Resources.Resource.list_created_with_success_menssage, Name), ToastDuration.Short);
             await toast.Show();
+            IsBusy = false;
         }
 
         [RelayCommand]
@@ -71,19 +77,22 @@ namespace IMDB.Mobile.Pages.MyLists
         {
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             await _deleteList.Execute(listId, sessionId);
+            IsBusy = true;
             await EachMyLists();
+            IsBusy = false;
         }
 
         [RelayCommand]
         public async Task Initialize()
         {
             IsBusy = true;
+            await EachFakeLists();
             await EachMyLists();
             IsBusy = false;
         }
 
 
-        public async Task EachMyLists()
+        private async Task EachMyLists()
         {
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
             var responseAccount = await _getAccount.Execute(sessionId);
@@ -91,6 +100,17 @@ namespace IMDB.Mobile.Pages.MyLists
             var responseList = await _getMyLists.Execute(accountId, sessionId);
             var lists = responseList;
             Lists = ListsMapper.ToMap(lists);
+        }
+
+        private async Task EachFakeLists()
+        {
+            FakeLists = new ObservableCollection<string>();
+            FakeLists.Add("01");
+            FakeLists.Add("02");
+            FakeLists.Add("03");
+            FakeLists.Add("04");
+            FakeLists.Add("05");
+            await Task.CompletedTask;
         }
     }
 }

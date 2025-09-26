@@ -51,7 +51,7 @@
             <Button
                 Grid.Column="1"
                 Command="{Binding CreateListCommand}"
-                Text="Criar" />
+                Text="{Static language:Resource.button_create_mylists}" />
         </Grid>
 
         <CollectionView
@@ -59,6 +59,15 @@
             SelectedItem="{Binding MyListSelected}"
             SelectionChangedCommand="{Binding DetailCommand}"
             SelectionMode="Single">
+            <CollectionView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="CollectionView"
+                    Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -89,6 +98,25 @@
                             </VerticalStackLayout>
                         </SwipeView>
                     </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView ItemsSource="{Binding FakeLists}">
+            <CollectionView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="CollectionView"
+                    Value="False">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <BoxView BackgroundColor="Gray" HeightRequest="60" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
