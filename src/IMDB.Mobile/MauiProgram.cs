@@ -38,6 +38,7 @@ using Plugin.Firebase.Auth;
 using Plugin.Maui.BottomSheet.Hosting;
 using Refit;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList;
 
 namespace IMDB.Mobile
 {
@@ -179,6 +180,8 @@ namespace IMDB.Mobile
 
         public static MauiAppBuilder AddPopups(this MauiAppBuilder appBuilder)
         {
+            appBuilder.Services.AddTransientPopup<ConfirmDeleteMovieInMyListPopup, ConfirmDeleteMovieInMyListPopupViewModel>();
+
             appBuilder.Services.AddBottomSheet<MyListsPopup, MyListsPopupViewModel>("mylist-popup");
             return appBuilder;
         }

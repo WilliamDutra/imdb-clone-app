@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList.ConfirmDeleteMovieInMyListPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="confirmDeleteMovieInMyListPopup"
+    Background="{StaticResource ColorTertiary}">
+    <VerticalStackLayout Spacing="10">
+        <Label
+            FontFamily="PoppinsBold"
+            FontSize="20"
+            HorizontalOptions="Center"
+            Text="Deseja realmente excluir esse filme?"
+            TextColor="White"
+            VerticalOptions="Center" />
+
+        <Button Command="{Binding ConfirmCommand}" Text="Confirm" />
+        <Button
+            BackgroundColor="Red"
+            Command="{Binding CancelCommand}"
+            Text="Cancel" />
+
+    </VerticalStackLayout>
+</toolkit:Popup>
