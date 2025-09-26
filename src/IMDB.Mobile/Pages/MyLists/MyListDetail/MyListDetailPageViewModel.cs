@@ -5,6 +5,7 @@ using IMDB.ApiClient.DeleteMovieOfList;
 using IMDB.ApiClient.GetListById;
 using IMDB.ApiClient.Mappings;
 using System;
+using System.Collections.ObjectModel;
 
 namespace IMDB.Mobile.Pages.MyLists.MyListDetail
 {
@@ -24,6 +25,9 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
 
         private int ListId;
 
+        [ObservableProperty]
+        private ObservableCollection<string> fakeDetailsList;
+
         public MyListDetailPageViewModel(IGetListById getListById, INavigationManager navigationManager, IDeleteMovieOfList deleteMovieOfList)
         {
             _getListById = getListById;
@@ -41,7 +45,15 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
         public async Task Delete(int movieId)
         {
             await _deleteMovieOfList.Execute(ListId, new MovieRequest { MediaId = movieId });
-            await GetList(ListId);
+            await GetListById(ListId);
+        }
+
+        [RelayCommand]
+        private async Task Initialize()
+        {
+            IsBusy = true;
+            await EachFakeDetailsList();
+            IsBusy = false;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -49,17 +61,37 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
             var listId = Convert.ToInt32(query["ListId"].ToString());
             Task.Run(async () =>
             {
+                IsBusy = true;
                 ListId = listId;
                 var name = query["ListName"].ToString();
                 ListName = name;
-                await GetList(listId);
+                await EachFakeDetailsList();
+                await GetListById(listId);
+                IsBusy = false;
             });
         }
 
-        private async Task GetList(int listId)
+        private async Task GetListById(int listId)
         {
             var response = await _getListById.Execute(listId);
             ListDetail = ListsMapper.ToMap(response);
         }
+
+        private async Task EachFakeDetailsList()
+        {
+            FakeDetailsList = new ObservableCollection<string>();
+            FakeDetailsList.Add("01");
+            FakeDetailsList.Add("02");
+            FakeDetailsList.Add("03");
+            FakeDetailsList.Add("04");
+            FakeDetailsList.Add("05");
+            FakeDetailsList.Add("06");
+            FakeDetailsList.Add("07");
+            FakeDetailsList.Add("08");
+            FakeDetailsList.Add("09");
+            FakeDetailsList.Add("10");
+            await Task.CompletedTask;
+        }
+
     }
 }

@@ -10,6 +10,13 @@
     x:Name="myListDetailPage"
     x:DataType="vm:MyListDetailPageViewModel">
 
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            BindingContext="{Binding Source={x:Reference myListDetailPage}, Path=BindingContext}"
+            Command="{Binding InitializeCommand}"
+            EventName="Loaded" />
+    </ContentPage.Behaviors>
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" />
     </Shell.BackButtonBehavior>
@@ -48,6 +55,14 @@
 
     <VerticalStackLayout>
         <CollectionView ItemsSource="{Binding ListDetail.Movies}">
+            <CollectionView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="CollectionView"
+                    Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
             <CollectionView.ItemsLayout>
                 <GridItemsLayout
                     Orientation="Vertical"
@@ -66,5 +81,35 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <CollectionView ItemsSource="{Binding FakeDetailsList}">
+            <CollectionView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="CollectionView"
+                    Value="False">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Vertical"
+                    Span="3"
+                    VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <BoxView
+                            Background="Gray"
+                            HeightRequest="150"
+                            WidthRequest="100" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
     </VerticalStackLayout>
 </ContentPage>
