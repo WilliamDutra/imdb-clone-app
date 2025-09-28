@@ -53,7 +53,7 @@
         </HorizontalStackLayout>
     </Shell.TitleView>
 
-    <VerticalStackLayout>
+    <Grid>
         <CollectionView ItemsSource="{Binding ListDetail.Movies}">
             <CollectionView.Triggers>
                 <DataTrigger
@@ -111,5 +111,5 @@
 
 
 
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

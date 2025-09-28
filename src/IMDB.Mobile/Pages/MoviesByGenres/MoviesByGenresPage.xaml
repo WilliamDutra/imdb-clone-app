@@ -53,10 +53,10 @@
             </Label>
         </HorizontalStackLayout>
     </Shell.TitleView>
-    <VerticalStackLayout>
+    <Grid>
         <CollectionView
-            HeightRequest="450"
             ItemsSource="{Binding Movies}"
+            ItemSizingStrategy="MeasureAllItems"
             ItemsUpdatingScrollMode="KeepItemsInView"
             RemainingItemsThreshold="1"
             RemainingItemsThresholdReachedCommand="{Binding RemainingItemsCommand}">
@@ -89,6 +89,6 @@
                 IsVisible="{Binding IsBusy}"
                 Color="{StaticResource ColorSecondary}" />
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>
