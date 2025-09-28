@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="button_cancel_delete_popup" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="button_confirm_delete_popup" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="button_create_mylists" xml:space="preserve">
     <value>Create</value>
   </data>
   <data name="film_add_with_success_message" xml:space="preserve">
     <value>Film added in '{0}' with success</value>
+  </data>
+  <data name="label_confirm_delete_popup" xml:space="preserve">
+    <value>Are you sure you want to delete this movie?</value>
   </data>
   <data name="list_created_with_success_menssage" xml:space="preserve">
     <value>List '{0}' created with success</value>

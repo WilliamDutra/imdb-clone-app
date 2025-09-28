@@ -61,6 +61,24 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a No.
+        /// </summary>
+        internal static string button_cancel_delete_popup {
+            get {
+                return ResourceManager.GetString("button_cancel_delete_popup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Yes.
+        /// </summary>
+        internal static string button_confirm_delete_popup {
+            get {
+                return ResourceManager.GetString("button_confirm_delete_popup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Create.
         /// </summary>
         internal static string button_create_mylists {
@@ -75,6 +93,15 @@ namespace IMDB.Mobile.Resources {
         internal static string film_add_with_success_message {
             get {
                 return ResourceManager.GetString("film_add_with_success_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Are you sure you want to delete this movie?.
+        /// </summary>
+        internal static string label_confirm_delete_popup {
+            get {
+                return ResourceManager.GetString("label_confirm_delete_popup", resourceCulture);
             }
         }
         
