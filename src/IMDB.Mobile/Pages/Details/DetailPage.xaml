@@ -143,17 +143,26 @@
                         </Label.FormattedText>
                     </Label>
 
-                    <CollectionView Margin="0,20" ItemsSource="{Binding Actors}">
+                    <CollectionView
+                        Margin="0,20"
+                        ItemsSource="{Binding Actors}"
+                        SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Actor">
-                                <cards:CardViewActorComponent
-                                    Name="{Binding Name}"
-                                    CardHeight="120"
-                                    CardWidth="120"
-                                    Photo="{Binding Photo}" />
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DetailPageViewModel}}, Path=ActorDetailsCommand}" CommandParameter="{Binding Id}" />
+                                    </Grid.GestureRecognizers>
+                                    <cards:CardViewActorComponent
+                                        Name="{Binding Name}"
+                                        Grid.Row="1"
+                                        CardHeight="120"
+                                        CardWidth="120"
+                                        Photo="{Binding Photo}" />
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

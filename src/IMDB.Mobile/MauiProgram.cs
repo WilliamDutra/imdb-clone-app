@@ -39,6 +39,8 @@ using Plugin.Maui.BottomSheet.Hosting;
 using Refit;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList;
+using IMDB.ApiClient.GetActorById;
+using IMDB.Mobile.Pages.ActorDetails;
 
 namespace IMDB.Mobile
 {
@@ -91,6 +93,7 @@ namespace IMDB.Mobile
             appBuilder.Services.AddTransientWithShellRoute<MyListsPage, MyListsPageViewModel>("my-lists");
             appBuilder.Services.AddTransientWithShellRoute<MyListDetailPage, MyListDetailPageViewModel>("my-list-detail");
             appBuilder.Services.AddTransientWithShellRoute<MoviesByGenresPage, MoviesByGenresPageViewModel>("movies-by-genres");
+            appBuilder.Services.AddTransientWithShellRoute<ActorDetailPage, ActorDetailPageViewModel>("actor-details");
             return appBuilder;
         }
 
@@ -172,6 +175,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IDeleteList>()
+                                .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetActorById>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 

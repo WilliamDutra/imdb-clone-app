@@ -95,6 +95,14 @@ namespace IMDB.Mobile.Pages.Details
             IsBusy = false;
         }
 
+        [RelayCommand]
+        public async Task ActorDetails(int id)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters["Id"] = id;
+            await _navigationManager.GoToPage("actor-details", parameters);
+        }
+
         public async Task EachLists()
         {
             var sessionId = await SecureStorage.Default.GetAsync("session_id");
