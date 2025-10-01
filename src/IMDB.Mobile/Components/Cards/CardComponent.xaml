@@ -5,9 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Name="this">
+    x:Name="cardComponent"
+    HeightRequest="{Binding CardHeight}"
+    WidthRequest="{Binding CardWidth}">
 
-    <Grid BindingContext="{x:Reference this}">
+    <Grid BindingContext="{x:Reference cardComponent}" VerticalOptions="Fill">
         <Grid
             BackgroundColor="{StaticResource Gray200}"
             WidthRequest="{Binding CardWidth}"
@@ -25,9 +27,9 @@
 
         <Grid RowSpacing="10" WidthRequest="{Binding CardWidth}">
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Border

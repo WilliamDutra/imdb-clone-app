@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.MoviesByGenres"
     x:Name="moviesByGenresPage"
     x:DataType="vm:MoviesByGenresPageViewModel"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="True">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior
@@ -55,8 +55,8 @@
     </Shell.TitleView>
     <Grid>
         <CollectionView
+            ItemSizingStrategy="MeasureFirstItem"
             ItemsSource="{Binding Movies}"
-            ItemSizingStrategy="MeasureAllItems"
             ItemsUpdatingScrollMode="KeepItemsInView"
             RemainingItemsThreshold="1"
             RemainingItemsThresholdReachedCommand="{Binding RemainingItemsCommand}">
