@@ -18,6 +18,6 @@ namespace IMDB.ApiClient.GetActorById
         public string Profile { get; set; }
 
         [JsonPropertyName("gender")]
-        public string Gender { get; set; }
+        public int Gender { get; set; }
     }
 }

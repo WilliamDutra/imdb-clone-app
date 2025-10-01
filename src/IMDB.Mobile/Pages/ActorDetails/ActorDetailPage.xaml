@@ -7,15 +7,56 @@
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.ActorDetails"
     x:Name="actorDetails"
     x:DataType="vm:ActorDetailPageViewModel">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <HorizontalStackLayout Grid.Row="0">
-            <Label Text="{Binding Name}" TextColor="White" />
-            <ffimageloading:CachedImage Source="{Binding Profile}" />
-        </HorizontalStackLayout>
-    </Grid>
+    <ScrollView>
+        <Grid ColumnSpacing="10" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Border Stroke="{StaticResource ColorSecondary}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5" />
+                </Border.StrokeShape>
+                <ffimageloading:CachedImage
+                    Grid.Row="0"
+                    Aspect="AspectFill"
+                    ErrorPlaceholder="film_icon.png"
+                    HeightRequest="200"
+                    Source="{Binding Profile}"
+                    VerticalOptions="Start" />
+            </Border>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontFamily="PoppinsBold"
+                            FontSize="26"
+                            Text="{Binding Name}"
+                            TextColor="White" />
+                        <Span
+                            FontFamily="PoppinsBold"
+                            FontSize="28"
+                            Text="."
+                            TextColor="{StaticResource ColorSecondary}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding Biography}"
+                TextColor="White" />
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

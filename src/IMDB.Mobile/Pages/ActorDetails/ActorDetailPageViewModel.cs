@@ -9,7 +9,7 @@ namespace IMDB.Mobile.Pages.ActorDetails
         private IGetActorById _getActorById;
 
         [ObservableProperty]
-        private string nome;
+        private string name;
 
         [ObservableProperty]
         private string profile;
@@ -29,14 +29,17 @@ namespace IMDB.Mobile.Pages.ActorDetails
         {
             var id = Convert.ToInt32(query["Id"]);
 
+            Task.Run(async () =>
+            {
 
-            var actor = _getActorById.Execute(id);
-            actor.Wait();
-            Nome = actor.Result.Name;
-            Profile = $"{actor.Result.Profile}";
-            Biography = actor.Result.Biography;
-            Gender = actor.Result.Gender;
+                var actor = await _getActorById.Execute(id);
 
+                Name = actor.Name;
+                Profile = $"https://image.tmdb.org/t/p/w500/{actor.Profile}";
+                Biography = actor.Biography;
+                Gender = actor.Gender.ToString();
+
+            });
         }
     }
 }
