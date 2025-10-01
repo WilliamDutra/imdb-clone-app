@@ -181,6 +181,7 @@ namespace IMDB.Mobile
 
             appBuilder.Services.AddRefitClient<IGetActorById>()
                                 .ConfigureHttpClient(httpClientSettings)
+                                .AddHttpMessageHandler<LanguageApiHandler>()
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetImagesOfMovie>()

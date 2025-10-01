@@ -12,6 +12,10 @@ public partial class CardWithDescriptionComponent : ContentView
 
     public static readonly BindableProperty DescriptionProperty = BindableProperty.Create("Description", typeof(string), typeof(CardComponent), string.Empty);
 
+    public static readonly BindableProperty CardWidthProperty = BindableProperty.Create("CardWidth", typeof(int), typeof(CardWithDescriptionComponent), default(int));
+
+    public static readonly BindableProperty CardHeightProperty = BindableProperty.Create("CardHeight", typeof(int), typeof(CardWithDescriptionComponent), default(int));
+
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -36,6 +40,17 @@ public partial class CardWithDescriptionComponent : ContentView
         set => SetValue(DescriptionProperty, value);
     }
 
+    public int CardHeight
+    {
+        get => (int)GetValue(CardHeightProperty);
+        set => SetValue(CardHeightProperty, value);
+    }
+
+    public int CardWidth
+    {
+        get => (int)GetValue(CardWidthProperty);
+        set => SetValue(CardWidthProperty, value);
+    }
     public CardWithDescriptionComponent()
 	{
 		InitializeComponent();

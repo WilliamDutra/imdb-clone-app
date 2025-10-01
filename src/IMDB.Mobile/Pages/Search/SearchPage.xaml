@@ -107,6 +107,8 @@
                         <DataTemplate x:DataType="model:Movie">
                             <components:CardWithDescriptionComponent
                                 Title="{Binding Title}"
+                                CardHeight="250"
+                                CardWidth="150"
                                 Description="{Binding Overview}"
                                 Image="{Binding Poster}"
                                 Rating="5" />

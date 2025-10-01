@@ -117,6 +117,8 @@
                             </Grid.GestureRecognizers>
                             <component:CardWithDescriptionComponent
                                 Title="{Binding Title}"
+                                CardHeight="250"
+                                CardWidth="150"
                                 Description="{Binding Overview}"
                                 Image="{Binding Poster}"
                                 Rating="{Binding Rating}" />
