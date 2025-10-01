@@ -31,14 +31,14 @@ namespace IMDB.Mobile.Pages.ActorDetails
 
             Task.Run(async () =>
             {
-
+                IsBusy = true;
                 var actor = await _getActorById.Execute(id);
 
                 Name = actor.Name;
                 Profile = $"https://image.tmdb.org/t/p/w500/{actor.Profile}";
                 Biography = actor.Biography;
                 Gender = actor.Gender.ToString();
-
+                IsBusy = false;
             });
         }
     }
