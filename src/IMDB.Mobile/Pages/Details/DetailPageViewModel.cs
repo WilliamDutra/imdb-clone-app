@@ -8,6 +8,7 @@ using IMDB.ApiClient;
 using IMDB.ApiClient.AddMovieToList;
 using IMDB.ApiClient.GetAccount;
 using IMDB.ApiClient.GetCastMovie;
+using IMDB.ApiClient.GetImagesOfMovie;
 using IMDB.ApiClient.GetMovieById;
 using IMDB.ApiClient.GetMyLists;
 using IMDB.ApiClient.Mappings;
@@ -40,7 +41,12 @@ namespace IMDB.Mobile.Pages.Details
         [ObservableProperty]
         private ObservableCollection<Actor> actors;
 
+        [ObservableProperty]
+        private ObservableCollection<ApiClient.Image> images;
+
         private IGetMovieById _getMovieById;
+
+        private IGetImagesOfMovie _getImagesOfMovie;
 
         private IGetAccount _getAccount;
 
@@ -58,7 +64,7 @@ namespace IMDB.Mobile.Pages.Details
 
         private int MovieId = 0;
 
-        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IPopupService popupService, IGetCastMovie getCastMovie, IBottomSheetNavigationService bottomSheetNavigationService)
+        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IPopupService popupService, IGetCastMovie getCastMovie, IBottomSheetNavigationService bottomSheetNavigationService, IGetImagesOfMovie getImagesOfMovie)
         {
             _getMovieById = getMovieById;
             _addMovieToList = addMovieToList;
@@ -67,6 +73,7 @@ namespace IMDB.Mobile.Pages.Details
             _navigationManager = navigationManager;
             _popupService = popupService;
             _getCastMovie = getCastMovie;
+            _getImagesOfMovie = getImagesOfMovie;
             _bottomSheetNavigationService = bottomSheetNavigationService;
         }
 
@@ -130,6 +137,9 @@ namespace IMDB.Mobile.Pages.Details
 
                     var cast = await _getCastMovie.Execute(id);
                     Actors = MovieMapper.ToMap(cast);
+
+                    var images = await _getImagesOfMovie.Execute(id);
+                    Images = MovieMapper.ToMap(images);
 
                 });
             }

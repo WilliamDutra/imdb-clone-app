@@ -67,6 +67,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <ffimageloading:CachedImage
@@ -145,6 +146,7 @@
 
                     <CollectionView
                         Margin="0,20"
+                        ItemSizingStrategy="MeasureFirstItem"
                         ItemsSource="{Binding Actors}"
                         SelectionMode="Single">
                         <CollectionView.ItemsLayout>
@@ -170,8 +172,26 @@
 
                 </VerticalStackLayout>
 
-                <Button
+                <CarouselView
                     Grid.Row="3"
+                    Background="{StaticResource ColorTertiary}"
+                    EmptyView="Não foi possível carregar as imagens"
+                    ItemsSource="{Binding Images}">
+                    <CarouselView.ItemTemplate x:DataType="model:Image">
+                        <DataTemplate>
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFill"
+                                CacheDuration="30"
+                                DownsampleToViewSize="True"
+                                ErrorPlaceholder="film_icon.png"
+                                HeightRequest="200"
+                                Source="{Binding Url}" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <Button
+                    Grid.Row="4"
                     BackgroundColor="{StaticResource ColorSecondary}"
                     Command="{Binding AddToMyListCommand}"
                     ImageSource="bookmark_icon.png"

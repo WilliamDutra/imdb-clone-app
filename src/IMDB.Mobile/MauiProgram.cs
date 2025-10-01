@@ -41,6 +41,7 @@ using SkiaSharp.Views.Maui.Controls.Hosting;
 using IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList;
 using IMDB.ApiClient.GetActorById;
 using IMDB.Mobile.Pages.ActorDetails;
+using IMDB.ApiClient.GetImagesOfMovie;
 
 namespace IMDB.Mobile
 {
@@ -181,6 +182,10 @@ namespace IMDB.Mobile
             appBuilder.Services.AddRefitClient<IGetActorById>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IGetImagesOfMovie>()
+                               .ConfigureHttpClient(httpClientSettings)
+                               .AddHttpMessageHandler<BearerTokenHandler>();
 
             return appBuilder;
         }
