@@ -82,6 +82,42 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            <CollectionView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="CollectionView"
+                    Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
+        </CollectionView>
+
+        <CollectionView ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding FakeMovies}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="15"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Movie">
+                    <Grid>
+                        <BoxView
+                            Background="LightGray"
+                            HeightRequest="250"
+                            WidthRequest="150" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="CollectionView"
+                    Value="False">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
         </CollectionView>
         <VerticalStackLayout HeightRequest="20">
             <ActivityIndicator

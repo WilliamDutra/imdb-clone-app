@@ -22,6 +22,9 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         [ObservableProperty]
         private string genreName;
 
+        [ObservableProperty]
+        private ObservableCollection<string> fakeMovies;
+
         private int _TotalPages  = 0;
 
         private int _CurrentPage = 1;
@@ -81,7 +84,9 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         [RelayCommand]
         public async Task Initialize()
         {
-
+            IsBusy = true;
+            await EachFakeMovies();
+            IsBusy = false;
         }
 
         private async void EachMoviesByGenres(int genreId)
@@ -90,6 +95,29 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
             _TotalPages = results.TotalPages;
             Movies = MovieMapper.ToMap(results.Data);
         }
+
+        private async Task EachFakeMovies()
+        {
+            FakeMovies = new ObservableCollection<string>();
+            await Task.Run(() =>
+            {
+                FakeMovies.Add("01");
+                FakeMovies.Add("02");
+                FakeMovies.Add("03");
+                FakeMovies.Add("04");
+                FakeMovies.Add("05");
+                FakeMovies.Add("06");
+                FakeMovies.Add("07");
+                FakeMovies.Add("08");
+                FakeMovies.Add("09");
+                FakeMovies.Add("10");
+                FakeMovies.Add("11");
+                FakeMovies.Add("12");
+                FakeMovies.Add("13");
+                FakeMovies.Add("14");
+            });
+        }
+
     }
 
     public static class Extensions
