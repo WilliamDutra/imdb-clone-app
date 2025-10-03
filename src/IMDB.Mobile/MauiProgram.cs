@@ -103,8 +103,8 @@ namespace IMDB.Mobile
             
             appBuilder.Services.AddScoped<BearerTokenHandler>();
             appBuilder.Services.AddScoped<LanguageApiHandler>();
-            appBuilder.Services.AddSingleton<ILocalStorage, LocalStorage>();
-            
+            appBuilder.Services.AddSingleton<IDeviceDisplay, Device>();
+                        
             appBuilder.Services.AddRefitClient<IGetMoviesTopFiveDay>()
                                 .ConfigureHttpClient(httpClientSettings)
                                 .AddHttpMessageHandler<LanguageApiHandler>()

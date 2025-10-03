@@ -44,7 +44,7 @@ namespace IMDB.Mobile.Pages.Home
         [ObservableProperty]
         private ObservableCollection<Category> categories;
 
-        public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, IGetAllCategories getAllCategories, IGetAuthenticationToken getAuthenticationToken, ICreateSession createSession, INavigationManager navigationManager, ILocalStorage localStorage, IPopupService popupService, IAddMovieToList addMovieToList)
+        public HomePageViewModel(IGetMoviesTopFiveDay getMoviesTopFiveDay, IGetMoviesLatest getMoviesLatest, IGetAllCategories getAllCategories, IGetAuthenticationToken getAuthenticationToken, ICreateSession createSession, INavigationManager navigationManager, IPopupService popupService, IAddMovieToList addMovieToList)
         {
             _getMoviesTopFiveDay = getMoviesTopFiveDay;
             _getMoviesLatest = getMoviesLatest;

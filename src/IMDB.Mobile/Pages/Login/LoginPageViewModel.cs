@@ -11,17 +11,14 @@ namespace IMDB.Mobile.Pages.Login
 
         private IGetAuthenticationToken _getAuthenticationToken;
 
-        private ILocalStorage _localStorage;
-
         private INavigationManager _navigationManager;
 
         private IShellManager _shellManager;
 
-        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, ILocalStorage localStorage, INavigationManager navigationManager, IShellManager shellManager)
+        public LoginPageViewModel(ICreateSession createSession, IGetAuthenticationToken getAuthenticationToken, INavigationManager navigationManager, IShellManager shellManager)
         {
             _createSession = createSession;
             _getAuthenticationToken = getAuthenticationToken;
-            _localStorage = localStorage;
             _navigationManager = navigationManager;
             _shellManager = shellManager;
         }
