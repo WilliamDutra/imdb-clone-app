@@ -29,9 +29,6 @@ namespace IMDB.Mobile.Pages.MyLists
         private string name;
 
         [ObservableProperty]
-        private MyList myListSelected;
-
-        [ObservableProperty]
         public ObservableCollection<MyList> lists;
 
         [ObservableProperty]
@@ -64,11 +61,11 @@ namespace IMDB.Mobile.Pages.MyLists
         }
 
         [RelayCommand]
-        public async Task Detail()
+        public async Task Detail(MyList myListSelected)
         {
             var parameters = new Dictionary<string, object>();
-            parameters["ListId"] = MyListSelected.Id;
-            parameters["ListName"] = MyListSelected.Name;
+            parameters["ListId"] = myListSelected.Id;
+            parameters["ListName"] = myListSelected.Name;
             await _navigationManager.GoToPage("my-list-detail", parameters);
         }
 
@@ -110,6 +107,8 @@ namespace IMDB.Mobile.Pages.MyLists
             FakeLists.Add("03");
             FakeLists.Add("04");
             FakeLists.Add("05");
+            FakeLists.Add("06");
+            FakeLists.Add("07");
             await Task.CompletedTask;
         }
     }
