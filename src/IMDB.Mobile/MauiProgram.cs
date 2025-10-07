@@ -42,6 +42,7 @@ using IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList;
 using IMDB.ApiClient.GetActorById;
 using IMDB.Mobile.Pages.ActorDetails;
 using IMDB.ApiClient.GetImagesOfMovie;
+using IMDB.ApiClient.DeleteSession;
 
 namespace IMDB.Mobile
 {
@@ -185,6 +186,10 @@ namespace IMDB.Mobile
                                 .AddHttpMessageHandler<BearerTokenHandler>();
 
             appBuilder.Services.AddRefitClient<IGetImagesOfMovie>()
+                               .ConfigureHttpClient(httpClientSettings)
+                               .AddHttpMessageHandler<BearerTokenHandler>();
+
+            appBuilder.Services.AddRefitClient<IDeleteSession>()
                                .ConfigureHttpClient(httpClientSettings)
                                .AddHttpMessageHandler<BearerTokenHandler>();
 

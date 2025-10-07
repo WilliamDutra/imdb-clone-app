@@ -33,7 +33,7 @@
         </Tab>
     </TabBar>
 
-    <MenuItem IconImageSource="trash.png" Text="Sair">
+    <MenuItem IconImageSource="sign_out.png" Text="Sair">
         <Shell.MenuItemTemplate>
             <DataTemplate>
                 <HorizontalStackLayout Padding="10" Spacing="10">
@@ -41,7 +41,7 @@
                         BackgroundColor="Transparent"
                         BindingContext="{Binding Source={x:Reference appShell}, Path=BindingContext}"
                         Command="{Binding SairCommand}"
-                        ImageSource="trash.png"
+                        ImageSource="sign_out.png"
                         Text="Sair">
                         <Button.Behaviors>
                             <toolkit:IconTintColorBehavior TintColor="White" />

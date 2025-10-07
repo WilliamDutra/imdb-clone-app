@@ -1,6 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using IMDB.ApiClient.DeleteSession;
 using IMDB.ApiClient.GetAccount;
 
 namespace IMDB.Mobile.Pages
@@ -9,15 +10,18 @@ namespace IMDB.Mobile.Pages
     {
         private IGetAccount _getAccount;
 
+        private IDeleteSession _deleteSession;
+
         [ObservableProperty]
         private string username;
 
         [ObservableProperty]
         private string photo;
 
-        public AppShellViewModel(IGetAccount getAccount)
+        public AppShellViewModel(IGetAccount getAccount, IDeleteSession deleteSession)
         {
             _getAccount = getAccount;
+            _deleteSession = deleteSession;
         }
 
         [RelayCommand]
@@ -32,6 +36,8 @@ namespace IMDB.Mobile.Pages
         [RelayCommand]
         public async Task Sair()
         {
+            var sessionId = await SecureStorage.Default.GetAsync("session_id");
+            var result = await _deleteSession.Execute(sessionId);
             await SecureStorage.Default.SetAsync("session_id", "");
             Application.Current.MainPage = new LoginAppShell();
         }
