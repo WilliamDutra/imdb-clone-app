@@ -97,11 +97,20 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Are you sure you want to delete the list?.
+        /// </summary>
+        internal static string label_confirm_delete_list_popup {
+            get {
+                return ResourceManager.GetString("label_confirm_delete_list_popup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Are you sure you want to delete this movie?.
         /// </summary>
-        internal static string label_confirm_delete_popup {
+        internal static string label_confirm_delete_movie_popup {
             get {
-                return ResourceManager.GetString("label_confirm_delete_popup", resourceCulture);
+                return ResourceManager.GetString("label_confirm_delete_movie_popup", resourceCulture);
             }
         }
         

@@ -129,7 +129,10 @@
   <data name="film_add_with_success_message" xml:space="preserve">
     <value>Filme adicionado em '{0}' com sucesso</value>
   </data>
-  <data name="label_confirm_delete_popup" xml:space="preserve">
+  <data name="label_confirm_delete_list_popup" xml:space="preserve">
+    <value>Deseja realmente excluir essa lista?</value>
+  </data>
+  <data name="label_confirm_delete_movie_popup" xml:space="preserve">
     <value>Deseja realmente excluir esse filme?</value>
   </data>
   <data name="list_created_with_success_menssage" xml:space="preserve">

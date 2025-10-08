@@ -5,6 +5,7 @@ using IMDB.ApiClient;
 using IMDB.ApiClient.DeleteMovieOfList;
 using IMDB.ApiClient.GetListById;
 using IMDB.ApiClient.Mappings;
+using IMDB.Mobile.Popups;
 using IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList;
 using System;
 using System.Collections.ObjectModel;

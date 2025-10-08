@@ -79,7 +79,7 @@
                                                     <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
                                                 </Image.Behaviors>
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:MyListsPageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding Id}" />
+                                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:MyListsPageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding .}" />
                                                 </Image.GestureRecognizers>
                                             </Image>
                                         </VerticalStackLayout>

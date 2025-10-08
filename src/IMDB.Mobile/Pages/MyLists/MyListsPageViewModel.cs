@@ -10,6 +10,9 @@ using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using IMDB.ApiClient.DeleteList;
+using CommunityToolkit.Maui;
+using IMDB.Mobile.Popups.ConfirmDeleteMyList;
+using IMDB.Mobile.Popups;
 
 namespace IMDB.Mobile.Pages.MyLists
 {
@@ -25,6 +28,8 @@ namespace IMDB.Mobile.Pages.MyLists
 
         private INavigationManager _navigationManager;
 
+        private IPopupService _popupService;
+
         [ObservableProperty]
         private string name;
 
@@ -34,13 +39,14 @@ namespace IMDB.Mobile.Pages.MyLists
         [ObservableProperty]
         private ObservableCollection<string> fakeLists;
 
-        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IDeleteList deleteList)
+        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IDeleteList deleteList, IPopupService popupService)
         {
             _createList = createList;
             _getAccount = getAccount;
             _getMyLists = getMyLists;
             _deleteList = deleteList;
             _navigationManager = navigationManager;
+            _popupService = popupService;
         }
 
         [RelayCommand]
@@ -70,13 +76,18 @@ namespace IMDB.Mobile.Pages.MyLists
         }
 
         [RelayCommand]
-        public async Task Delete(int listId)
+        public async Task Delete(MyList myListSelected)
         {
-            var sessionId = await SecureStorage.Default.GetAsync("session_id");
-            await _deleteList.Execute(listId, sessionId);
-            IsBusy = true;
-            await EachMyLists();
-            IsBusy = false;
+            var result = await _popupService.ShowPopupAsync<ConfirmDeleteMyListPopupViewModel, ConfirmOptionResult>(Shell.Current);
+
+            if(result.Result == ConfirmOptionResult.Ok)
+            {
+                var sessionId = await SecureStorage.Default.GetAsync("session_id");
+                await _deleteList.Execute(myListSelected.Id, sessionId);
+                IsBusy = true;
+                await EachMyLists();
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]

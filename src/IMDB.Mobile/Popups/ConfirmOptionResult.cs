@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IMDB.Mobile.Popups.ConfirmDeleteMovieInMyList
+namespace IMDB.Mobile.Popups
 {
     public enum ConfirmOptionResult
     {

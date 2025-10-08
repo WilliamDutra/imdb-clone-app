@@ -144,6 +144,9 @@
 	  <MauiXaml Update="Popups\ConfirmDeleteMovieInMyList\ConfirmDeleteMovieInMyListPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Popups\ConfirmDeleteMyList\ConfirmDeleteMyListPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Popups\Loading\LoadingPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -43,6 +43,7 @@ using IMDB.ApiClient.GetActorById;
 using IMDB.Mobile.Pages.ActorDetails;
 using IMDB.ApiClient.GetImagesOfMovie;
 using IMDB.ApiClient.DeleteSession;
+using IMDB.Mobile.Popups.ConfirmDeleteMyList;
 
 namespace IMDB.Mobile
 {
@@ -199,6 +200,7 @@ namespace IMDB.Mobile
         public static MauiAppBuilder AddPopups(this MauiAppBuilder appBuilder)
         {
             appBuilder.Services.AddTransientPopup<ConfirmDeleteMovieInMyListPopup, ConfirmDeleteMovieInMyListPopupViewModel>();
+            appBuilder.Services.AddTransientPopup<ConfirmDeleteMyListPopup, ConfirmDeleteMyListPopupViewModel>();
 
             appBuilder.Services.AddBottomSheet<MyListsPopup, MyListsPopupViewModel>("mylist-popup");
             return appBuilder;
