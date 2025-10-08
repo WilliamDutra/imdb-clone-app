@@ -60,18 +60,15 @@ namespace IMDB.Mobile.Pages.Details
 
         private IBottomSheetNavigationService _bottomSheetNavigationService;
 
-        private IPopupService _popupService;
-
         private int MovieId = 0;
 
-        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IPopupService popupService, IGetCastMovie getCastMovie, IBottomSheetNavigationService bottomSheetNavigationService, IGetImagesOfMovie getImagesOfMovie)
+        public DetailPageViewModel(IGetMovieById getMovieById, IAddMovieToList addMovieToList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IGetCastMovie getCastMovie, IBottomSheetNavigationService bottomSheetNavigationService, IGetImagesOfMovie getImagesOfMovie)
         {
             _getMovieById = getMovieById;
             _addMovieToList = addMovieToList;
             _getMyLists = getMyLists;
             _getAccount = getAccount;
             _navigationManager = navigationManager;
-            _popupService = popupService;
             _getCastMovie = getCastMovie;
             _getImagesOfMovie = getImagesOfMovie;
             _bottomSheetNavigationService = bottomSheetNavigationService;

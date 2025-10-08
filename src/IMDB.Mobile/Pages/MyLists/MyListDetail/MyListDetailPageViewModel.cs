@@ -20,8 +20,6 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
 
         private INavigationManager _navigationManager;
 
-        private IPopupService _popupService;
-
         [ObservableProperty]
         private MyList listDetail;
 
@@ -33,12 +31,11 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
         [ObservableProperty]
         private ObservableCollection<string> fakeDetailsList;
 
-        public MyListDetailPageViewModel(IGetListById getListById, INavigationManager navigationManager, IDeleteMovieOfList deleteMovieOfList, IPopupService popupService)
+        public MyListDetailPageViewModel(IGetListById getListById, INavigationManager navigationManager, IDeleteMovieOfList deleteMovieOfList)
         {
             _getListById = getListById;
             _deleteMovieOfList = deleteMovieOfList;
             _navigationManager = navigationManager;
-            _popupService = popupService;
         }
 
         [RelayCommand]
@@ -50,9 +47,9 @@ namespace IMDB.Mobile.Pages.MyLists.MyListDetail
         [RelayCommand]
         public async Task Delete(int movieId)
         {
-            var result = await _popupService.ShowPopupAsync<ConfirmDeleteMovieInMyListPopupViewModel, ConfirmOptionResult>(Shell.Current);
+            var result = await _navigationManager.OpenPopup<ConfirmDeleteMovieInMyListPopupViewModel, ConfirmOptionResult>(Shell.Current);
 
-            if (result?.Result == ConfirmOptionResult.Ok)
+            if (result == ConfirmOptionResult.Ok)
             {
                 await _deleteMovieOfList.Execute(ListId, new MovieRequest { MediaId = movieId });
                 await GetListById(ListId);

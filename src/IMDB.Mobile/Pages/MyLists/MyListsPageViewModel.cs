@@ -28,8 +28,6 @@ namespace IMDB.Mobile.Pages.MyLists
 
         private INavigationManager _navigationManager;
 
-        private IPopupService _popupService;
-
         [ObservableProperty]
         private string name;
 
@@ -39,14 +37,13 @@ namespace IMDB.Mobile.Pages.MyLists
         [ObservableProperty]
         private ObservableCollection<string> fakeLists;
 
-        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IDeleteList deleteList, IPopupService popupService)
+        public MyListsPageViewModel(ICreateList createList, IGetAccount getAccount, IGetMyLists getMyLists, INavigationManager navigationManager, IDeleteList deleteList)
         {
             _createList = createList;
             _getAccount = getAccount;
             _getMyLists = getMyLists;
             _deleteList = deleteList;
             _navigationManager = navigationManager;
-            _popupService = popupService;
         }
 
         [RelayCommand]
@@ -78,9 +75,9 @@ namespace IMDB.Mobile.Pages.MyLists
         [RelayCommand]
         public async Task Delete(MyList myListSelected)
         {
-            var result = await _popupService.ShowPopupAsync<ConfirmDeleteMyListPopupViewModel, ConfirmOptionResult>(Shell.Current);
+            var result = await _navigationManager.OpenPopup<ConfirmDeleteMyListPopupViewModel, ConfirmOptionResult>(Shell.Current);
 
-            if(result.Result == ConfirmOptionResult.Ok)
+            if(result == ConfirmOptionResult.Ok)
             {
                 var sessionId = await SecureStorage.Default.GetAsync("session_id");
                 await _deleteList.Execute(myListSelected.Id, sessionId);
