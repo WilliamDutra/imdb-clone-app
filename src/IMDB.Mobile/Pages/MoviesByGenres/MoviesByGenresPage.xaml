@@ -123,7 +123,7 @@
                     HorizontalItemSpacing="15"
                     Orientation="Vertical"
                     Span="2"
-                    VerticalItemSpacing="5" />
+                    VerticalItemSpacing="8" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Movie">
@@ -146,8 +146,10 @@
         </CollectionView>
         <VerticalStackLayout HeightRequest="20">
             <ActivityIndicator
+                Grid.Row="1"
                 IsRunning="True"
                 IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center"
                 Color="{StaticResource ColorSecondary}" />
         </VerticalStackLayout>
     </Grid>

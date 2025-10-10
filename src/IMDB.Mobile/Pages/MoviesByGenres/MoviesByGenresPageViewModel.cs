@@ -65,7 +65,10 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
 
             _CurrentPage++;
 
-            var results = await _getMoviesByGenres.Execute(_GenreId, _CurrentPage);
+            var parameters = new MoviesByGenresParams();
+            parameters.GenreId = _GenreId;
+            parameters.Page = _CurrentPage;
+            var results = await _getMoviesByGenres.Execute(parameters);
             Movies.AddRange(MovieMapper.ToMap(results.Data));
             await Toast.Make($"página {_CurrentPage}", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
             IsBusy = false;
@@ -98,6 +101,7 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         [RelayCommand]
         public async Task WatchProviderSelected(int id)
         {
+            IsBusy = true;
             if (!watchProvidersSelecteds.Contains(id))
             {
                 watchProvidersSelecteds.Add(id);
@@ -106,11 +110,21 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
             {
                 watchProvidersSelecteds.Remove(id);
             }
+
+            var parameters = new MoviesByGenresParams();
+            parameters.GenreId = _GenreId;
+            parameters.WithWatchProviders = watchProvidersSelecteds;
+            var results = await _getMoviesByGenres.Execute(parameters);
+            Movies = MovieMapper.ToMap(results.Data);
+
+            IsBusy = false;
         }
 
         private async void EachMoviesByGenres(int genreId)
         {
-            var results = await _getMoviesByGenres.Execute(genreId);
+            var parameters = new MoviesByGenresParams();
+            parameters.GenreId = genreId;
+            var results = await _getMoviesByGenres.Execute(parameters);
             _TotalPages = results.TotalPages;
             Movies = MovieMapper.ToMap(results.Data);
         }
