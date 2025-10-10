@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cards="clr-namespace:IMDB.Mobile.Components.Cards"
     xmlns:model="clr-namespace:IMDB.ApiClient;assembly=IMDB.ApiClient"
+    xmlns:pills="clr-namespace:IMDB.Mobile.Components.Pills"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.MoviesByGenres"
     x:Name="moviesByGenresPage"
@@ -53,8 +54,29 @@
             </Label>
         </HorizontalStackLayout>
     </Shell.TitleView>
-    <Grid>
+    <Grid RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <CollectionView Grid.Row="0" ItemsSource="{Binding WatchProviders}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:WatchProvider">
+                    <pills:PillToggleComponent
+                        Id="{Binding Id}"
+                        IsPressedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:MoviesByGenresPageViewModel}}, Path=WatchProviderSelectedCommand}"
+                        IsPressedCommandParameter="{Binding Id}"
+                        Label="{Binding Name}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <CollectionView
+            Grid.Row="1"
             ItemSizingStrategy="MeasureFirstItem"
             ItemsSource="{Binding Movies}"
             ItemsUpdatingScrollMode="KeepItemsInView"
@@ -92,7 +114,10 @@
             </CollectionView.Triggers>
         </CollectionView>
 
-        <CollectionView ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding FakeMovies}">
+        <CollectionView
+            Grid.Row="1"
+            ItemSizingStrategy="MeasureFirstItem"
+            ItemsSource="{Binding FakeMovies}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout
                     HorizontalItemSpacing="15"

@@ -25,6 +25,11 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         [ObservableProperty]
         private ObservableCollection<string> fakeMovies;
 
+        [ObservableProperty]
+        private ObservableCollection<WatchProvider> watchProviders;
+
+        private List<int> watchProvidersSelecteds = new List<int>();
+
         private int _TotalPages  = 0;
 
         private int _CurrentPage = 1;
@@ -86,7 +91,21 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
         {
             IsBusy = true;
             await EachFakeMovies();
+            await EachWatchProviders();
             IsBusy = false;
+        }
+
+        [RelayCommand]
+        public async Task WatchProviderSelected(int id)
+        {
+            if (!watchProvidersSelecteds.Contains(id))
+            {
+                watchProvidersSelecteds.Add(id);
+            }
+            else
+            {
+                watchProvidersSelecteds.Remove(id);
+            }
         }
 
         private async void EachMoviesByGenres(int genreId)
@@ -115,6 +134,19 @@ namespace IMDB.Mobile.Pages.MoviesByGenres
                 FakeMovies.Add("12");
                 FakeMovies.Add("13");
                 FakeMovies.Add("14");
+            });
+        }
+
+        private async Task EachWatchProviders()
+        {
+            await Task.Run(() =>
+            {
+                WatchProviders = new ObservableCollection<WatchProvider>();
+                WatchProviders.Add(WatchProvider.Restore(8, "Netflix"));
+                WatchProviders.Add(WatchProvider.Restore(9, "Amazon Prime Video"));
+                WatchProviders.Add(WatchProvider.Restore(10, "AppleTv"));
+                WatchProviders.Add(WatchProvider.Restore(337, "Disney+"));
+                WatchProviders.Add(WatchProvider.Restore(8, "HBOMax"));
             });
         }
 
