@@ -15,18 +15,10 @@ Projeto de referência mobile do .NET MAUI. Esse projeto simula um catalogo de f
 
 ## Aplicativo rodando
 
-<video src="media/home.mp4" controls width="300">
-  Seu navegador não suporta vídeo HTML5.
-</video>
-<video src="media/singin.mp4" controls width="300">
-  Seu navegador não suporta vídeo HTML5.
-</video>
-<video src="media/details.mp4" controls width="300">
-  Seu navegador não suporta vídeo HTML5.
-</video>
-<video src="media/list.mp4" controls width="300">
-  Seu navegador não suporta vídeo HTML5.
-</video>
-<video src="media/my-list.mp4" controls width="300">
-  Seu navegador não suporta vídeo HTML5.
-</video>
+https://github.com/user-attachments/assets/4aa64abb-2d44-4b5f-acc3-d9ff2a0fed96
+
+https://github.com/user-attachments/assets/c866a11d-5057-4a88-a55b-714c069f554f
+
+https://github.com/user-attachments/assets/93a527b8-3542-44a7-860e-4dfdd8786ab2
+
+https://github.com/user-attachments/assets/843241bf-0976-4ce8-a7f0-8121e8585aea
