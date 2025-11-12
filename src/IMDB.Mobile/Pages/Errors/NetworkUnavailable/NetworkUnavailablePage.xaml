@@ -3,6 +3,7 @@
     x:Class="IMDB.Mobile.Pages.Errors.NetworkUnavailable.NetworkUnavailablePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:IMDB.Mobile.Resources"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Errors.NetworkUnavailable"
     x:DataType="vm:NetworkUnavailablePageViewModel"
@@ -22,12 +23,14 @@
             FontFamily="PoppinsRegular"
             FontSize="26"
             HorizontalOptions="Center"
-            Text="Rede indisponivel" />
+            Text="{x:Static language:Resource.network_error_message}"
+            TextTransform="Uppercase" />
         <Button
             Margin="0,26"
             BackgroundColor="{StaticResource ColorSecondary}"
             Command="{Binding TryOutCommand}"
-            Text="Tentar novamente"
-            TextColor="White" />
+            Text="{x:Static language:Resource.network_error_button}"
+            TextColor="White"
+            TextTransform="Uppercase" />
     </VerticalStackLayout>
 </ContentPage>

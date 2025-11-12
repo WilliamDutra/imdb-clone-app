@@ -138,6 +138,12 @@
   <data name="list_created_with_success_menssage" xml:space="preserve">
     <value>Lista '{0}' criada com sucesso</value>
   </data>
+  <data name="network_error_button" xml:space="preserve">
+    <value>Tentar novamente</value>
+  </data>
+  <data name="network_error_message" xml:space="preserve">
+    <value>Rede Indisponível</value>
+  </data>
   <data name="text_back_button_details" xml:space="preserve">
     <value>Voltar</value>
   </data>

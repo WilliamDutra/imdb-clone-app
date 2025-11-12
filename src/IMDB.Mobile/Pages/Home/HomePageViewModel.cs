@@ -57,19 +57,33 @@ namespace IMDB.Mobile.Pages.Home
         [RelayCommand]
         public async Task Detail(Movie movie)
         {
-            var id = movie.Id;
-            var paramsNavigation = new Dictionary<string, object>();
-            paramsNavigation["Id"] = id;
-            await _navigationManager.GoToPage("details", paramsNavigation);
+            if (!IsNetworkAvailable)
+            {
+                await _navigationManager.GoToPage("network-unavailable");
+            }
+            else
+            {
+                var id = movie.Id;
+                var paramsNavigation = new Dictionary<string, object>();
+                paramsNavigation["Id"] = id;
+                await _navigationManager.GoToPage("details", paramsNavigation);
+            }
         }
 
         [RelayCommand]
         public async Task MoviesByCategory(Category categorie)
         {
-            var queryParams = new Dictionary<string, object>();
-            queryParams["genreId"] = categorie.Id;
-            queryParams["genreName"] = categorie.Name;
-            await _navigationManager.GoToPage("movies-by-genres", queryParams);
+            if (!IsNetworkAvailable)
+            {
+                await _navigationManager.GoToPage("network-unavailable");
+            }
+            else
+            {
+                var queryParams = new Dictionary<string, object>();
+                queryParams["genreId"] = categorie.Id;
+                queryParams["genreName"] = categorie.Name;
+                await _navigationManager.GoToPage("movies-by-genres", queryParams);
+            }
         }
 
         [RelayCommand]

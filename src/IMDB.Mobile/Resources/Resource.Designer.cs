@@ -124,6 +124,24 @@ namespace IMDB.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Try Out.
+        /// </summary>
+        internal static string network_error_button {
+            get {
+                return ResourceManager.GetString("network_error_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Network Unavailable.
+        /// </summary>
+        internal static string network_error_message {
+            get {
+                return ResourceManager.GetString("network_error_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Back.
         /// </summary>
         internal static string text_back_button_details {

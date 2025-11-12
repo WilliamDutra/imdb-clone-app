@@ -19,7 +19,7 @@ namespace IMDB.Mobile.Pages.Errors.NetworkUnavailable
             bool network = IsNetworkAvailable;
             if (!network)
                 return;
-            await _navigationManager.GoToPage("login");
+            await _navigationManager.GoToPage("..");
         }
 
     }
