@@ -44,6 +44,7 @@ using IMDB.Mobile.Pages.ActorDetails;
 using IMDB.ApiClient.GetImagesOfMovie;
 using IMDB.ApiClient.DeleteSession;
 using IMDB.Mobile.Popups.ConfirmDeleteMyList;
+using IMDB.Mobile.Pages.Errors.NetworkUnavailable;
 
 namespace IMDB.Mobile
 {
@@ -90,6 +91,7 @@ namespace IMDB.Mobile
 
             appBuilder.Services.AddTransientWithShellRoute<LoginPage, LoginPageViewModel>("login");
             appBuilder.Services.AddTransientWithShellRoute<ErrorsPage, ErrorsPageViewModel>("errors");
+            appBuilder.Services.AddTransientWithShellRoute<NetworkUnavailablePage, NetworkUnavailablePageViewModel>("network-unavailable");
             appBuilder.Services.AddTransientWithShellRoute<HomePage, HomePageViewModel>("home");
             appBuilder.Services.AddTransientWithShellRoute<DetailPage, DetailPageViewModel>("details");
             appBuilder.Services.AddTransientWithShellRoute<SearchPage, SearchPageViewModel>("search");

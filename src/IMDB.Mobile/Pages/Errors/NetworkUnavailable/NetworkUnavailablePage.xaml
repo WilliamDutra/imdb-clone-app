@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMDB.Mobile.Pages.Errors.NetworkUnavailable.NetworkUnavailablePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:IMDB.Mobile.Pages.Errors.NetworkUnavailable"
+    x:DataType="vm:NetworkUnavailablePageViewModel"
+    BackgroundColor="{StaticResource ColorPrimary}"
+    Shell.TabBarIsVisible="False">
+    <VerticalStackLayout Padding="16">
+        <Image
+            Margin="0,20"
+            HeightRequest="300"
+            Source="network_unavailable.png"
+            WidthRequest="300">
+            <Image.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="{StaticResource ColorSecondary}" />
+            </Image.Behaviors>
+        </Image>
+        <Label
+            FontFamily="PoppinsRegular"
+            FontSize="26"
+            HorizontalOptions="Center"
+            Text="Rede indisponivel" />
+        <Button
+            Margin="0,26"
+            BackgroundColor="{StaticResource ColorSecondary}"
+            Command="{Binding TryOutCommand}"
+            Text="Tentar novamente"
+            TextColor="White" />
+    </VerticalStackLayout>
+</ContentPage>
